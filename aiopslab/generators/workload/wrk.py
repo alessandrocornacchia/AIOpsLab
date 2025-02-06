@@ -37,7 +37,7 @@ class Wrk:
             url (str): The URL of the target server.
         """
 
-        command = f"wrk -D {self.dist} -t {self.threads} -c {self.connections} -d {self.duration} -L -s {payload_script} {url} -R {self.rate}"
+        command = f"./TargetMicroservices/wrk2/wrk -D {self.dist} -t {self.threads} -c {self.connections} -d {self.duration} -L -s {payload_script} {url} -R {self.rate}"
         command += " --latency" if self.latency else ""
         process = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE)
         output, error = process.communicate()
