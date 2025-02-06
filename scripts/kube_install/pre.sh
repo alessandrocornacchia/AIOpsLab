@@ -13,7 +13,6 @@ sudo apt upgrade -y
 # removes any automatically installed packages that are not longer needed
 
 
-
 # install docker - https://docs.docker.com/engine/install/ubuntu/ (follow the docker page)
 
 # remove unofficial versions of docker if any
@@ -87,17 +86,17 @@ curl -fsSL https://pkgs.k8s.io/core:/stable:/v1.29/deb/Release.key | sudo gpg --
 
 # update the packages
 
-  sudo apt update;
+sudo apt update;
 
 # install packages
 # Don't pass "-y" flag as packages could already be installed and held at a particular version
   # sudo apt-get install -qy kubeadm kubelet kubectl --allow-change-held-packages
-    sudo apt-get install -qy kubeadm kubelet kubectl
+sudo apt-get install -qy kubeadm kubelet kubectl
 
 
 # avoids the package being automatically updated. Good for stability
-  sudo apt-mark hold kubeadm kubelet kubectl;
-  kubeadm version;
+sudo apt-mark hold kubeadm kubelet kubectl;
+kubeadm version;
 
 
 # disable swap
@@ -130,47 +129,3 @@ net.ipv4.ip_forward                 = 1
 EOF
 
 sudo sysctl --system
-
-
-#All below steps only for setting up controller
-
-sudo systemctl enable --now kubelet
-sudo kubeadm config images pull  --cri-socket /var/run/cri-dockerd.sock
-sudo kubeadm init --pod-network-cidr=10.244.0.0/16 --cri-socket /var/run/cri-dockerd.sock
-# sudo kubeadm init --pod-network-cidr=192.168.10.0/16 --control-plane-endpoint {`hostname --fqdn`,,} --cri-socket /var/run/cri-dockerd.sock
-mkdir -p $HOME/.kube
-sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
-sudo chown $(id -u):$(id -g) $HOME/.kube/config
-
-
-# install network 
-wget https://github.com/flannel-io/flannel/releases/latest/download/kube-flannel.yml
-kubectl apply -f kube-flannel.yml
-sudo systemctl status kubelet --no-pager
-
-sudo kubeadm init --pod-network-cidr=10.244.0.0/16 --cri-socket /var/run/cri-dockerd.sock
-
-# untaint the control plane to make it host pods 
-kubectl taint nodes <control-plane-node-name> node-role.kubernetes.io/control-plane:NoSchedule-
-
-# install Helm
-curl https://baltocdn.com/helm/signing.asc | gpg --dearmor | sudo tee /usr/share/keyrings/helm.gpg > /dev/null
-sudo apt-get install apt-transport-https --yes
-echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/helm.gpg] https://baltocdn.com/helm/stable/debian/ all main" | sudo tee /etc/apt/sources.list.d/helm-stable-debian.list
-sudo apt-get update
-sudo apt-get install helm
-
-###################################
-#### Worker
-# Replace with YOUR HASH for cert
-sudo kubeadm join <ip>:6443 --token <token> --discovery-token-ca-cert-hash <cert_hash> --cri-socket unix:///var/run/cri-dockerd.sock
-mkdir -p $HOME/.kube
-# copy the control plane admin.conf to the worker's .kube/config
-# In control plane
-sudo cat /etc/kubernetes/admin.conf 
-# In worker
-nano $HOME/.kube/config
-sudo chown $(id -u):$(id -g) $HOME/.kube/config
-
-# test
-kubectl get nodes
