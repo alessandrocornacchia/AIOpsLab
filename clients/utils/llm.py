@@ -18,9 +18,9 @@ from azure.identity import DefaultAzureCredential, get_bearer_token_provider
 
 CACHE_DIR = Path("./cache_dir")
 CACHE_PATH = CACHE_DIR / "cache.json"
-#MODEL = "gpt-4-turbo-2024-04-09"
+MODEL = "gpt-4-turbo-2024-04-09"
 #MODEL = "deepseek-ai/DeepSeek-V3"
-MODEL = "meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo-128K"
+#MODEL = "meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo-128K"
 
 def format_prompt(history):
     return "\n".join([f"{msg['role'].capitalize()}: {msg['content']}" for msg in history])

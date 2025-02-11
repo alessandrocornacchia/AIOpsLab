@@ -76,7 +76,7 @@ if __name__ == "__main__":
     orchestrator = Orchestrator()
     orchestrator.register_agent(agent, name="react")
 
-    pid = "misconfig_app_hotel_res-mitigation-1"
+    pid = "k8s_target_port-misconfig-mitigation-1"
     problem_desc, instructs, apis = orchestrator.init_problem(pid)
     agent.init_context(problem_desc, instructs, apis)
     asyncio.run(orchestrator.start_problem(max_steps=30))
