@@ -3,12 +3,12 @@ all:
     ansible_python_interpreter: /usr/bin/python3
     pod_cidr: "172.41.0.0/16"
     ansible_ssh_common_args: '-o ForwardAgent=yes -o ProxyCommand="ssh cornaca@mcnode43 -W %h:%p"'
+    ansible_user: ubuntu
 
 control_plane:
   hosts:
     kashef-cornaca-ctl:
       ansible_host: 10.178.48.3
-      ansible_user: ubuntu
 workers:
   hosts:
     kashef-cornaca-w1:

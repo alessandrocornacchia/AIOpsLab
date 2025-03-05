@@ -24,7 +24,7 @@
       
     - name: Debug ansible_host IP
       debug:
-        msg: "Control plane IP is {{ ansible_host }}. Pod CIDR is {{ hostvars['all']['vars']['pod_cidr'] }}"
+        msg: "Control plane IP is {{ ansible_host }}. Pod CIDR is {{ hostvars['pod_cidr'] }}"
 
     - name: Initialize Kubernetes control plane
       command: >
