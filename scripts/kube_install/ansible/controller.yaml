@@ -1,5 +1,5 @@
 ---
-# run on all of them
+# TODO: use separate playbooks or use roles
 - name: Install Helm on all nodes
   hosts: all
   become: true
