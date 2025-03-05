@@ -1,0 +1,48 @@
+# get join command
+- name: Run on Controller
+  hosts: control_plane
+
+  tasks:
+    - name: Get join command
+      command: kubeadm token create --print-join-command
+      register: join_command_output
+
+    - name: Set join command fact
+      set_fact:
+        kubeadm_join_cmd: "{{ join_command_output.stdout }}"
+
+    - name: Print join command
+      debug:
+        var: kubeadm_join_cmd
+
+# run on workers
+- name: Initialize Worker Nodes
+  hosts: workers
+  become: true
+  tasks:
+    - name: Join cluster
+      command: "{{ hostvars[groups['control_plane'][0]]['kubeadm_join_cmd'] }} --cri-socket /var/run/cri-dockerd.sock"
+
+    
+- name: Configure worker nodes
+  hosts: workers
+  tags: kubeconfig
+  tasks:
+  - name: Create .kube directory
+    file:
+      path: $HOME/.kube
+      state: directory
+      mode: '0755'
+
+  - name: Fetch kubeconfig from control plane
+    fetch:
+      src: /home/{{ ansible_user }}/.kube/config
+      dest: /tmp/kubeconfig
+      flat: yes
+    delegate_to: "{{ groups['control_plane'][0] }}"
+
+  - name: Copy kubeconfig to workers
+    copy:
+      src: /tmp/kubeconfig
+      dest: $HOME/.kube/config
+      mode: '0644'

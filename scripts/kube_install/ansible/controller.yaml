@@ -1,4 +1,5 @@
 ---
+# run on all of them
 - name: Install Helm on all nodes
   hosts: all
   become: true
@@ -17,23 +18,34 @@
         path: /tmp/get_helm.sh
         state: absent
 
-- name: Initialize Control Plane
+    - name: Create alias k for kubectl
+      become: false
+      command: echo "alias k=kubectl" >> $HOME/.bashrc
+      
+
+# run on plane
+- name: Create Control Plane
   hosts: control_plane
   become: true
   tasks:
       
     - name: Debug ansible_host IP
       debug:
-        msg: "Control plane IP is {{ ansible_host }}. Pod CIDR is {{ hostvars['pod_cidr'] }}"
+        msg: "Control plane IP is {{ ansible_host }}. Pod CIDR is {{ hostvars[inventory_hostname]['pod_cidr'] }}"
 
     - name: Initialize Kubernetes control plane
       command: >
         kubeadm init 
-        --pod-network-cidr={{ hostvars['all']['vars']['pod_cidr'] }} 
+        --pod-network-cidr={{ hostvars[inventory_hostname]['pod_cidr'] }} 
         --control-plane-endpoint={{ ansible_host }}
         --cri-socket /var/run/cri-dockerd.sock
       register: kubeadm_init
 
+# runs as non root user
+- name: Initialize Control Plane
+  hosts: control_plane
+  tags: kubeconfig  
+  tasks:
     - name: Create .kube directory
       file:
         path: $HOME/.kube
@@ -41,9 +53,10 @@
         mode: '0755'
 
     - name: Copy admin.conf
+      become: true
       copy:
         src: /etc/kubernetes/admin.conf
-        dest: $HOME/.kube/config
+        dest: "/home/{{ ansible_user }}/.kube/config"
         remote_src: yes
         owner: "{{ ansible_user_id }}"
         group: "{{ ansible_user_id }}"
@@ -63,23 +76,4 @@
       command: helm repo add flannel https://flannel-io.github.io/flannel/
 
     - name: Install Flannel CNI
-      command: helm install flannel --set podCidr={{ hostvars['all']['vars']['pod_cidr'] }} --namespace kube-flannel flannel/flannel
-
-- name: Configure Worker Nodes
-  hosts: workers
-  become: true
-  tasks:
-    - name: Join cluster
-      command: "{{ hostvars[groups['control_plane'][0]]['kubeadm_init']['stdout_lines'] | select('search', 'kubeadm join') | list | first }}"
-
-    - name: Create .kube directory
-      file:
-        path: $HOME/.kube
-        state: directory
-        mode: '0755'
-
-    - name: Copy kubeconfig from control plane
-      copy:
-        src: "{{ hostvars[groups['control_plane'][0]]['ansible_env']['HOME'] }}/.kube/config"
-        dest: $HOME/.kube/config
-        mode: '0644'
+      command: helm install flannel --set podCidr={{ hostvars[inventory_hostname]['pod_cidr'] }} --namespace kube-flannel flannel/flannel
