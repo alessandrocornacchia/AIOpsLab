@@ -4,29 +4,30 @@
   become: true
   tasks:
     - name: Add Helm GPG key
-      shell: curl https://baltocdn.com/helm/signing.asc | gpg --dearmor | sudo tee /usr/share/keyrings/helm.gpg > /dev/null
+      shell: curl https://baltocdn.com/helm/signing.asc | gpg --dearmor | tee /usr/share/keyrings/helm.gpg > /dev/null
 
     - name: Add Helm repository
-      apt_repository:
-        repo: deb [arch={{ ansible_architecture }} signed-by=/usr/share/keyrings/helm.gpg] https://baltocdn.com/helm/stable/debian/ all main
+      shell: echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/helm.gpg] https://baltocdn.com/helm/stable/debian/ all main" | tee /etc/apt/sources.list.d/helm-stable-debian.list
+
+    - name: Install required package
+      apt:
+        name: apt-transport-https
         state: present
-        filename: helm-stable-debian
+
+    - name: Update apt cache
+      apt:
+        update_cache: yes
 
     - name: Install Helm package
       apt:
         name: helm
         state: present
-        update_cache: yes
 
 - name: Initialize Control Plane
   hosts: control_plane
   become: true
   tasks:
       
-    - name: Debug ansible_host IP
-      debug:
-      msg: "Control plane IP is {{ ansible_host }}. Pod CIDR is {{ hostvars['all']['vars']['pod_cidr'] }}"
-
     - name: Initialize Kubernetes control plane
       command: >
         kubeadm init 
