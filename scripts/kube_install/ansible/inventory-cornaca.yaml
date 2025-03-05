@@ -9,6 +9,7 @@ control_plane:
   hosts:
     kashef-cornaca-ctl:
       ansible_host: 10.178.48.3
+
 workers:
   hosts:
     kashef-cornaca-w1:
