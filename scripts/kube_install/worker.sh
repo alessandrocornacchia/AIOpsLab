@@ -11,7 +11,7 @@ sudo apt-get install helm
 # Replace with YOUR HASH for cert
 sudo kubeadm join <ip>:6443 --token <token> --discovery-token-ca-cert-hash <cert_hash> --cri-socket unix:///var/run/cri-dockerd.sock
 mkdir -p $HOME/.kube
-# copy the control plane admin.conf to the worker's .kube/config
+# copy the control plane admin.conf to the worker's .kube/ccloonfig
 # In control plane
 sudo cat /etc/kubernetes/admin.conf 
 # In worker

@@ -1,3 +1,5 @@
+#!/bin/bash
+
 #https://www.nathanobert.com/posts/blog-kubernetes-on-ubuntu/
 #https://earthly.dev/blog/deploy-kubernetes-cri-o-container-runtime/
 #https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/install-kubeadm/
@@ -56,7 +58,9 @@ sudo service docker start
 # Without proper permissions, non-root users cannot access this socket. Docker daemon while creating the socket, creates a group called docker 
 # with #read/write privileges. So we can skip using sudo before every command by adding the user to docker group
 sudo usermod -aG docker $USER
-newgrp docker
+# TODO This makes the script exit the first time (cannot gain group membership in the middle of the script. Suggest to make it
+# a requirement for the user before running this entire script)
+#newgrp docker 
 docker run hello-world
 
 
@@ -65,6 +69,7 @@ docker run hello-world
 # wget https://github.com/Mirantis/cri-dockerd/releases/download/<version>/cri-dockerd_<>.deb
 wget https://github.com/Mirantis/cri-dockerd/releases/download/v0.3.12/cri-dockerd_0.3.12.3-0.ubuntu-jammy_amd64.deb
 sudo apt install ./cri-dockerd_0.3.12.3-0.ubuntu-jammy_amd64.deb -y
+
 sudo systemctl status docker.service --no-pager;
 sudo systemctl status cri-docker.service --no-pager;
 
@@ -87,6 +92,12 @@ curl -fsSL https://pkgs.k8s.io/core:/stable:/v1.29/deb/Release.key | sudo gpg --
 # update the packages
 
 sudo apt update;
+
+echo ""
+echo "Installing kubeadm, kubelet, kubectl"
+echo ""
+sleep 10
+
 
 # install packages
 # Don't pass "-y" flag as packages could already be installed and held at a particular version
