@@ -77,7 +77,7 @@ class Shell:
                 username=user,
                 #key_filename=ssh_key_path
                 allow_agent=True,  # This enables SSH agent authentication
-                look_for_keys=False  # Don't look for keys in ~/.ssh/
+                look_for_keys=False  # TODO ideal behavior is to look when agent fails
             )
 
             stdin, stdout, stderr = ssh_client.exec_command(command)
