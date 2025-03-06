@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Contains dependencies for kubernetes installation. It is already run in incus k8s image.
+# Start from there and avoid re-runing this script
+
 #https://www.nathanobert.com/posts/blog-kubernetes-on-ubuntu/
 #https://earthly.dev/blog/deploy-kubernetes-cri-o-container-runtime/
 #https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/install-kubeadm/
