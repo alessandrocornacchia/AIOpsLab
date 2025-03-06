@@ -5,6 +5,7 @@
 
 import os
 from openai import OpenAI
+import together
 from pathlib import Path
 import json
 
@@ -79,6 +80,50 @@ class GPT4Turbo:
     def run(self, payload: list[dict[str, str]]) -> list[str]:
         response = self.inference(payload)
         if self.cache is not None:
+            self.cache.add_to_cache(payload, response)
+            self.cache.save_cache()
+        return response
+
+class TogetherLLM:
+    """Abstraction for a Together AI model."""
+
+    def __init__(self):
+        self.cache = Cache()
+
+    def inference(self, payload: list[dict[str, str]]) -> list[str]:
+        if self.cache is not None:
+            cache_result = self.cache.get_from_cache(payload)
+            if cache_result is not None:
+                return cache_result
+            
+        api_key = os.getenv("TOGETHER_API_KEY")
+        
+        if not api_key:
+            raise ValueError("API key must be provided or set in TOGETHER_API_KEY environment variable")
+        
+        client = together.Together()
+    
+        if self.cache:
+            cache_result = self.cache.get_from_cache(payload)
+        if cache_result is not None:
+            return cache_result
+
+        try:
+            response = client.chat.completions.create(
+                model="deepseek-ai/DeepSeek-V3",
+                messages=payload# :white_check_mark: Now a string, not a list
+            )
+        except Exception as e:
+            print(f"Exception: {repr(e)}")
+            raise e
+
+        output = [choice.message.content for choice in response.choices]
+        return output
+
+
+    def run(self, payload: list[dict[str, str]]) -> list[str]:
+        response = self.inference(payload)
+        if self.cache:
             self.cache.add_to_cache(payload, response)
             self.cache.save_cache()
         return response
