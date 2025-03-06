@@ -29,12 +29,6 @@ class Wrk:
             data={payload_script_path.name: script_content},
         )
 
-<<<<<<< HEAD
-        command = f"./TargetMicroservices/wrk2/wrk -D {self.dist} -t {self.threads} -c {self.connections} -d {self.duration} -L -s {payload_script} {url} -R {self.rate}"
-        command += " --latency" if self.latency else ""
-        process = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE)
-        output, error = process.communicate()
-=======
         api_instance = client.CoreV1Api()
         try:
             print(f"Checking for existing ConfigMap '{name}'...")
@@ -44,7 +38,6 @@ class Wrk:
             if e.status != 404:
                 print(f"Error deleting ConfigMap '{name}': {e}")
                 return
->>>>>>> upstream/main
 
         try:
             print(f"Creating ConfigMap '{name}'...")

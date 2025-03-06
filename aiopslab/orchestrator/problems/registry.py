@@ -27,6 +27,8 @@ from aiopslab.orchestrator.problems.recommendation_service_cache_failure import 
 from aiopslab.orchestrator.problems.redeploy_without_pv import *
 from aiopslab.orchestrator.problems.wrong_bin_usage import *
 from aiopslab.orchestrator.problems.operator_misoperation import *
+from aiopslab.orchestrator.problems.memory_stress import *
+from aiopslab.orchestrator.problems.cpu_stress import *
 
 
 class ProblemRegistry:
@@ -154,6 +156,12 @@ class ProblemRegistry:
             # Network delay
             "network_delay_hotel_res-detection-1": NetworkDelayDetection,
             "network_delay_hotel_res-localization-1": NetworkDelayLocalization,
+            # Memory stress
+            "memory_stress_hotel_res-detection-1": MemoryStressDetection,
+            "memory_stress_hotel_res-localization-1": MemoryStressLocalization,
+            # CPU stress
+            "cpu_stress_hotel_res-detection-1": CPUStressDetection,
+            "cpu_stress_hotel_res-localization-1": CPUStressLocalization,
             # No operation
             "noop_detection_hotel_reservation-1": lambda: NoOpDetection(
                 app_name="hotel"

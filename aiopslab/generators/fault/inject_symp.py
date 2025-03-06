@@ -151,6 +151,62 @@ class SymptomFaultInjector(FaultInjector):
     def recover_network_delay(self):
         self.delete_chaos_experiment("network-delay")
 
+    def inject_memory_stress(
+        self,
+        microservices: List[str]
+    ):
+        """
+        Inject a memory stress fault.
+
+        Args:
+            microservices (List[str]): A list of microservice names or labels to target.
+        """
+        chaos_experiment = {
+            "apiVersion": "chaos-mesh.org/v1alpha1",
+            "kind": "StressChaos",
+            "metadata": {"name": "memory-stress", "namespace": self.namespace},
+            "spec": {
+                "mode": "one",
+                "selector": {
+                    "labelSelectors": {"io.kompose.service": ", ".join(microservices)}
+                },
+                "stressors": {"memory": {"workers":4, "size":"1GB"}},
+            },
+        }
+
+        self.create_chaos_experiment(chaos_experiment, "memory-stress")
+
+    def recover_memory_stress(self):
+        self.delete_chaos_experiment("memory-stress")
+
+    def inject_cpu_stress(
+        self,
+        microservices: List[str]
+    ):
+        """
+        Inject a CPU stress fault.
+
+        Args:
+            microservices (List[str]): A list of microservice names or labels to target.
+        """
+        chaos_experiment = {
+            "apiVersion": "chaos-mesh.org/v1alpha1",
+            "kind": "StressChaos",
+            "metadata": {"name": "cpu-stress", "namespace": self.namespace},
+            "spec": {
+                "mode": "one",
+                "selector": {
+                    "labelSelectors": {"io.kompose.service": ", ".join(microservices)}
+                },
+                "stressors": {"cpu": {"workers": 4, "load": 90}},
+            },
+        }
+
+        self.create_chaos_experiment(chaos_experiment, "cpu-stress")
+
+    def recover_cpu_stress(self):
+        self.delete_chaos_experiment("cpu-stress")
+
     def inject_pod_kill(self, microservices: List[str], duration: str = "200s"):
         """
         Inject a pod kill fault targeting specified microservices by label in the configured namespace.
