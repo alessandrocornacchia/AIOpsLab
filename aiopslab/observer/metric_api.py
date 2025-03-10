@@ -256,6 +256,7 @@ class PrometheusAPI:
                 )
             # prometheus query
             else:
+                
                 query = (
                     f"rate({metric_name}{{pod=~'{pod}', namespace='{namespace}'}}[5m])"
                 )
@@ -299,12 +300,20 @@ class PrometheusAPI:
             else:
                 current_et = start_time + interval_time
             for metric in normal_metrics:
-                data_raw = self.client.custom_query_range(
-                    f"{metric}{{namespace='{self.namespace}'}}",
-                    time_format_transform(start_time),
-                    time_format_transform(current_et),
-                    step=step,
-                )
+                if metric == "container_cpu_usage_seconds_total":
+                    data_raw = self.client.custom_query_range(
+                        f"rate({metric}{{namespace='{self.namespace}'}}[2m])",
+                        time_format_transform(start_time),
+                        time_format_transform(current_et),
+                        step=step,
+                    )
+                else:
+                    data_raw = self.client.custom_query_range(
+                        f"{metric}{{namespace='{self.namespace}'}}",
+                        time_format_transform(start_time),
+                        time_format_transform(current_et),
+                        step=step,
+                    )
                 # Debugging print statements
                 # print(f"Query: {metric}{{namespace='{self.namespace}'}}")
                 # print(f"Start Time: {start_time}, End Time: {current_et}")
@@ -403,15 +412,16 @@ class PrometheusAPI:
 
 
 if __name__ == "__main__":
-    prom = PrometheusAPI(monitor_config["prometheusApi"], monitor_config["namespace"])
+    # prom = PrometheusAPI(monitor_config["prometheusApi"], monitor_config["namespace"])
+    prom = PrometheusAPI("http://localhost:32000", "test-hotel-reservation")
 
     # Define time range for exporting metrics
     end_time = datetime.now()
-    start_time = end_time - timedelta(minutes=7)
+    start_time = end_time - timedelta(minutes=1)
 
     # Define the save path for metrics
     save_path = root_path / "metrics_output"
 
     prom.export_all_metrics(
-        start_time=start_time, end_time=end_time, save_path=str(save_path), step=10
+        start_time=start_time, end_time=end_time, save_path=str(save_path), step=1
     )

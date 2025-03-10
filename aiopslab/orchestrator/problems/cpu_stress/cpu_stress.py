@@ -4,6 +4,7 @@
 """CPU stress problem in the HotelReservation application."""
 
 from typing import Any
+import time
 
 from aiopslab.orchestrator.tasks import *
 from aiopslab.orchestrator.evaluators.quantitative import *
@@ -46,6 +47,8 @@ class CPUStressBaseTask:
             microservices=[self.faulty_service]
         )
         print(f"Service: {self.faulty_service} | Namespace: {self.namespace}\n")
+        # print("SLEEPING TILL 60 SECONDS")     
+        # time.sleep(60)  # Wait for fault
 
     def recover_fault(self):
         print("== Fault Recovery ==")

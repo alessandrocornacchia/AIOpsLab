@@ -93,7 +93,7 @@ class TaskActions:
 
         # Export all metrics and save to the specified path
         save_dir_str = prometheus_api.export_all_metrics(
-            start_time=start_time, end_time=end_time, save_path=save_path, step=15
+            start_time=start_time, end_time=end_time, save_path=save_path, step=1
         )
 
         return save_dir_str
