@@ -3,9 +3,10 @@
 
 # Create bridge network for the cluster
 
-NET=kashef-cornaca
-IP_ADDR=10.178.48.4
-VM=kashef-cornaca-w1
+USER=albaraa
+NET=kashef-${USER}
+IP_ADDR=10.180.100.4
+VM=kashef-${USER}-w1
 
 # create VMs associated with that network
 # check first the IP address is in the network range

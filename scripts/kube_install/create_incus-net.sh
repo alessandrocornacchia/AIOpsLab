@@ -2,7 +2,7 @@
 
 # Create bridge network for the cluster
 
-NET=kashef1
+NET=kashef-albaraa
 
 # solves network issue
 incus network create $NET

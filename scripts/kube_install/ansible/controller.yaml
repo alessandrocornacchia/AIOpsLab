@@ -20,8 +20,14 @@
 
     - name: Create alias k for kubectl
       become: false
+      tag: alias
       command: echo "alias k=kubectl" >> $HOME/.bashrc
-      
+    
+    - name: Debug content of $HOME varibale
+      become: false
+      tag: alias
+      debug: 
+        msg: "HOME is {{ lookup('env', 'HOME') }}"
 
 # run on plane
 - name: Create Control Plane
