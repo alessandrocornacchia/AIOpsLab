@@ -5,6 +5,11 @@
 
 import os
 import pandas as pd
+import numpy as np
+from tslearn.clustering import KShape
+from tslearn.preprocessing import TimeSeriesScalerMeanVariance
+from tslearn.utils import to_time_series_dataset
+import json
 from datetime import datetime, timedelta
 from aiopslab.utils.actions import action, read, write
 from aiopslab.service.kubectl import KubeCtl
@@ -102,13 +107,13 @@ class TaskActions:
     @read
     def read_metrics(file_path: str) -> str:
         """
-        Reads and returns metrics from a specified CSV file.
+        Reads and returns metrics from a specified CSV file, adding a time-series column.
 
         Args:
             file_path (str): Path to the metrics file (CSV format).
 
         Returns:
-            str: The requested metrics or an error message.
+            str: The requested metrics with the time-series column or an error message.
         """
         if not os.path.exists(file_path):
             return {"error": f"Metrics file '{file_path}' not found."}
@@ -116,10 +121,150 @@ class TaskActions:
         try:
             df_metrics = pd.read_csv(file_path)
 
+            # Ensure the 'timestamp' column exists
+            if 'timestamp' in df_metrics.columns:
+                df_metrics['timestamp'] = pd.to_datetime(df_metrics['timestamp'], unit='s')  # Convert to datetime
+                df_metrics['time_series'] = df_metrics['timestamp'].dt.strftime('%Y-%m-%d %H:%M:%S')  # Create time series
+
             return df_metrics.to_string(index=False)
 
         except Exception as e:
             return f"Failed to read metrics: {str(e)}"
+
+    @staticmethod
+    @read
+    def get_metric_summary(file_path: str) -> str:
+        """
+        Provides a statistical summary of the metric in the file, including max/min metric services.
+
+        Args:
+            file_path (str): Path to the metrics file.
+
+        Returns:
+            str: A formatted string containing the summary statistics.
+        """
+        if not os.path.exists(file_path):
+            return {"error": f"Metrics file '{file_path}' not found."}
+
+        try:
+            df = pd.read_csv(file_path)
+
+            # Ensure the 'timestamp' column exists
+            if 'timestamp' in df.columns:
+                df['timestamp'] = pd.to_datetime(df['timestamp'], unit='s')  # Convert to datetime
+                df['time_series'] = df['timestamp'].dt.strftime('%Y-%m-%d %H:%M:%S')  # Create time series
+
+        except Exception as e:
+            return f"Failed to read metrics: {str(e)}"
+
+        if 'cmdb_id' not in df.columns or 'value' not in df.columns:
+            return "Error: Metrics file does not contain required columns ('cmdb_id' and 'value')."
+
+        # Compute statistical summary
+        summary = df['value'].describe(percentiles=[0.25, 0.5, 0.75])
+
+        # Identify CMDB IDs with max and min values
+        max_value = df['value'].max()
+        min_value = df['value'].min()
+        max_cmdb = df[df['value'] == max_value]['cmdb_id'].values[0]
+        min_cmdb = df[df['value'] == min_value]['cmdb_id'].values[0]
+
+        # Identify top 5 CMDBs by average value
+        top_cmdbs = df.groupby('cmdb_id')['value'].mean().nlargest(5)
+
+        # Format output as a string
+        summary_str = (
+            f"Statistical Summary for Metric in {file_path}:\n"
+            f"-----------------------------------------\n"
+            f"Count: {int(summary['count'])}\n"
+            f"Mean: {summary['mean']:.5f}\n"
+            f"Std Dev: {summary['std']:.5f}\n"
+            f"Min: {summary['min']:.5f} (Service: {min_cmdb})\n"
+            f"25th Percentile: {summary['25%']:.5f}\n"
+            f"Median (50%): {summary['50%']:.5f}\n"
+            f"75th Percentile: {summary['75%']:.5f}\n"
+            f"Max: {summary['max']:.5f} (Service: {max_cmdb})\n"
+            f"\nTop 5 Services by Average Value:\n"
+            + "\n".join([f"- {cmdb}: {val:.5f}" for cmdb, val in top_cmdbs.items()])
+        )
+
+        return summary_str
+
+    @staticmethod
+    # @read
+    def cluster_metrics(file_path: str, n_clusters: int = 3) -> str:
+        """
+        Clusters time series metrics using k-shape clustering.
+
+        Args:
+            file_path (str): Path to the CSV file containing time-series metrics.
+            n_clusters (int): Number of clusters to create.
+
+        Returns:
+            str: Cluster mapping as a string or an error message.
+        """
+        
+        if not os.path.exists(file_path):
+            return "Error: Metrics file not found."
+
+        try:
+            # Load CSV
+            df = pd.read_csv(file_path)
+
+            # Ensure necessary columns exist
+            required_columns = {'timestamp', 'cmdb_id', 'value'}
+            if not required_columns.issubset(df.columns):
+                return f"Error: CSV file must contain {required_columns} columns."
+
+            # Convert timestamp to datetime
+            df['timestamp'] = pd.to_datetime(df['timestamp'], unit='s')
+
+            # Ensure 'value' column is numeric
+            df['value'] = pd.to_numeric(df['value'], errors='coerce')  # Convert non-numeric to NaN
+            df.dropna(subset=['value'], inplace=True)  # Remove rows where value is NaN
+            
+            if df.empty:
+                return "Error: No valid numerical time-series data available."
+            
+            # Pivot the data so each `cmdb_id` becomes a column (one time series per entity)
+            df_pivot = df.pivot(index='timestamp', columns='cmdb_id', values='value')
+
+            if df_pivot.empty:
+                return "Error: No valid time series extracted."
+
+            # Resample to a uniform frequency (fill missing timestamps)
+            df_pivot = df_pivot.resample('min').mean().interpolate()  # Resample to 1-minute intervals, interpolate missing values
+            df_pivot = df_pivot.fillna(0)
+
+            # Extract time series values
+            metric_names = df_pivot.columns.tolist()  # Unique cmdb_id values
+            time_series = [df_pivot[col].values for col in metric_names]  # Extract values
+            
+            if not time_series:
+                return "Error: No valid time series found after cleaning."
+
+            # Convert list of series to uniform shape
+            X = to_time_series_dataset(time_series)  # Auto-pads/truncates to a uniform shape
+            
+            # Scale the time series using RobustScaler (prevents outliers from being ignored)
+            scaler = TimeSeriesScalerMeanVariance()
+            X_scaled = np.array([scaler.fit_transform(x.reshape(-1, 1)).flatten() for x in X])
+
+            # Perform k-shape clustering
+            ks = KShape()
+            cluster_labels = ks.fit_predict(X_scaled)
+
+            # Create mapping of clusters to metric names
+            clusters = {}
+            for label, name in zip(cluster_labels, metric_names):
+                clusters.setdefault(label, []).append(name)  # Store only cmdb_id
+
+            # Convert dictionary to a string output
+            result_str = "\n".join([f"Cluster {label}: {', '.join(names)}" for label, names in clusters.items()])
+            return result_str
+
+        except Exception as e:
+            return f"Error: Failed to cluster metrics - {str(e)}"
 
     @staticmethod
     @read
@@ -170,6 +315,64 @@ class TaskActions:
 
         except Exception as e:
             return f"Failed to read traces: {str(e)}"
+
+    @staticmethod
+    @read
+    def analyze_jaeger_trace(
+        namespace: str, 
+        trace_id: str,
+        duration: int = 5, 
+    ) -> str:
+        """
+        Analyzes a Jaeger trace from the given namespace. It extracts traces from Jaeger
+        within the specified duration (in minutes), then calls the analyze_trace
+        method on a particular trace_id.
+
+        Args:
+            namespace (str): The Kubernetes namespace of Jaeger and your services.
+            trace_id (str): The specific trace to analyze.
+            duration (int): Time window in minutes from now going backward to collect traces.
+            
+        Returns:
+            str: The analysis for the chosen trace.
+        """
+        print(f"Analyzing trace(s) in namespace: {namespace} for last {duration} minutes.")
+        trace_api = TraceAPI(namespace=namespace)
+
+        # Compute time window
+        end_time = datetime.now()
+        start_time = end_time - timedelta(minutes=duration)
+
+        # Extract all traces from Jaeger within the time window
+        traces = trace_api.extract_traces(start_time=start_time, end_time=end_time)
+        if not traces:
+            return "No traces found in the given time window."
+
+        # If user didn't specify trace_id, pick the first trace by default
+        if not trace_id:
+            trace_id = traces[0]['traceID']
+            print(f"No trace_id specified. Using the first available trace: {trace_id}")
+
+        # Perform the analysis
+        try:
+            analysis_result = trace_api.analyze_trace(traces, trace_id)
+            if isinstance(analysis_result, str):
+                # If your analyze_trace returns a string, load it back to dict (if valid JSON-ish)
+                try:
+                    analysis_dict = eval(analysis_result)  # or json.loads(...) if valid JSON
+                except Exception:
+                    return analysis_result  # fallback
+
+                # Then convert to a nice JSON string
+                pretty_str = json.dumps(analysis_dict, indent=2)
+                return pretty_str
+            elif isinstance(analysis_result, dict):
+                # If your analyze_trace can return dict directly
+                return json.dumps(analysis_result, indent=2)
+            else:
+                return str(analysis_result)
+        except KeyError as ke:
+            return str(ke)
 
     @staticmethod
     # @read
@@ -235,3 +438,7 @@ class TaskActions:
         # except requests.RequestException as e:
         #     print(f"An error occurred: {e}")
         #     return []
+
+if __name__ == "__main__":
+    print(TaskActions.get_metric_summary('/home/ubuntu/iliyas/AIOpsLab/metrics_output/metric_20250309_130819/container/kpi_container_cpu_usage_seconds_total.csv'))
+    

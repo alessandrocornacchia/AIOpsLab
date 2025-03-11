@@ -231,7 +231,7 @@ server:
   global:
     ## How frequently to scrape targets by default
     ##
-    scrape_interval: 1m
+    scrape_interval: 30s
     ## How long until a scrape request times out
     ##
     scrape_timeout: 10s

@@ -52,9 +52,9 @@ if __name__ == "__main__":
     agent = Agent()
 
     orchestrator = Orchestrator()
-    orchestrator.register_agent(agent, name="deepseek-agent")
+    orchestrator.register_agent(agent, name="deepseek-w-shell")
 
-    pid = "memory_stress_hotel_res-detection-1"
+    pid = "cpu_stress_hotel_res-detection-1"
     problem_desc, instructs, apis = orchestrator.init_problem(pid)
     agent.init_context(problem_desc, instructs, apis)
     asyncio.run(orchestrator.start_problem(max_steps=10))

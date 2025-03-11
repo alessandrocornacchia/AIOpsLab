@@ -77,6 +77,10 @@ class Orchestrator:
         else:
             prob.start_workload()
 
+        # define failure pattern
+        # while ...
+        #     inject_failures()
+
         task_desc = prob.get_task_description()
         instructions = prob.get_instructions()
         actions = prob.get_available_actions()

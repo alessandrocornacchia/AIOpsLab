@@ -170,7 +170,7 @@ class SymptomFaultInjector(FaultInjector):
                 "selector": {
                     "labelSelectors": {"io.kompose.service": ", ".join(microservices)}
                 },
-                "stressors": {"memory": {"workers":4, "size":"1GB"}},
+                "stressors": {"memory": {"workers":4, "size":"100%"}},
             },
         }
 
@@ -198,7 +198,7 @@ class SymptomFaultInjector(FaultInjector):
                 "selector": {
                     "labelSelectors": {"io.kompose.service": ", ".join(microservices)}
                 },
-                "stressors": {"cpu": {"workers": 4, "load": 90}},
+                "stressors": {"cpu": {"workers": 4, "load": 100}},
             },
         }
 
