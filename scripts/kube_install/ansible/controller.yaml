@@ -1,10 +1,19 @@
 ---
 # TODO: use separate playbooks or use roles
-- name: Install Helm on all nodes
+- name: Install pre-requisites
   hosts: all
   become: true  # needs sudo priviledges
-  tags: helm
+  tags: pre
   tasks:
+    - name: Set sudoers for ansible_user
+      ansible.builtin.copy:
+        dest: /etc/sudoers.d/{{ ansible_user }}
+        content: |
+          {{ ansible_user }} ALL=(ALL) NOPASSWD: ALL
+        owner: root
+        group: root
+        mode: 0440
+
     - name: Download Helm installation script
       get_url:
         url: https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3
