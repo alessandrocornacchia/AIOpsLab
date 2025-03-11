@@ -16,3 +16,8 @@ workers:
   hosts:
     kashef-albaraa-w1:
       ansible_host: 10.180.100.4
+
+others:
+  hosts:
+    kashef-albaraa-AI:
+      ansible_host: 10.180.100.2

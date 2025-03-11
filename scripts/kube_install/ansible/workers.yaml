@@ -25,7 +25,7 @@
 
     
 - name: Configure worker nodes
-  hosts: workers
+  hosts: workers:others
   tags: kubeconfig
   tasks:
   - name: Create .kube directory
