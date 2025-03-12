@@ -13,7 +13,7 @@ from aiopslab.service.telemetry.prometheus import Prometheus
 import time
 import inspect
 import asyncio
-
+import re
 
 class Orchestrator:
     def __init__(self):
@@ -26,7 +26,7 @@ class Orchestrator:
         self.execution_end_time = None
         self.kubectl = KubeCtl()
 
-    def init_problem(self, problem_id: str):
+    def init_problem(self, problem_id: str, fault_free_interval: str = "60s", fault_interval: str = "60s", num_failures: int = 1):
         """Initialize a problem instance for the agent to solve.
 
         Args:
@@ -68,18 +68,34 @@ class Orchestrator:
         prob.app.delete()
         prob.app.deploy()
 
-        # inject fault
-        prob.inject_fault()
+        if 'cpu_stress' in problem_id or 'memory_stress' in problem_id:
 
-        # Check if start_workload is async or sync
-        if inspect.iscoroutinefunction(prob.start_workload):
-            asyncio.create_task(prob.start_workload())
+            int_fault_free_interval = self.parse_duration(fault_free_interval)
+            int_fault_interval = self.parse_duration(fault_interval)
+            total_duration = (int_fault_free_interval + int_fault_interval) * num_failures
+
+            if inspect.iscoroutinefunction(prob.start_workload):
+                asyncio.create_task(prob.start_workload(total_duration))
+            else:
+                prob.start_workload(total_duration)
+            
+            for i in range(num_failures):
+                print(f"Fault injection {i} of {num_failures}, sleeping for {int_fault_free_interval} seconds for no faults...")
+                time.sleep(int_fault_free_interval)
+                print(f"Injecting fault for {int_fault_interval} seconds...then sleeping for another 60 seconds to recover...")
+                prob.inject_fault(fault_interval)
+                time.sleep(int_fault_interval)
+                prob.recover_fault()
+                time.sleep(60)
         else:
-            prob.start_workload()
+            # inject fault
+            prob.inject_fault()
 
-        # define failure pattern
-        # while ...
-        #     inject_failures()
+            # Check if start_workload is async or sync
+            if inspect.iscoroutinefunction(prob.start_workload):
+                asyncio.create_task(prob.start_workload())
+            else:
+                prob.start_workload()
 
         task_desc = prob.get_task_description()
         instructions = prob.get_instructions()
@@ -194,3 +210,22 @@ class Orchestrator:
             "results": results,
             "framework_overhead": framework_overhead,
         }
+    def parse_duration(self, duration: str) -> int:
+        """
+        Converts a duration string (e.g., '5m', '30s', '2h') into seconds.
+
+        Args:
+            duration (str): The duration string (e.g., '5m', '30s', '2h').
+
+        Returns:
+            int: Duration in seconds.
+        """
+        match = re.match(r"(\d+)([smh])", duration.lower())
+        if not match:
+            raise ValueError("Invalid duration format. Use 'Xs', 'Xm', or 'Xh' (e.g., '30s', '5m', '2h').")
+
+        value, unit = int(match.group(1)), match.group(2)
+
+        conversion = {"s": 1, "m": 60, "h": 3600}
+        
+        return value * conversion[unit]

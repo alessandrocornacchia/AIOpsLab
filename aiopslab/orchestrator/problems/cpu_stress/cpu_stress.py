@@ -29,21 +29,22 @@ class CPUStressBaseTask:
         )
         self.injector = SymptomFaultInjector(namespace=self.namespace)
 
-    def start_workload(self):
+    def start_workload(self, duration: int = 60):
         print("== Start Workload ==")
         frontend_url = get_frontend_url(self.app)
 
-        wrk = Wrk(rate=10, dist="exp", connections=2, duration=60, threads=2)
+        wrk = Wrk(rate=10, dist="exp", connections=2, duration=duration, threads=2)
         wrk.start_workload(
             payload_script=self.payload_script,
             url=f"{frontend_url}",
         )
 
-    def inject_fault(self):
+    def inject_fault(self, duration: str = "60s"):
         print("== Fault Injection ==")      
         self.injector._inject(
             fault_type="cpu_stress",
-            microservices=[self.faulty_service]
+            microservices=[self.faulty_service],
+            duration=duration
         )
         print(f"Service: {self.faulty_service} | Namespace: {self.namespace}\n")
 

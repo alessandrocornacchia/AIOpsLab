@@ -1,0 +1,24 @@
+{
+    "agent": "human",
+    "session_id": "2e3f7759-43f5-4286-aff6-48b4c3929501",
+    "problem_id": "cpu_stress_hotel_res-detection-1",
+    "start_time": 1741817083.8670511,
+    "end_time": 1741817666.9444542,
+    "trace": [
+        {
+            "role": "assistant",
+            "content": "Action:```\nsubmit('yes')\n```"
+        },
+        {
+            "role": "env",
+            "content": "1"
+        }
+    ],
+    "results": {
+        "Detection Accuracy": "Correct",
+        "TTD": 583.0774030685425,
+        "steps": 1,
+        "in_tokens": 1,
+        "out_tokens": 9
+    }
+}
