@@ -151,15 +151,13 @@ class SymptomFaultInjector(FaultInjector):
     def recover_network_delay(self):
         self.delete_chaos_experiment("network-delay")
 
-    def inject_memory_stress(
-        self,
-        microservices: List[str]
-    ):
+    def inject_memory_stress(self, microservices: List[str], duration: str = "60s"):
         """
         Inject a memory stress fault.
 
         Args:
             microservices (List[str]): A list of microservice names or labels to target.
+            duration (str): Duration of the fault (e.g., "30s", "1m", "5m").
         """
         chaos_experiment = {
             "apiVersion": "chaos-mesh.org/v1alpha1",
@@ -167,10 +165,11 @@ class SymptomFaultInjector(FaultInjector):
             "metadata": {"name": "memory-stress", "namespace": self.namespace},
             "spec": {
                 "mode": "one",
+                "duration": duration,
                 "selector": {
                     "labelSelectors": {"io.kompose.service": ", ".join(microservices)}
                 },
-                "stressors": {"memory": {"workers":4, "size":"1GB"}},
+                "stressors": {"memory": {"workers": 4, "size": "100%"}},
             },
         }
 
@@ -179,15 +178,13 @@ class SymptomFaultInjector(FaultInjector):
     def recover_memory_stress(self):
         self.delete_chaos_experiment("memory-stress")
 
-    def inject_cpu_stress(
-        self,
-        microservices: List[str]
-    ):
+    def inject_cpu_stress(self, microservices: List[str], duration: str = "60s"):
         """
         Inject a CPU stress fault.
 
         Args:
             microservices (List[str]): A list of microservice names or labels to target.
+            duration (str): Duration of the fault (e.g., "30s", "1m", "5m").
         """
         chaos_experiment = {
             "apiVersion": "chaos-mesh.org/v1alpha1",
@@ -195,6 +192,7 @@ class SymptomFaultInjector(FaultInjector):
             "metadata": {"name": "cpu-stress", "namespace": self.namespace},
             "spec": {
                 "mode": "one",
+                "duration": duration,
                 "selector": {
                     "labelSelectors": {"io.kompose.service": ", ".join(microservices)}
                 },
@@ -206,6 +204,7 @@ class SymptomFaultInjector(FaultInjector):
 
     def recover_cpu_stress(self):
         self.delete_chaos_experiment("cpu-stress")
+
 
     def inject_pod_kill(self, microservices: List[str], duration: str = "200s"):
         """
