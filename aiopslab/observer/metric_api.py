@@ -299,12 +299,20 @@ class PrometheusAPI:
             else:
                 current_et = start_time + interval_time
             for metric in normal_metrics:
-                data_raw = self.client.custom_query_range(
-                    f"{metric}{{namespace='{self.namespace}'}}",
-                    time_format_transform(start_time),
-                    time_format_transform(current_et),
-                    step=step,
-                )
+                if metric == "container_cpu_usage_seconds_total":
+                    data_raw = self.client.custom_query_range(
+                        f"rate({metric}{{namespace='{self.namespace}'}}[2m])",
+                        time_format_transform(start_time),
+                        time_format_transform(current_et),
+                        step=step,
+                    )
+                else:
+                    data_raw = self.client.custom_query_range(
+                        f"{metric}{{namespace='{self.namespace}'}}",
+                        time_format_transform(start_time),
+                        time_format_transform(current_et),
+                        step=step,
+                    )
                 # Debugging print statements
                 # print(f"Query: {metric}{{namespace='{self.namespace}'}}")
                 # print(f"Start Time: {start_time}, End Time: {current_et}")
@@ -339,7 +347,10 @@ class PrometheusAPI:
                     }
                 )
                 dt = dt.sort_values(by="timestamp")
-                file_path = os.path.join(container_save_path, "kpi_" + metric + ".csv")
+                if metric == "container_cpu_usage_seconds_total":
+                    file_path = os.path.join(container_save_path, "kpi_cpu_usage_rate.csv")
+                else:
+                    file_path = os.path.join(container_save_path, "kpi_" + metric + ".csv")
                 if os.path.exists(file_path):
                     with open(file_path, "a", encoding="utf-8", newline="") as f:
                         dt.to_csv(f, header=False, index=False)

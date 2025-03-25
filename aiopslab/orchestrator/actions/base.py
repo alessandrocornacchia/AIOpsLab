@@ -18,6 +18,7 @@ from aiopslab.service.shell import Shell
 # from aiopslab.observer import initialize_pod_and_service_lists
 from aiopslab.observer.metric_api import PrometheusAPI
 from aiopslab.observer.trace_api import TraceAPI
+import openai
 
 
 class TaskActions:
@@ -27,7 +28,7 @@ class TaskActions:
     @read
     def get_logs(namespace: str, service: str) -> str:
         """
-        Collects relevant log data from a pod using Kubectl.
+        Collects relevant log data from a pod using Kubectl. Use the service name without the pod suffix.
 
         Args:
             namespace (str): The namespace in which the service is running.
@@ -98,13 +99,13 @@ class TaskActions:
 
         # Export all metrics and save to the specified path
         save_dir_str = prometheus_api.export_all_metrics(
-            start_time=start_time, end_time=end_time, save_path=save_path, step=15
+            start_time=start_time, end_time=end_time, save_path=save_path, step=1
         )
 
         return save_dir_str
     
     @staticmethod
-    @read
+    #@read
     def read_metrics(file_path: str) -> str:
         """
         Reads and returns metrics from a specified CSV file, adding a time-series column.
@@ -135,6 +136,7 @@ class TaskActions:
     @read
     def get_metric_summary(file_path: str) -> str:
         """
+        Please call get_metrics() before calling this function to generate the CSV files.
         Provides a statistical summary of the metric in the file, including max/min metric services.
 
         Args:
@@ -189,6 +191,110 @@ class TaskActions:
         )
 
         return summary_str
+
+    @staticmethod
+    # @read
+    def detect_high_cpu_pods(csv_file, threshold_cpu=0.5):
+        """
+        Please call get_metrics() before calling this function to generate the CSV files.
+        Detect all instances where CPU usage exceeded a specified threshold.
+
+        Args:
+            csv_file (str): Path to the CSV file containing CPU metrics
+            threshold_cpu (float): CPU usage threshold in cores (default: 0.5 cores)
+
+        Returns:
+            list: List of tuples containing (timestamp, pod_name, cpu_usage)
+        """
+        import pandas as pd
+
+        df = pd.read_csv(csv_file)
+
+        # Filter for CPU usage metrics
+        cpu_df = df[df['kpi_name'] == 'container_cpu_usage_seconds_total'].copy()
+
+        # Extract pod name from cmdb_id
+        cpu_df['pod_name'] = cpu_df['cmdb_id'].apply(lambda x: x.split('.', 1)[1])
+
+        # Convert timestamp to readable datetime if needed
+        if 'timestamp' in cpu_df.columns:
+            cpu_df['timestamp'] = pd.to_datetime(cpu_df['timestamp'], unit='s')
+
+        # Filter where CPU value exceeds the threshold
+        high_cpu_df = cpu_df[cpu_df['value'] > threshold_cpu]
+
+        # Sort by value (optional)
+        high_cpu_df = high_cpu_df.sort_values(by='value', ascending=False)
+
+        if not high_cpu_df.empty:
+            result = "High CPU usage instances:\n"
+            for _, row in high_cpu_df.iterrows():
+                result += f"Time: {row['timestamp']}, Pod: {row['pod_name']}, CPU: {row['value']:.3f} cores\n"
+            return result
+        else:
+            return "No high CPU usage instances found."
+    
+    @staticmethod
+    @read
+    def analyze_metric(file_path: str) -> str:
+        """
+        Please call get_metrics() before calling this function to generate the CSV files.
+        Analyzes the given metric and returns a summary.
+        
+        Args:
+            file_path (str): Path to the metrics CSV file.
+
+        Returns:
+            str: A text analysis of the metric data.
+        """
+        if not os.path.exists(file_path):
+            return f"Error: File '{file_path}' not found."
+
+        try:
+            df = pd.read_csv(file_path)
+
+            # Convert timestamp if present
+            if 'timestamp' in df.columns:
+                df['timestamp'] = pd.to_datetime(df['timestamp'], unit='s')
+                df['time_series'] = df['timestamp'].dt.strftime('%Y-%m-%d %H:%M:%S')
+
+
+            # Downsample for GPT input if too large
+            sample_df = df.sample(n=min(len(df), 1000), random_state=42)
+            
+            # Select relevant columns
+            context_df = sample_df[['timestamp', 'cmdb_id', 'value', 'kpi_name']] if 'kpi_name' in df.columns else sample_df[['timestamp', 'cmdb_id', 'value']]
+            context_csv = context_df.to_csv(index=False)
+
+            # Compose prompt
+            prompt = f"""
+                        You are a metrics analyst assistant. Analyze the following metrics data and provide any key patterns and outliers. 
+                        Suggest exactly what service(s) need attention or further investigation, that's it.
+
+                        Metric file: {file_path}
+                        Metric name: {df['kpi_name'][0] or "Not specified"}
+
+                        Here are the sampled records:
+
+                        {context_csv}
+                    """
+
+            # Call OpenAI
+            client = openai.OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+            response = openai.chat.completions.create(
+                model="gpt-4o-mini",
+                messages=[
+                    {"role": "system", "content": "You are a helpful assistant skilled at analyzing metrics from time-series data."},
+                    {"role": "user", "content": prompt}
+                ],
+                temperature=0.3,
+                max_tokens=1024
+            )
+
+            return response.choices[0].message.content.strip()
+
+        except Exception as e:
+            return f"Failed to analyze metric: {str(e)}"
 
     @staticmethod
     # @read
@@ -294,7 +400,7 @@ class TaskActions:
         # return f"Trace data exported to: {save_path}"
 
     @staticmethod
-    @read
+    #@read
     def read_traces(file_path: str) -> str:
         """
         Reads and returns traces from a specified CSV file.
@@ -318,12 +424,13 @@ class TaskActions:
 
     @staticmethod
     @read
-    def analyze_jaeger_trace(
+    def analyze_specific_trace(
         namespace: str, 
         trace_id: str,
         duration: int = 5, 
     ) -> str:
         """
+        Please call get_traces() before calling this function to generate the CSV file.
         Analyzes a Jaeger trace from the given namespace. It extracts traces from Jaeger
         within the specified duration (in minutes), then calls the analyze_trace
         method on a particular trace_id.
@@ -373,6 +480,121 @@ class TaskActions:
                 return str(analysis_result)
         except KeyError as ke:
             return str(ke)
+    
+    @staticmethod
+    @read
+    def get_traces_summary(file_path: str) -> str:
+        """
+        Please call get_traces() before calling this function to generate the CSV file.
+        Reads a traces file (CSV) and returns a detailed statistical summary including
+        average latency, total requests, error rate, and longest spans, along with trace IDs.
+        
+        Args:
+            file_path (str): Path to the traces file.
+        
+        Returns:
+            str: A formatted string containing trace summary statistics.
+        """
+        if not os.path.exists(file_path):
+            return f"Error: Traces file '{file_path}' not found."
+        
+        try:
+            # Load the traces CSV file
+            df = pd.read_csv(file_path)
+            
+            # Compute statistical summary
+            total_traces = len(df)
+            avg_latency = df["latency"].mean()
+            max_latency = df["latency"].max()
+            min_latency = df["latency"].min()
+            error_rate = df["error_rate"].mean()
+            total_errors = df[df["contains_errors"] == True].shape[0]
+            most_common_operation = df["operation"].mode()[0]
+            most_common_service = df["services"].mode()[0]
+            
+            # Identify trace IDs for max values
+            max_latency_trace = df.loc[df["latency"].idxmax(), "trace_id"]
+            min_latency_trace = df.loc[df["latency"].idxmin(), "trace_id"]
+            max_span_trace = df.loc[df["longest_span_duration"].idxmax(), "trace_id"]
+            
+            # Identify the longest span service
+            longest_span_service = df.loc[df["longest_span_duration"].idxmax(), "longest_span_service"]
+            max_span_duration = df["longest_span_duration"].max()
+            mean_span_duration = df["mean_span_duration"].mean()
+            
+            # Format summary as a string
+            summary_str = (
+                f"Trace Summary Report\n"
+                f"---------------------------------\n"
+                f"Total Traces: {total_traces}\n"
+                f"Average Latency: {avg_latency:.2f} ms\n"
+                f"Max Latency: {max_latency:.2f} ms (Trace ID: {max_latency_trace})\n"
+                f"Min Latency: {min_latency:.2f} ms (Trace ID: {min_latency_trace})\n"
+                f"Error Rate: {error_rate:.2%}\n"
+                f"Total Errors: {total_errors}\n"
+                f"Most Common Operation: {most_common_operation}\n"
+                f"Most Common Service: {most_common_service}\n"
+                f"Longest Span Service: {longest_span_service}\n"
+                f"Max Span Duration: {max_span_duration:.2f} ms (Trace ID: {max_span_trace})\n"
+                f"Mean Span Duration: {mean_span_duration:.2f} ms\n"
+            )
+            
+            return summary_str
+        except Exception as e:
+            return f"Error processing traces file: {str(e)}"
+
+    @staticmethod
+    @read
+    def analyze_traces(file_path: str) -> str:
+        """
+        Please call get_traces() before calling this function to generate the CSV file.
+        Analyzes trace data and returns an insightful summary.
+
+        Args:
+            file_path (str): Path to the CSV file containing trace data.
+
+        Returns:
+            str: Textual summary of the trace data.
+        """
+        if not os.path.exists(file_path):
+            return f"Error: File '{file_path}' not found."
+
+        try:
+            df = pd.read_csv(file_path)
+
+            context_csv = df.to_csv(index=False)
+
+            # Compose prompt
+            prompt = f"""
+    You are a tracing performance expert. Analyze the following trace data to detect:
+    - Performance bottlenecks
+    - High latency spans
+    - Services or operations that might need optimization
+    - Any unusual trace patterns
+
+    Trace file: {file_path}
+
+    Here is the trace data:
+
+    {context_csv}
+            """
+
+            # GPT call
+            client = openai.OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+            response = openai.chat.completions.create(
+                model="gpt-4o-mini",
+                messages=[
+                    {"role": "system", "content": "You are a helpful assistant skilled in analyzing distributed trace data and identifying performance issues."},
+                    {"role": "user", "content": prompt}
+                ],
+                temperature=0.3,
+                max_tokens=1000
+            )
+
+            return response.choices[0].message.content.strip()
+
+        except Exception as e:
+            return f"Failed to analyze trace data: {str(e)}"
 
     @staticmethod
     # @read
@@ -440,5 +662,5 @@ class TaskActions:
         #     return []
 
 if __name__ == "__main__":
-    print(TaskActions.get_metric_summary('/home/ubuntu/iliyas/AIOpsLab/metrics_output/metric_20250309_130819/container/kpi_container_cpu_usage_seconds_total.csv'))
+    print(TaskActions.analyze_traces('/home/ubuntu/iliyas/AIOpsLab/trace_output/traces_1742771893.csv'))
     

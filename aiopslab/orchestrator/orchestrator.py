@@ -82,11 +82,11 @@ class Orchestrator:
             for i in range(num_failures):
                 print(f"Fault injection {i} of {num_failures}, sleeping for {int_fault_free_interval} seconds for no faults...")
                 time.sleep(int_fault_free_interval)
-                print(f"Injecting fault for {int_fault_interval} seconds...then sleeping for another 60 seconds to recover...")
+                print(f"Injecting fault for {int_fault_interval} seconds...")
                 prob.inject_fault(fault_interval)
                 time.sleep(int_fault_interval)
                 prob.recover_fault()
-                time.sleep(60)
+                
         else:
             # inject fault
             prob.inject_fault()
