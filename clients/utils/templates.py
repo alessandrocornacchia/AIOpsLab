@@ -62,6 +62,6 @@ Finally, you will submit your solution for this task using the following API:
 
 {submit_api}
 
-Collaborate with your team to analyze the problem and suggest appropriate API calls.
-Do not execute commands. Suggest API calls in the specified format within markdown code blocks.
+Collaborate with your team to analyze the problem and suggest an appropriate API call.
+Do not execute commands. Do not use markdown for anything other than the API call.
 """

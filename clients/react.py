@@ -77,8 +77,8 @@ if __name__ == "__main__":
     orchestrator.register_agent(agent, name="react")
 
     pid = "cpu_stress_hotel_res-localization-1"
-    fault_free_interval = '60s'
-    fault_interval = '60s'
+    fault_free_interval = '30s'
+    fault_interval = '30s'
     num_failures = 1
     problem_desc, instructs, apis = orchestrator.init_problem(pid, fault_free_interval, fault_interval, num_failures)
     agent.init_context(problem_desc, instructs, apis)
