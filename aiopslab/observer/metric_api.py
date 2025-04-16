@@ -291,7 +291,7 @@ class PrometheusAPI:
         # istio metrics
         istio_save_path = os.path.join(save_path, "istio")
         os.makedirs(istio_save_path, exist_ok=True)
-
+        step = max((end_time - start_time).total_seconds() // 100, 1)
         # interval_time = 2 * 60 * 60
         interval_time = timedelta(seconds=2 * 60 * 60)
         while start_time < end_time:
@@ -348,7 +348,10 @@ class PrometheusAPI:
                     }
                 )
                 dt = dt.sort_values(by="timestamp")
-                file_path = os.path.join(container_save_path, "kpi_" + metric + ".csv")
+                if metric == "container_cpu_usage_seconds_total":
+                    file_path = os.path.join(container_save_path, "kpi_cpu_usage_rate.csv")
+                else:
+                    file_path = os.path.join(container_save_path, "kpi_" + metric + ".csv")
                 if os.path.exists(file_path):
                     with open(file_path, "a", encoding="utf-8", newline="") as f:
                         dt.to_csv(f, header=False, index=False)
@@ -417,7 +420,7 @@ if __name__ == "__main__":
 
     # Define time range for exporting metrics
     end_time = datetime.now()
-    start_time = end_time - timedelta(minutes=1)
+    start_time = end_time - timedelta(minutes=10)
 
     # Define the save path for metrics
     save_path = root_path / "metrics_output"

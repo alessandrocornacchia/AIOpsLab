@@ -8,7 +8,8 @@ import os
 # Response Instruction to avoid looping actions
 RESP_INSTR = """DO NOT REPEAT ACTIONS! Respond with:
 Thought: <your thought on the previous output>
-Action: <your action towards mitigating>
+Action: <your action towards mitigating IN A MARKDOWN CODE BLOCK>
+Remember you are trying to find the root cause of the issue.
 """
 
 # 1. Define a DSPy Signature for Prediction
@@ -22,7 +23,7 @@ class ReActSignature(dspy.Signature):
 class ReActAgent:
     def __init__(self):
         self.history = []
-        self.llm = dspy.LM(model="openai/gpt-4o-mini", api_key=os.getenv("OPENAI_API_KEY"))
+        self.llm = dspy.LM(model="openai/gpt-4o", api_key=os.getenv("OPENAI_API_KEY"))
         dspy.configure(lm = self.llm)
         self.predictor = dspy.Predict(ReActSignature)
 
@@ -65,7 +66,7 @@ class ReActAgent:
         response = self.predictor.forward(**observation)
 
         thought, action = response.thought, response.action
-        formatted_response = f"Thought: {thought}\nAction: {action}"
+        formatted_response = f"Thought: {thought}\nAction: ```\n {action}\n ```"
         
         self.history.append({"role": "assistant", "content": formatted_response})
         return formatted_response
@@ -77,9 +78,12 @@ if __name__ == "__main__":
     orchestrator = Orchestrator()
     orchestrator.register_agent(agent, name="dspy_react")
 
-    pid = "assign_to_non_existent_node_social_net-localization-1"
-    problem_desc, instructions, apis = orchestrator.init_problem(pid)
+    pid = "cpu_stress_hotel_res-localization-1"
+    fault_free_interval = '60s'
+    fault_interval = '60s'
+    num_failures = 1
+    problem_desc, instructs, apis = orchestrator.init_problem(pid, fault_free_interval, fault_interval, num_failures)
     
-    agent.init_context(problem_desc, instructions, apis)
+    agent.init_context(problem_desc, instructs, apis)
     
     asyncio.run(orchestrator.start_problem(max_steps=15))

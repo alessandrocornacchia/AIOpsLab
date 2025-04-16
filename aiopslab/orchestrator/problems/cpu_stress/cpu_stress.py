@@ -48,8 +48,26 @@ class CPUStressBaseTask:
             duration=duration
         )
         print(f"Service: {self.faulty_service} | Namespace: {self.namespace}\n")
-        # print("SLEEPING TILL 60 SECONDS")     
-        # time.sleep(60)  # Wait for fault
+
+    # TODO inject with a given time pattern
+    
+    # def inject_serial_fault(self, transient_period, experiment_period):
+    #     print("== Fault Injection ==")      
+    #     t = 0
+        
+    #     sleep(transient_period)
+
+    #     while t < experiment_period:
+    #         sleep(60)
+    #         t += 60
+    #         self.injector._inject(
+    #             fault_type="cpu_stress",
+    #             microservices=[self.faulty_service]
+    #             duration=10
+    #         )
+    #         t += duration
+
+    #     print(f"Service: {self.faulty_service} | Namespace: {self.namespace}\n")
 
     def recover_fault(self):
         print("== Fault Recovery ==")

@@ -196,7 +196,7 @@ class SymptomFaultInjector(FaultInjector):
                 "selector": {
                     "labelSelectors": {"io.kompose.service": ", ".join(microservices)}
                 },
-                "stressors": {"cpu": {"workers": 4, "load": 90}},
+                "stressors": {"cpu": {"workers": 4, "load": 100}},
             },
         }
 

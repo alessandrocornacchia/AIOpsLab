@@ -72,14 +72,13 @@ class Shell:
         ssh_client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
 
         try:
-            # ssh_client.connect(hostname=host, username=user, key_filename=ssh_key_path)
             ssh_client.connect(
-                 hostname=host, 
-                 username=user,
-                 #key_filename=ssh_key_path
-                 allow_agent=True,  # This enables SSH agent authentication
-                 look_for_keys=False  # TODO ideal behavior is to look when agent fails
-             )
+                hostname=host, 
+                username=user,
+                #key_filename=ssh_key_path
+                allow_agent=True,  # This enables SSH agent authentication
+                look_for_keys=False  # TODO ideal behavior is to look when agent fails
+            )
 
             stdin, stdout, stderr = ssh_client.exec_command(command)
             exit_status = stdout.channel.recv_exit_status()

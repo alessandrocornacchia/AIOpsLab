@@ -1,4 +1,4 @@
-api: <api_path>
+api: http://localhost:9200
 username: elastic
 password: <update with elastic password>
 prometheusApi: http://localhost:32000
@@ -7,4 +7,4 @@ trace_index: .ds-traces-apm-default-*
 logstash_index: logstash-*
 kubernetes_path: '~/.kube/config'
 es_use_cert: 'False'
-es_cert_path: <update the path to the cert>
+es_cert_path: /home/alabduin/AIOpsLab/aiopslab/observer/ca.pem
