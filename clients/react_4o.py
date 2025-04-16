@@ -76,7 +76,7 @@ if __name__ == "__main__":
     orchestrator = Orchestrator()
     orchestrator.register_agent(agent, name="ReAct gpt4o - with original tools")
 
-    pid = "memory_stress_hotel_res-localization-1"
+    pid = "memory_stress_social_net-localization-1"
     fault_free_interval = '60s'
     fault_interval = '60s'
     num_failures = 1

@@ -46,7 +46,7 @@ class Cache:
 
 
 class GPT4o:
-    """Abstraction for OpenAI's GPT-4 Turbo model."""
+    """Abstraction for OpenAI's GPT-4o model."""
 
     def __init__(self):
         self.cache = Cache()
@@ -70,6 +70,37 @@ class GPT4o:
                 n=1,
                 timeout=60,
                 stop=[],
+            )
+        except Exception as e:
+            print(f"Exception: {repr(e)}")
+            raise e
+
+        return [c.message.content for c in response.choices]  # type: ignore
+
+    def run(self, payload: list[dict[str, str]]) -> list[str]:
+        response = self.inference(payload)
+        if self.cache is not None:
+            self.cache.add_to_cache(payload, response)
+            self.cache.save_cache()
+        return response
+
+class o1:
+    """Abstraction for OpenAI's o1 model."""
+
+    def __init__(self):
+        self.cache = Cache()
+
+    def inference(self, payload: list[dict[str, str]]) -> list[str]:
+        if self.cache is not None:
+            cache_result = self.cache.get_from_cache(payload)
+            if cache_result is not None:
+                return cache_result
+
+        client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+        try:
+            response = client.chat.completions.create(
+                messages=payload,  # type: ignore
+                model="o1"
             )
         except Exception as e:
             print(f"Exception: {repr(e)}")
