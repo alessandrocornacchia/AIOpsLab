@@ -22,7 +22,7 @@ class NetworkLossBaseTask:
         self.app = HotelReservation()
         self.kubectl = KubeCtl()
         self.namespace = self.app.namespace
-        self.faulty_service = "user"
+        self.faulty_service = "recommendation"
         self.payload_script = (
             TARGET_MICROSERVICES
             / "hotelReservation/wrk2/scripts/hotel-reservation/mixed-workload_type_1.lua"

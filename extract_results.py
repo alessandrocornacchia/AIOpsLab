@@ -6,7 +6,6 @@ from datetime import datetime
 
 RESULTS_DIR = "./aiopslab/data/results"
 CUTOFF_TIME = 1744208585.4308631
-# 1744812465.4460268
 
 def extract_from_file(filepath):
     with open(filepath, "r") as f:
@@ -19,16 +18,22 @@ def extract_from_file(filepath):
         return None
 
     trace = session.get("trace", [])
-    tools_used = []
-    tool_calls = 0
+    tool_calls_detailed = []
 
     for t in trace:
         if t.get("role") == "assistant":
             actions = re.findall(r"```(?:\w*\n)?(.*?)```", t["content"], re.DOTALL)
             for action in actions:
-                cleaned = action.strip().split('(')[0].strip()
-                tools_used.append(cleaned)
-                tool_calls += 1
+                stripped = action.strip()
+                # Try to match function and arguments: function_name("arg1", 123)
+                match = re.match(r"(\w+)\((.*)\)", stripped, re.DOTALL)
+                if match:
+                    tool_name = match.group(1)
+                    args = match.group(2).strip()
+                    tool_calls_detailed.append({
+                        "tool": tool_name,
+                        "args": args
+                    })
 
     return {
         "session_id": session.get("session_id"),
@@ -41,8 +46,8 @@ def extract_from_file(filepath):
         "tokens_out": session["results"].get("out_tokens"),
         "steps": session["results"].get("steps"),
         "localization_accuracy": session["results"].get("Localization Accuracy"),
-        "tools_used_order": tools_used,
-        "num_tool_calls": tool_calls
+        "tool_calls_ordered": tool_calls_detailed,
+        "num_tool_calls": len(tool_calls_detailed)
     }
 
 def build_insights_table(results_dir):

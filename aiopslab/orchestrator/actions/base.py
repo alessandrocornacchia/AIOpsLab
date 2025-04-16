@@ -662,5 +662,5 @@ class TaskActions:
         #     return []
 
 if __name__ == "__main__":
-    print(TaskActions.analyze_traces('/home/ubuntu/iliyas/AIOpsLab/trace_output/traces_1742771893.csv'))
+    print(TaskActions.get_traces_summary('/home/ubuntu/iliyas/AIOpsLab/trace_output/traces_1744818653.csv'))
     
