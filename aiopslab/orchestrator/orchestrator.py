@@ -14,6 +14,10 @@ import time
 import inspect
 import asyncio
 import re
+from aiopslab.observer.trace_api import TraceAPI
+from aiopslab.observer import root_path
+from datetime import datetime, timedelta
+import os
 
 class Orchestrator:
     def __init__(self):
@@ -72,7 +76,8 @@ class Orchestrator:
 
             int_fault_free_interval = self.parse_duration(fault_free_interval)
             int_fault_interval = self.parse_duration(fault_interval)
-            total_duration = (int_fault_free_interval + int_fault_interval) * num_failures
+            total_duration = (int_fault_free_interval + int_fault_interval) * num_failures if num_failures > 0 else int_fault_free_interval
+
 
             if inspect.iscoroutinefunction(prob.start_workload):
                 asyncio.create_task(prob.start_workload(total_duration))
@@ -82,11 +87,68 @@ class Orchestrator:
             for i in range(num_failures):
                 print(f"Fault injection {i} of {num_failures}, sleeping for {int_fault_free_interval} seconds for no faults...")
                 time.sleep(int_fault_free_interval)
-                print(f"Injecting fault for {int_fault_interval} seconds...then sleeping for another 60 seconds to recover...")
+                print(f"Injecting fault for {int_fault_interval} seconds...")
                 prob.inject_fault(fault_interval)
                 time.sleep(int_fault_interval)
                 prob.recover_fault()
-                time.sleep(60)
+                
+            
+            print(f"[XYB] TOTAL EXPERIMENT COMPLETED IN: {total_duration} seconds")
+            
+            # --- START: Trace Collection and Aggregation ---
+            print("[XYB] Starting trace collection and aggregation...")
+            trace_end_time = datetime.now()
+            total_experiment_duration_seconds = (int_fault_free_interval + int_fault_interval) * num_failures if num_failures > 0 else int_fault_free_interval
+            # total_experiment_duration_seconds = (int_fault_free_interval + int_fault_interval) + int_fault_free_interval #REMOVE THIS LINE
+            trace_start_time = trace_end_time - timedelta(seconds=total_experiment_duration_seconds)
+            print(f"[XYB] Trace window: Start={trace_start_time}, End={trace_end_time}, Approx Duration={(trace_end_time-trace_start_time).total_seconds()}s")
+
+            # Format timestamp for directory name
+            timestamp_str = trace_end_time.strftime("%Y%m%d_%H%M%S")
+
+            # Determine base directory (normal/abnormal)
+            base_save_path = root_path / "trace_output" / "traceRCA"
+            if num_failures == 0:
+                rca_subdir = base_save_path / "normal"
+            else:
+                rca_subdir = base_save_path / "abnormal"
+
+            # Create the final timestamped output directory path
+            output_dir_path = rca_subdir / timestamp_str
+            print(f"[XYB] Output directory set to: {output_dir_path}")
+            # Ensure the directory exists (although save functions also do this)
+            os.makedirs(output_dir_path, exist_ok=True) 
+
+            tracer = None # Initialize tracer to None for finally block safety
+            try:
+                # Use the namespace from the problem's app
+                tracer = TraceAPI(namespace=prob.app.namespace)
+                traces = tracer.extract_traces(trace_start_time, trace_end_time)
+
+                if traces:
+                    print(f"[XYB] Processing {len(traces)} traces...")
+                    df_traces = tracer.process_traces(traces)
+                    df_edges = tracer.process_traces_to_edges(traces)
+                    aggregated_traces = tracer.aggregate_trace_edges(df_edges)
+
+                    # Call save functions with the target DIRECTORY path
+                    # The functions in trace_api.py will generate the filenames internally
+                    print(tracer.save_traces(df_traces, str(output_dir_path)))
+                    print(tracer.save_trace_edges(df_edges, str(output_dir_path)))
+                    print(tracer.save_aggregated_traces(aggregated_traces, str(output_dir_path)))
+
+                else:
+                    print("[XYB] No traces found for the specified time window.")
+
+            except Exception as e:
+                print(f"[XYB] An error occurred during trace collection or processing: {e}")
+            finally:
+                # Ensure cleanup happens even if errors occur
+                if tracer:
+                    tracer.cleanup()
+            print("[XYB] Trace collection and aggregation finished.")
+            # --- END: Trace Collection and Aggregation ---
+
         else:
             # inject fault
             prob.inject_fault()

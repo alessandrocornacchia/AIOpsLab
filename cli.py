@@ -98,7 +98,10 @@ class HumanAgent:
         return template.format(user_input)
 
     def init_problem(self, problem_id="misconfig-mitigation-1"):
-        problem_desc, _, apis = self.orchestrator.init_problem(problem_id)
+        fault_free_interval = '60s'
+        fault_interval = '240s'
+        num_failures = 1
+        problem_desc, _, apis = self.orchestrator.init_problem(problem_id, fault_free_interval, fault_interval, num_failures)
         self.display_context(problem_desc, apis)
 
     async def get_user_input(self, completer=None):
