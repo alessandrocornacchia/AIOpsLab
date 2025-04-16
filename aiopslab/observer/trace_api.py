@@ -234,25 +234,25 @@ class TraceAPI:
         duration_list = []
         parent_span_list = []
 
-        trace_id = trace["traceID"]
-        processes = trace.get("processes", {}) # Get the processes dictionary
-        for span in trace["spans"]:
-            trace_id_list.append(trace_id)
-            # Get service name using processID
-            process_id = span.get("processID")
-            service_name = processes.get(process_id, {}).get("serviceName", "unknown_service")
-            service_name_list.append(service_name)
-            operation_name_list.append(span["operationName"])
-            start_time_list.append(span["startTime"])
-            duration_list.append(span["duration"])
-            parent_span = "ROOT"
-            if "references" in span:
-                for ref in span["references"]:
-                    if ref["refType"] == "CHILD_OF":
-                        parent_span = ref["spanID"]
-                        break
-                parent_span_list.append(parent_span)
-
+        for trace in traces:
+            trace_id = trace["traceID"]
+            processes = trace.get("processes", {}) # Get the processes dictionary
+            for span in trace["spans"]:
+                trace_id_list.append(trace_id)
+                # Get service name using processID
+                process_id = span.get("processID")
+                service_name = processes.get(process_id, {}).get("serviceName", "unknown_service")
+                service_name_list.append(service_name)
+                operation_name_list.append(span["operationName"])
+                start_time_list.append(span["startTime"])
+                duration_list.append(span["duration"])
+                parent_span = "ROOT"
+                if "references" in span:
+                    for ref in span["references"]:
+                        if ref["refType"] == "CHILD_OF":
+                            parent_span = ref["spanID"]
+                            break
+                    parent_span_list.append(parent_span)
         df = pd.DataFrame(
             {
                 "trace_id": trace_id_list,
@@ -264,6 +264,46 @@ class TraceAPI:
             }
         )
         return df
+                
+    # def process_traces(self, traces) -> pd.DataFrame:
+    #     """Process raw traces data into a structured DataFrame."""
+    #     trace_id_list = []
+    #     service_name_list = []
+    #     operation_name_list = []
+    #     start_time_list = []
+    #     duration_list = []
+    #     parent_span_list = []
+
+    #     for trace in traces:
+    #         trace_id = trace["traceID"]
+    #         for span in trace["spans"]:
+    #             trace_id_list.append(trace_id)
+    #             service_name_list.append(
+    #                 span["serviceName"]
+    #             )  # Use the correct service name from the span
+    #             operation_name_list.append(span["operationName"])
+    #             start_time_list.append(span["startTime"])
+    #             duration_list.append(span["duration"])
+    #             parent_span = "ROOT"
+    #             if "references" in span:
+    #                 for ref in span["references"]:
+    #                     if ref["refType"] == "CHILD_OF":
+    #                         parent_span = ref["spanID"]
+    #                         break
+    #             parent_span_list.append(parent_span)
+
+    #     df = pd.DataFrame(
+    #         {
+    #             "trace_id": trace_id_list,
+    #             "service_name": service_name_list,
+    #             "operation_name": operation_name_list,
+    #             "start_time": start_time_list,
+    #             "duration": duration_list,
+    #             "parent_span": parent_span_list,
+    #         }
+    #     )
+    #     return df
+
     
     def process_traces(self, traces):
         """

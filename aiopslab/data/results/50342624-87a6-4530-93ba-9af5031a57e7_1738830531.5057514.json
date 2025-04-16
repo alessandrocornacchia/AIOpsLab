@@ -1,0 +1,32 @@
+{
+    "agent": "human",
+    "session_id": "50342624-87a6-4530-93ba-9af5031a57e7",
+    "problem_id": "misconfig_app_hotel_res-detection-1",
+    "start_time": 1738830531.5057514,
+    "end_time": 1738830545.1912274,
+    "trace": [
+        {
+            "role": "assistant",
+            "content": "Action:```\n\n```"
+        },
+        {
+            "role": "env",
+            "content": "Error parsing response: No API call found!"
+        },
+        {
+            "role": "assistant",
+            "content": "Action:```\nsubmit('yes')\n```"
+        },
+        {
+            "role": "env",
+            "content": "1"
+        }
+    ],
+    "results": {
+        "Detection Accuracy": "Correct",
+        "TTD": 13.685476064682007,
+        "steps": 2,
+        "in_tokens": 10,
+        "out_tokens": 14
+    }
+}
