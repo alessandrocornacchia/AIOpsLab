@@ -200,6 +200,9 @@ class TraceAPI:
         if services is None:
             print("No services found.")
             return all_traces
+
+        unique_trace_ids = set()
+
         for service in services:
             if service == "jaeger-all-in-one":  # Skip utility service
                 continue
@@ -210,11 +213,12 @@ class TraceAPI:
                 limit=limit,
             )
             for trace in traces:
-                for span in trace["spans"]:
-                    span[
-                        "serviceName"
-                    ] = service  # Directly associate service name with each span
-                all_traces.append(trace)  # Collect the trace with service name included
+                # Ensure we only add each trace once, even if fetched multiple times
+                # via different service queries
+                if trace['traceID'] not in unique_trace_ids:
+                    all_traces.append(trace)
+                    unique_trace_ids.add(trace['traceID'])
+
         self.cleanup()
         print("Cleanup completed.")
         # print(f"all_traces: {all_traces}")
@@ -231,11 +235,13 @@ class TraceAPI:
 
         for trace in traces:
             trace_id = trace["traceID"]
+            processes = trace.get("processes", {}) # Get the processes dictionary
             for span in trace["spans"]:
                 trace_id_list.append(trace_id)
-                service_name_list.append(
-                    span["serviceName"]
-                )  # Use the correct service name from the span
+                # Get service name using processID
+                process_id = span.get("processID")
+                service_name = processes.get(process_id, {}).get("serviceName", "unknown_service")
+                service_name_list.append(service_name)
                 operation_name_list.append(span["operationName"])
                 start_time_list.append(span["startTime"])
                 duration_list.append(span["duration"])
@@ -263,15 +269,84 @@ class TraceAPI:
         os.makedirs(path, exist_ok=True)
         file_path = os.path.join(path, f"traces_{int(time.time())}.csv")
         df.to_csv(file_path, index=False)
-        self.cleanup() # Stop port-forwarding after traces are exported
+        #self.cleanup() # Stop port-forwarding after traces are exported
         return f"Traces data exported to: {file_path}"
 
 
+    def process_traces_to_edges(self, traces) -> pd.DataFrame:
+        """Process raw traces data into a DataFrame representing service interactions (edges)."""
+        edge_data = []
+
+        for trace in traces:
+            trace_id = trace["traceID"]
+            # Create a dictionary for quick span lookup by ID within the trace
+            spans_by_id = {span["spanID"]: span for span in trace["spans"]}
+            processes = trace.get("processes", {}) # Get the processes dictionary
+
+            for span_id, span in spans_by_id.items():
+                # Check for parent-child relationships
+                if "references" in span:
+                    for ref in span["references"]:
+                        if ref["refType"] == "CHILD_OF":
+                            parent_span_id = ref["spanID"]
+                            # Ensure the parent span is part of this trace data
+                            if parent_span_id in spans_by_id:
+                                parent_span = spans_by_id[parent_span_id]
+
+                                # Get service names using processID and the processes dictionary
+                                parent_process_id = parent_span.get("processID")
+                                span_process_id = span.get("processID")
+
+                                source_service = processes.get(parent_process_id, {}).get("serviceName", "unknown_source")
+                                target_service = processes.get(span_process_id, {}).get("serviceName", "unknown_target")
+
+                                # Convert timestamps and durations from microseconds to milliseconds
+                                timestamp_ms = span["startTime"] // 1000
+                                latency_ms = span["duration"] // 1000
+
+                                # Determine success (True if no error tag is present or error tag is not True)
+                                is_error = False
+                                if "tags" in span:
+                                    for tag in span["tags"]:
+                                        if tag.get("key") == "error" and tag.get("value") is True:
+                                            is_error = True
+                                            break
+                                success = not is_error
+
+                                edge_data.append({
+                                    "trace_id": trace_id,
+                                    "timestamp": timestamp_ms,
+                                    "latency": latency_ms,
+                                    "succ": success,
+                                    "source": source_service,
+                                    "target": target_service,
+                                })
+                            # Break after finding the CHILD_OF reference, assuming one parent link
+                            break
+
+        df = pd.DataFrame(edge_data)
+        # Ensure columns are in the desired order, even if DataFrame is empty
+        if not df.empty:
+            df = df[["trace_id", "timestamp", "latency", "succ", "source", "target"]]
+        else:
+            # Create empty DataFrame with correct columns if no edges found
+            df = pd.DataFrame(columns=["trace_id", "timestamp", "latency", "succ", "source", "target"])
+        return df
+    
+    def save_trace_edges(self, df, path) -> str:
+        """Saves the processed trace edges DataFrame to a CSV file."""
+        os.makedirs(path, exist_ok=True)
+        file_path = os.path.join(path, f"trace_edges_{int(time.time())}.csv")
+        df.to_csv(file_path, index=False)
+        return f"Trace edges data exported to: {file_path}"
+
 if __name__ == "__main__":
-    tracer = TraceAPI(namespace="hotel-reservation")
+    tracer = TraceAPI(namespace="test-hotel-reservation")
     end_time = datetime.now()
     start_time = end_time - timedelta(minutes=9)  # Example time window
     traces = tracer.extract_traces(start_time, end_time)
     df_traces = tracer.process_traces(traces)
     save_path = root_path / "trace_output"
-    tracer.save_traces(df_traces, save_path)
+    print(tracer.save_traces(df_traces, save_path))
+    df_edges = tracer.process_traces_to_edges(traces)
+    print(tracer.save_trace_edges(df_edges, save_path))
