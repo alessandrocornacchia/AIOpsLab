@@ -45,7 +45,7 @@ class Cache:
             json.dump(self.cache_dict, f, indent=4)
 
 
-class GPT4Turbo:
+class GPT4o:
     """Abstraction for OpenAI's GPT-4 Turbo model."""
 
     def __init__(self):

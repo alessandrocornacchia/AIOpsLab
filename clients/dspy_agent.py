@@ -8,8 +8,7 @@ import os
 # Response Instruction to avoid looping actions
 RESP_INSTR = """DO NOT REPEAT ACTIONS! Respond with:
 Thought: <your thought on the previous output>
-Action: <your action towards mitigating IN A MARKDOWN CODE BLOCK>
-Remember you are trying to find the root cause of the issue.
+Action: <your action towards mitigating>
 """
 
 # 1. Define a DSPy Signature for Prediction
@@ -66,7 +65,7 @@ class ReActAgent:
         response = self.predictor.forward(**observation)
 
         thought, action = response.thought, response.action
-        formatted_response = f"Thought: {thought}\nAction: ```\n {action}\n ```"
+        formatted_response = f"Thought: {thought}\nAction: " + (action if '```' in action else '```\n' + action + '\n```')
         
         self.history.append({"role": "assistant", "content": formatted_response})
         return formatted_response
@@ -86,4 +85,4 @@ if __name__ == "__main__":
     
     agent.init_context(problem_desc, instructs, apis)
     
-    asyncio.run(orchestrator.start_problem(max_steps=15))
+    asyncio.run(orchestrator.start_problem(max_steps=20))

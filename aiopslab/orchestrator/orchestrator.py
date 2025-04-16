@@ -80,7 +80,7 @@ class Orchestrator:
                 prob.start_workload(total_duration)
             
             for i in range(num_failures):
-                print(f"Fault injection {i} of {num_failures}, sleeping for {int_fault_free_interval} seconds for no faults...")
+                print(f"Fault injection {i+1} of {num_failures}, sleeping for {int_fault_free_interval} seconds for no faults...")
                 time.sleep(int_fault_free_interval)
                 print(f"Injecting fault for {int_fault_interval} seconds...")
                 prob.inject_fault(fault_interval)

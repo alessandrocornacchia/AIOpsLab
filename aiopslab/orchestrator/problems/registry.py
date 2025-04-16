@@ -157,8 +157,8 @@ class ProblemRegistry:
             "network_delay_hotel_res-detection-1": NetworkDelayDetection,
             "network_delay_hotel_res-localization-1": NetworkDelayLocalization,
             # Memory stress
-            "memory_stress_hotel_res-detection-1": MemoryStressDetection,
-            "memory_stress_hotel_res-localization-1": MemoryStressLocalization,
+            "memory_stress_social_net-detection-1": MemoryStressDetection,
+            "memory_stress_social_net-localization-1": MemoryStressLocalization,
             # CPU stress
             "cpu_stress_hotel_res-detection-1": CPUStressDetection,
             "cpu_stress_hotel_res-localization-1": CPUStressLocalization,

@@ -63,7 +63,11 @@ if __name__ == "__main__":
     orchestrator = Orchestrator()
     orchestrator.register_agent(agent, name="gpt-w-shell")
 
-    pid = "misconfig_app_hotel_res-mitigation-1"
-    problem_desc, instructs, apis = orchestrator.init_problem(pid)
+    pid = "memory_stress_hotel_res-localization-1"
+    fault_free_interval = '60s'
+    fault_interval = '60s'
+    num_failures = 1
+    problem_desc, instructs, apis = orchestrator.init_problem(pid, fault_free_interval, fault_interval, num_failures)
     agent.init_context(problem_desc, instructs, apis)
-    asyncio.run(orchestrator.start_problem(max_steps=10))
+
+    asyncio.run(orchestrator.start_problem(max_steps=20))
