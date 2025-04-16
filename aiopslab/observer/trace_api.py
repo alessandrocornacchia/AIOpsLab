@@ -340,13 +340,79 @@ class TraceAPI:
         df.to_csv(file_path, index=False)
         return f"Trace edges data exported to: {file_path}"
 
+    def aggregate_trace_edges(self, df_edges: pd.DataFrame) -> list[dict]:
+        """Aggregates trace edge data by trace_id into the specified format."""
+        aggregated_data = []
+        if df_edges.empty:
+            return aggregated_data
+
+        # Group by trace_id
+        grouped = df_edges.groupby("trace_id")
+
+        for trace_id, group in grouped:
+            trace_dict = {
+                "endtime": [],
+                "http_status": [],
+                "label": 0,  # Set label to 0 as requested
+                "latency": [],
+                "s_t": [],
+                "timestamp": [],
+                "trace_id": trace_id,
+            }
+
+            # Iterate through edges within the trace group
+            for _, row in group.iterrows():
+                timestamp_ms = row["timestamp"]
+                latency_ms = row["latency"]
+                succ = row["succ"]
+                source = row["source"]
+                target = row["target"]
+
+                # Calculate endtime and latency in seconds
+                endtime_s = (timestamp_ms + latency_ms) / 1000.0
+                latency_s = latency_ms / 1000.0
+                timestamp_s = timestamp_ms / 1000.0
+
+                # Convert succ to http_status
+                http_status = '200' if succ else '500'
+
+                trace_dict["endtime"].append(endtime_s)
+                trace_dict["http_status"].append(http_status)
+                trace_dict["latency"].append(latency_s)
+                trace_dict["s_t"].append((source, target))
+                trace_dict["timestamp"].append(timestamp_s)
+
+            aggregated_data.append(trace_dict)
+
+        return aggregated_data
+
+    def save_aggregated_traces(self, aggregated_data: list[dict], path) -> str:
+        """Saves the aggregated trace data to a JSON file."""
+        os.makedirs(path, exist_ok=True)
+        file_path = os.path.join(path, f"aggregated_traces_{int(time.time())}.json")
+        with open(file_path, 'w') as f:
+            json.dump(aggregated_data, f, indent=2)
+        return f"Aggregated trace data exported to: {file_path}"
+
+
 if __name__ == "__main__":
     tracer = TraceAPI(namespace="test-hotel-reservation")
     end_time = datetime.now()
     start_time = end_time - timedelta(minutes=9)  # Example time window
     traces = tracer.extract_traces(start_time, end_time)
+    
+    # Process and save raw traces
     df_traces = tracer.process_traces(traces)
     save_path = root_path / "trace_output"
     print(tracer.save_traces(df_traces, save_path))
+    
+    # Process and save trace edges
     df_edges = tracer.process_traces_to_edges(traces)
     print(tracer.save_trace_edges(df_edges, save_path))
+
+    # Aggregate trace edges and save
+    aggregated_traces = tracer.aggregate_trace_edges(df_edges)
+    print(tracer.save_aggregated_traces(aggregated_traces, save_path))
+    # Optional: Print first few aggregated traces for verification
+    # print("\nFirst 2 Aggregated Traces:")
+    # print(json.dumps(aggregated_traces[:2], indent=2))
