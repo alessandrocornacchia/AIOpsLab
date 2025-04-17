@@ -68,7 +68,7 @@ class Orchestrator:
         prob.app.delete()
         prob.app.deploy()
 
-        if 'cpu_stress' in problem_id or 'memory_stress' in problem_id:
+        if 'cpu_stress' in problem_id or 'memory_stress' in problem_id or 'network_delay' in problem_id:
 
             int_fault_free_interval = self.parse_duration(fault_free_interval)
             int_fault_interval = self.parse_duration(fault_interval)
