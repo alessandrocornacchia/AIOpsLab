@@ -10,7 +10,7 @@ Paper: https://arxiv.org/abs/2210.03629
 import asyncio
 
 from aiopslab.orchestrator import Orchestrator
-from clients.utils.llm import GPT4Turbo
+from clients.utils.llm import GPT4o
 from clients.utils.templates import DOCS
 
 RESP_INSTR = """DO NOT REPEAT ACTIONS! Respond with:
@@ -22,7 +22,7 @@ Action: <your action towards mitigating>
 class Agent:
     def __init__(self):
         self.history = []
-        self.llm = GPT4Turbo()
+        self.llm = GPT4o()
 
     def init_context(self, problem_desc: str, instructions: str, apis: str):
         """Initialize the context for the agent."""
@@ -74,11 +74,11 @@ if __name__ == "__main__":
     agent = Agent()
 
     orchestrator = Orchestrator()
-    orchestrator.register_agent(agent, name="react")
+    orchestrator.register_agent(agent, name="ReAct gpt4o - with original tools")
 
-    pid = "cpu_stress_hotel_res-localization-1"
-    fault_free_interval = '30s'
-    fault_interval = '30s'
+    pid = "memory_stress_social_net-localization-1"
+    fault_free_interval = '60s'
+    fault_interval = '60s'
     num_failures = 1
     problem_desc, instructs, apis = orchestrator.init_problem(pid, fault_free_interval, fault_interval, num_failures)
     agent.init_context(problem_desc, instructs, apis)

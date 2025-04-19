@@ -105,7 +105,7 @@ class TaskActions:
         return save_dir_str
     
     @staticmethod
-    #@read
+    @read
     def read_metrics(file_path: str) -> str:
         """
         Reads and returns metrics from a specified CSV file, adding a time-series column.
@@ -133,7 +133,7 @@ class TaskActions:
             return f"Failed to read metrics: {str(e)}"
 
     @staticmethod
-    @read
+    # @read
     def get_metric_summary(file_path: str) -> str:
         """
         Please call get_metrics() before calling this function to generate the CSV files.
@@ -235,7 +235,7 @@ class TaskActions:
             return "No high CPU usage instances found."
     
     @staticmethod
-    @read
+    # @read
     def analyze_metric(file_path: str) -> str:
         """
         Please call get_metrics() before calling this function to generate the CSV files.
@@ -400,7 +400,7 @@ class TaskActions:
         # return f"Trace data exported to: {save_path}"
 
     @staticmethod
-    #@read
+    @read
     def read_traces(file_path: str) -> str:
         """
         Reads and returns traces from a specified CSV file.
@@ -423,7 +423,7 @@ class TaskActions:
             return f"Failed to read traces: {str(e)}"
 
     @staticmethod
-    @read
+    # @read
     def analyze_specific_trace(
         namespace: str, 
         trace_id: str,
@@ -482,7 +482,7 @@ class TaskActions:
             return str(ke)
     
     @staticmethod
-    @read
+    # @read
     def get_traces_summary(file_path: str) -> str:
         """
         Please call get_traces() before calling this function to generate the CSV file.
@@ -544,7 +544,7 @@ class TaskActions:
             return f"Error processing traces file: {str(e)}"
 
     @staticmethod
-    @read
+    # @read
     def analyze_traces(file_path: str) -> str:
         """
         Please call get_traces() before calling this function to generate the CSV file.
@@ -662,5 +662,5 @@ class TaskActions:
         #     return []
 
 if __name__ == "__main__":
-    print(TaskActions.analyze_traces('/home/ubuntu/iliyas/AIOpsLab/trace_output/traces_1742771893.csv'))
+    print(TaskActions.get_traces_summary('/home/ubuntu/iliyas/AIOpsLab/trace_output/traces_1744818653.csv'))
     

@@ -167,7 +167,7 @@ class SymptomFaultInjector(FaultInjector):
                 "mode": "one",
                 "duration": duration,
                 "selector": {
-                    "labelSelectors": {"io.kompose.service": ", ".join(microservices)}
+                    "labelSelectors": {"app": ", ".join(microservices)}
                 },
                 "stressors": {"memory": {"workers": 4, "size": "100%"}},
             },

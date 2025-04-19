@@ -72,7 +72,7 @@ class Orchestrator:
         prob.app.delete()
         prob.app.deploy()
 
-        if 'cpu_stress' in problem_id or 'memory_stress' in problem_id:
+        if 'cpu_stress' in problem_id or 'memory_stress' in problem_id or 'network_delay' in problem_id:
 
             int_fault_free_interval = self.parse_duration(fault_free_interval)
             int_fault_interval = self.parse_duration(fault_interval)
@@ -85,7 +85,7 @@ class Orchestrator:
                 prob.start_workload(total_duration)
             
             for i in range(num_failures):
-                print(f"Fault injection {i} of {num_failures}, sleeping for {int_fault_free_interval} seconds for no faults...")
+                print(f"Fault injection {i+1} of {num_failures}, sleeping for {int_fault_free_interval} seconds for no faults...")
                 time.sleep(int_fault_free_interval)
                 print(f"Injecting fault for {int_fault_interval} seconds...")
                 prob.inject_fault(fault_interval)

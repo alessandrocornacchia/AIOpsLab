@@ -8,7 +8,7 @@ from typing import Any
 from aiopslab.orchestrator.tasks import *
 from aiopslab.orchestrator.evaluators.quantitative import *
 from aiopslab.service.kubectl import KubeCtl
-from aiopslab.service.apps.hotelres import HotelReservation
+from aiopslab.service.apps.socialnet import SocialNetwork
 from aiopslab.generators.workload.wrk import Wrk
 from aiopslab.generators.fault.inject_symp import SymptomFaultInjector
 from aiopslab.session import SessionItem
@@ -19,13 +19,13 @@ from .helpers import get_frontend_url
 
 class MemoryStressBaseTask:
     def __init__(self):
-        self.app = HotelReservation()
+        self.app = SocialNetwork()
         self.kubectl = KubeCtl()
         self.namespace = self.app.namespace
-        self.faulty_service = "user"
+        self.faulty_service = "user-service"
         self.payload_script = (
             TARGET_MICROSERVICES
-            / "hotelReservation/wrk2/scripts/hotel-reservation/mixed-workload_type_1.lua"
+            / "socialNetwork/wrk2/scripts/social-network/compose-post.lua"
         )
         self.injector = SymptomFaultInjector(namespace=self.namespace)
 
