@@ -662,5 +662,5 @@ class TaskActions:
         #     return []
 
 if __name__ == "__main__":
-    print(TaskActions.get_traces_summary('/home/ubuntu/iliyas/AIOpsLab/trace_output/traces_1744818653.csv'))
+    print(TaskActions.analyze_metric('/home/ubuntu/iliyas/AIOpsLab/metrics_output/metric_20250416_205524/container/kpi_container_memory_usage_bytes.csv'))
     

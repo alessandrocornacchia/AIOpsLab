@@ -4,9 +4,11 @@ import re
 import pandas as pd
 from datetime import datetime
 
-RESULTS_DIR = "./aiopslab/data/results"
-CUTOFF_TIME = 1744208585.4308631
-
+RESULTS_DIR = "./aiopslab/data/results/"
+CUTOFF_TIME = 1745336296.0254824
+#1745300000.2251244
+# 1744825271.3439772
+#1744208585.4308631
 def extract_from_file(filepath):
     with open(filepath, "r") as f:
         try:

@@ -1,7 +1,6 @@
 import asyncio
 import dspy
 from aiopslab.orchestrator import Orchestrator
-from clients.utils.llm import GPT4Turbo
 from clients.utils.templates import DOCS
 import os
 
@@ -72,17 +71,19 @@ class ReActAgent:
 
 
 if __name__ == "__main__":
-    agent = ReActAgent()
+    for i in range(5):
+        print(f"Running ReAct DSpy gpt4o - with new tools: {i}")
+        agent = ReActAgent()
 
-    orchestrator = Orchestrator()
-    orchestrator.register_agent(agent, name="dspy_react")
+        orchestrator = Orchestrator()
+        orchestrator.register_agent(agent, name="ReAct DSpy gpt4o - with new tools")
 
-    pid = "cpu_stress_hotel_res-localization-1"
-    fault_free_interval = '60s'
-    fault_interval = '60s'
-    num_failures = 1
-    problem_desc, instructs, apis = orchestrator.init_problem(pid, fault_free_interval, fault_interval, num_failures)
-    
-    agent.init_context(problem_desc, instructs, apis)
-    
-    asyncio.run(orchestrator.start_problem(max_steps=20))
+        pid = "assign_to_non_existent_node_social_net-localization-1"
+        fault_free_interval = '60s'
+        fault_interval = '60s'
+        num_failures = 1
+        problem_desc, instructs, apis = orchestrator.init_problem(pid, fault_free_interval, fault_interval, num_failures)
+        
+        agent.init_context(problem_desc, instructs, apis)
+        
+        asyncio.run(orchestrator.start_problem(max_steps=30))

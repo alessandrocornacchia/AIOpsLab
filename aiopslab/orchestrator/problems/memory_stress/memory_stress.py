@@ -22,10 +22,10 @@ class MemoryStressBaseTask:
         self.app = SocialNetwork()
         self.kubectl = KubeCtl()
         self.namespace = self.app.namespace
-        self.faulty_service = "user-service"
+        self.faulty_service = "user-timeline-service"
         self.payload_script = (
             TARGET_MICROSERVICES
-            / "socialNetwork/wrk2/scripts/social-network/compose-post.lua"
+            / "socialNetwork/wrk2/scripts/social-network/mixed-workload.lua"
         )
         self.injector = SymptomFaultInjector(namespace=self.namespace)
 

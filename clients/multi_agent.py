@@ -22,41 +22,41 @@ class MultiAgentReAct:
         api_key = os.getenv("OPENAI_API_KEY")
         llm_config={"model": "gpt-4o", "api_key": api_key}
         # Define Autogen Agents
-        self.reasoner = autogen.AssistantAgent(
-            name="Reasoner",
-            system_message="You analyze outputs of the given analysis tools to determine what the next API call should be. You only have 30 steps, make sure they count.",
-            llm_config={"model": "o1", "api_key": api_key}
-        )
-
-        self.critic = autogen.AssistantAgent(
-            name="Critic",
-            system_message="You may only say whether we have analyzed enough for submission or if more analysis is required. Do not ask the user for input.",
-            llm_config={"model": "gpt-4o", "api_key": api_key}
-        )
-
-        self.executor = autogen.AssistantAgent(
-            name="Executor",
-            system_message="You must respond with the API call that the Reasoner provides inside a markdown code block preceded outside the block by the text 'Action:' , e.g. Action: ```\n<API_NAME>(<API_PARAM1>, <API_PARAM2> ...)\n```.",
-            llm_config={"model": "gpt-4o", "api_key": api_key}
-        )
-
         # self.reasoner = autogen.AssistantAgent(
         #     name="Reasoner",
-        #     system_message="You analyze outputs of the given analysis tools to determine what the next API call should be.",
-        #     llm_config=llm_config
+        #     system_message="You analyze outputs of the given analysis tools to determine what the next API call should be. You only have 30 steps, make sure they count.",
+        #     llm_config={"model": "o1", "api_key": api_key}
         # )
 
         # self.critic = autogen.AssistantAgent(
         #     name="Critic",
-        #     system_message="You evaluate the actions taken. Ensure that proper analysis is done before confirming anomalies.",
-        #     llm_config=llm_config
+        #     system_message="You may only say whether we have analyzed enough for submission or if more analysis is required. Do not ask the user for input.",
+        #     llm_config={"model": "gpt-4o", "api_key": api_key}
         # )
 
         # self.executor = autogen.AssistantAgent(
         #     name="Executor",
-        #     system_message="You must respond with exactly one API call that the Reasoner provides inside a markdown code block preceded outside the block by the text 'Action:' , e.g. Action: ```\n<API_NAME>(<API_PARAM1>, <API_PARAM2> ...)\n```. Do not explain or add extra text.",
-        #     llm_config=llm_config
+        #     system_message="You must respond with the API call that the Reasoner provides inside a markdown code block preceded outside the block by the text 'Action:' , e.g. Action: ```\n<API_NAME>(<API_PARAM1>, <API_PARAM2> ...)\n```.",
+        #     llm_config={"model": "gpt-4o", "api_key": api_key}
         # )
+
+        self.reasoner = autogen.AssistantAgent(
+            name="Reasoner",
+            system_message="You analyze outputs of the given analysis tools to determine what the next API call should be.",
+            llm_config=llm_config
+        )
+
+        self.critic = autogen.AssistantAgent(
+            name="Critic",
+            system_message="You evaluate the actions taken. Ensure that proper analysis is done before confirming anomalies.",
+            llm_config=llm_config
+        )
+
+        self.executor = autogen.AssistantAgent(
+            name="Executor",
+            system_message="You must respond with exactly one API call that the Reasoner provides inside a markdown code block preceded outside the block by the text 'Action:' , e.g. Action: ```\n<API_NAME>(<API_PARAM1>, <API_PARAM2> ...)\n```. Do not explain or add extra text.",
+            llm_config=llm_config
+        )
 
         # Define Multi-Agent GroupChat with Custom Speaker Selection
         self.groupchat = autogen.GroupChat(
@@ -142,16 +142,18 @@ class MultiAgentReAct:
 
 
 if __name__ == "__main__":
-    agent = MultiAgentReAct()
+    for i in range(1):
+        print(f"Running AutoGen - 3 gpt4o - with new tools: {i}")
+        agent = MultiAgentReAct()
 
-    orchestrator = Orchestrator()
-    orchestrator.register_agent(agent, name="multiagent_react")
+        orchestrator = Orchestrator()
+        orchestrator.register_agent(agent, name="AutoGen - 3 gpt4o - with new tools")
 
-    pid = "cpu_stress_hotel_res-localization-1"
-    fault_free_interval = '60s'
-    fault_interval = '60s'
-    num_failures = 1
-    problem_desc, instructs, apis = orchestrator.init_problem(pid, fault_free_interval, fault_interval, num_failures)
-    agent.init_context(problem_desc, instructs, apis)
+        pid = "assign_to_non_existent_node_social_net-localization-1"
+        fault_free_interval = '60s'
+        fault_interval = '60s'
+        num_failures = 1
+        problem_desc, instructs, apis = orchestrator.init_problem(pid, fault_free_interval, fault_interval, num_failures)
+        agent.init_context(problem_desc, instructs, apis)
 
-    asyncio.run(orchestrator.start_problem(max_steps=30))
+        asyncio.run(orchestrator.start_problem(max_steps=30))

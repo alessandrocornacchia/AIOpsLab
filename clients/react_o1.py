@@ -71,15 +71,17 @@ class Agent:
 
 
 if __name__ == "__main__":
-    agent = Agent()
+    for i in range(1):
+        print(f"Running ReAct o1 - with new tools: {i}")
+        agent = Agent()
 
-    orchestrator = Orchestrator()
-    orchestrator.register_agent(agent, name="ReAct o1 - with original tools")
+        orchestrator = Orchestrator()
+        orchestrator.register_agent(agent, name="ReAct o1 - with new tools")
 
-    pid = "memory_stress_social_net-localization-1"
-    fault_free_interval = '60s'
-    fault_interval = '60s'
-    num_failures = 1
-    problem_desc, instructs, apis = orchestrator.init_problem(pid, fault_free_interval, fault_interval, num_failures)
-    agent.init_context(problem_desc, instructs, apis)
-    asyncio.run(orchestrator.start_problem(max_steps=30))
+        pid = "assign_to_non_existent_node_social_net-localization-1"
+        fault_free_interval = '60s'
+        fault_interval = '60s'
+        num_failures = 1
+        problem_desc, instructs, apis = orchestrator.init_problem(pid, fault_free_interval, fault_interval, num_failures)
+        agent.init_context(problem_desc, instructs, apis)
+        asyncio.run(orchestrator.start_problem(max_steps=30))
