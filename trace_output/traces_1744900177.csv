@@ -1,0 +1,58 @@
+trace_id,latency,total_spans,contains_errors,error_rate,error_messages,operation,services,longest_span_service,longest_span_duration,mean_span_duration
+00fb9f7043bdf8ba,21099,33,False,0.0,,/wrk2-api/post/compose,media-service; home-timeline-service; user-timeline-service; url-shorten-service; nginx-web-server; user-service; social-graph-service; compose-post-service; post-storage-service; user-mention-service; unique-id-service; text-service,compose-post-service,7426,1360.4848484848485
+00abf479903adda4,8803,6,False,0.0,,/wrk2-api/home-timeline/read,nginx-web-server; home-timeline-service; post-storage-service,nginx-web-server,3459,1469.3333333333333
+01e13a94d78ba28b,3440,6,False,0.0,,/wrk2-api/home-timeline/read,home-timeline-service; nginx-web-server; post-storage-service,home-timeline-service,1340,576.0
+01efd881d5a89537,6609,8,False,0.0,,/wrk2-api/user-timeline/read,nginx-web-server; post-storage-service; user-timeline-service,user-timeline-service,3037,936.25
+01a9451c95acc63c,3159,6,False,0.0,,/wrk2-api/home-timeline/read,home-timeline-service; nginx-web-server; post-storage-service,nginx-web-server,1080,528.0
+020a2686666e13dc,3281,6,False,0.0,,/wrk2-api/home-timeline/read,home-timeline-service; nginx-web-server; post-storage-service,home-timeline-service,1314,549.1666666666666
+013294f3914f9c14,5311,8,False,0.0,,/wrk2-api/user-timeline/read,nginx-web-server; post-storage-service; user-timeline-service,nginx-web-server,2106,727.875
+004593cd590c32be,5500,7,False,0.0,,/wrk2-api/user-timeline/read,nginx-web-server; post-storage-service; user-timeline-service,nginx-web-server,2167,881.5714285714286
+00b08bf886f53bfd,3485,7,False,0.0,,/wrk2-api/user-timeline/read,nginx-web-server; post-storage-service; user-timeline-service,nginx-web-server,1983,669.2857142857143
+00fb9f7043bdf8ba,21099,33,False,0.0,,/wrk2-api/post/compose,media-service; home-timeline-service; user-timeline-service; url-shorten-service; nginx-web-server; user-service; social-graph-service; compose-post-service; post-storage-service; user-mention-service; unique-id-service; text-service,compose-post-service,7426,1360.4848484848485
+003551bc3ad2519b,2137,6,False,0.0,,/wrk2-api/home-timeline/read,nginx-web-server; home-timeline-service; post-storage-service,nginx-web-server,583,271.8333333333333
+0202d1032fca49b5,5203,7,False,0.0,,/wrk2-api/user-timeline/read,nginx-web-server; post-storage-service; user-timeline-service,nginx-web-server,2140,789.1428571428571
+005103e2704584bb,3369,6,False,0.0,,/wrk2-api/home-timeline/read,home-timeline-service; nginx-web-server; post-storage-service,home-timeline-service,1060,563.6666666666666
+022c31b837dbf559,3214,6,False,0.0,,/wrk2-api/home-timeline/read,nginx-web-server; home-timeline-service; post-storage-service,home-timeline-service,1402,538.1666666666666
+0117450bba574690,4490,7,False,0.0,,/wrk2-api/user-timeline/read,nginx-web-server; post-storage-service; user-timeline-service,nginx-web-server,2048,679.0
+0149b53a210610c6,3573,6,False,0.0,,/wrk2-api/home-timeline/read,home-timeline-service; nginx-web-server; post-storage-service,home-timeline-service,1182,598.0
+000dd51712b01efd,3652,6,False,0.0,,/wrk2-api/home-timeline/read,nginx-web-server; home-timeline-service; post-storage-service,home-timeline-service,1182,611.1666666666666
+000dd51712b01efd,3652,6,False,0.0,,/wrk2-api/home-timeline/read,nginx-web-server; home-timeline-service; post-storage-service,home-timeline-service,1182,611.1666666666666
+022c31b837dbf559,3214,6,False,0.0,,/wrk2-api/home-timeline/read,nginx-web-server; home-timeline-service; post-storage-service,home-timeline-service,1402,538.1666666666666
+0117450bba574690,4490,7,False,0.0,,/wrk2-api/user-timeline/read,nginx-web-server; post-storage-service; user-timeline-service,nginx-web-server,2048,679.0
+0149b53a210610c6,3573,6,False,0.0,,/wrk2-api/home-timeline/read,home-timeline-service; nginx-web-server; post-storage-service,home-timeline-service,1182,598.0
+00abf479903adda4,8803,6,False,0.0,,/wrk2-api/home-timeline/read,nginx-web-server; home-timeline-service; post-storage-service,nginx-web-server,3459,1469.3333333333333
+01e13a94d78ba28b,3440,6,False,0.0,,/wrk2-api/home-timeline/read,home-timeline-service; nginx-web-server; post-storage-service,home-timeline-service,1340,576.0
+01efd881d5a89537,6609,8,False,0.0,,/wrk2-api/user-timeline/read,nginx-web-server; post-storage-service; user-timeline-service,user-timeline-service,3037,936.25
+01a9451c95acc63c,3159,6,False,0.0,,/wrk2-api/home-timeline/read,home-timeline-service; nginx-web-server; post-storage-service,nginx-web-server,1080,528.0
+020a2686666e13dc,3281,6,False,0.0,,/wrk2-api/home-timeline/read,home-timeline-service; nginx-web-server; post-storage-service,home-timeline-service,1314,549.1666666666666
+013294f3914f9c14,5311,8,False,0.0,,/wrk2-api/user-timeline/read,nginx-web-server; post-storage-service; user-timeline-service,nginx-web-server,2106,727.875
+003551bc3ad2519b,2137,6,False,0.0,,/wrk2-api/home-timeline/read,nginx-web-server; home-timeline-service; post-storage-service,nginx-web-server,583,271.8333333333333
+0202d1032fca49b5,5203,7,False,0.0,,/wrk2-api/user-timeline/read,nginx-web-server; post-storage-service; user-timeline-service,nginx-web-server,2140,789.1428571428571
+005103e2704584bb,3369,6,False,0.0,,/wrk2-api/home-timeline/read,home-timeline-service; nginx-web-server; post-storage-service,home-timeline-service,1060,563.6666666666666
+004593cd590c32be,5500,7,False,0.0,,/wrk2-api/user-timeline/read,nginx-web-server; post-storage-service; user-timeline-service,nginx-web-server,2167,881.5714285714286
+00b08bf886f53bfd,3485,7,False,0.0,,/wrk2-api/user-timeline/read,nginx-web-server; post-storage-service; user-timeline-service,nginx-web-server,1983,669.2857142857143
+00fb9f7043bdf8ba,21099,33,False,0.0,,/wrk2-api/post/compose,media-service; home-timeline-service; user-timeline-service; url-shorten-service; nginx-web-server; user-service; social-graph-service; compose-post-service; post-storage-service; user-mention-service; unique-id-service; text-service,compose-post-service,7426,1360.4848484848485
+00fb9f7043bdf8ba,21099,33,False,0.0,,/wrk2-api/post/compose,media-service; home-timeline-service; user-timeline-service; url-shorten-service; nginx-web-server; user-service; social-graph-service; compose-post-service; post-storage-service; user-mention-service; unique-id-service; text-service,compose-post-service,7426,1360.4848484848485
+00fb9f7043bdf8ba,21099,33,False,0.0,,/wrk2-api/post/compose,media-service; home-timeline-service; user-timeline-service; url-shorten-service; nginx-web-server; user-service; social-graph-service; compose-post-service; post-storage-service; user-mention-service; unique-id-service; text-service,compose-post-service,7426,1360.4848484848485
+00fb9f7043bdf8ba,21099,33,False,0.0,,/wrk2-api/post/compose,media-service; home-timeline-service; user-timeline-service; url-shorten-service; nginx-web-server; user-service; social-graph-service; compose-post-service; post-storage-service; user-mention-service; unique-id-service; text-service,compose-post-service,7426,1360.4848484848485
+00fb9f7043bdf8ba,21099,33,False,0.0,,/wrk2-api/post/compose,media-service; home-timeline-service; user-timeline-service; url-shorten-service; nginx-web-server; user-service; social-graph-service; compose-post-service; post-storage-service; user-mention-service; unique-id-service; text-service,compose-post-service,7426,1360.4848484848485
+01a9451c95acc63c,3159,6,False,0.0,,/wrk2-api/home-timeline/read,home-timeline-service; nginx-web-server; post-storage-service,nginx-web-server,1080,528.0
+020a2686666e13dc,3281,6,False,0.0,,/wrk2-api/home-timeline/read,home-timeline-service; nginx-web-server; post-storage-service,home-timeline-service,1314,549.1666666666666
+00fb9f7043bdf8ba,21099,33,False,0.0,,/wrk2-api/post/compose,media-service; home-timeline-service; user-timeline-service; url-shorten-service; nginx-web-server; user-service; social-graph-service; compose-post-service; post-storage-service; user-mention-service; unique-id-service; text-service,compose-post-service,7426,1360.4848484848485
+003551bc3ad2519b,2137,6,False,0.0,,/wrk2-api/home-timeline/read,nginx-web-server; home-timeline-service; post-storage-service,nginx-web-server,583,271.8333333333333
+005103e2704584bb,3369,6,False,0.0,,/wrk2-api/home-timeline/read,home-timeline-service; nginx-web-server; post-storage-service,home-timeline-service,1060,563.6666666666666
+022c31b837dbf559,3214,6,False,0.0,,/wrk2-api/home-timeline/read,nginx-web-server; home-timeline-service; post-storage-service,home-timeline-service,1402,538.1666666666666
+0149b53a210610c6,3573,6,False,0.0,,/wrk2-api/home-timeline/read,home-timeline-service; nginx-web-server; post-storage-service,home-timeline-service,1182,598.0
+000dd51712b01efd,3652,6,False,0.0,,/wrk2-api/home-timeline/read,nginx-web-server; home-timeline-service; post-storage-service,home-timeline-service,1182,611.1666666666666
+00abf479903adda4,8803,6,False,0.0,,/wrk2-api/home-timeline/read,nginx-web-server; home-timeline-service; post-storage-service,nginx-web-server,3459,1469.3333333333333
+01e13a94d78ba28b,3440,6,False,0.0,,/wrk2-api/home-timeline/read,home-timeline-service; nginx-web-server; post-storage-service,home-timeline-service,1340,576.0
+004593cd590c32be,5500,7,False,0.0,,/wrk2-api/user-timeline/read,nginx-web-server; post-storage-service; user-timeline-service,nginx-web-server,2167,881.5714285714286
+00b08bf886f53bfd,3485,7,False,0.0,,/wrk2-api/user-timeline/read,nginx-web-server; post-storage-service; user-timeline-service,nginx-web-server,1983,669.2857142857143
+00fb9f7043bdf8ba,21099,33,False,0.0,,/wrk2-api/post/compose,media-service; home-timeline-service; user-timeline-service; url-shorten-service; nginx-web-server; user-service; social-graph-service; compose-post-service; post-storage-service; user-mention-service; unique-id-service; text-service,compose-post-service,7426,1360.4848484848485
+0202d1032fca49b5,5203,7,False,0.0,,/wrk2-api/user-timeline/read,nginx-web-server; post-storage-service; user-timeline-service,nginx-web-server,2140,789.1428571428571
+0117450bba574690,4490,7,False,0.0,,/wrk2-api/user-timeline/read,nginx-web-server; post-storage-service; user-timeline-service,nginx-web-server,2048,679.0
+01efd881d5a89537,6609,8,False,0.0,,/wrk2-api/user-timeline/read,nginx-web-server; post-storage-service; user-timeline-service,user-timeline-service,3037,936.25
+013294f3914f9c14,5311,8,False,0.0,,/wrk2-api/user-timeline/read,nginx-web-server; post-storage-service; user-timeline-service,nginx-web-server,2106,727.875
+00fb9f7043bdf8ba,21099,33,False,0.0,,/wrk2-api/post/compose,media-service; home-timeline-service; user-timeline-service; url-shorten-service; nginx-web-server; user-service; social-graph-service; compose-post-service; post-storage-service; user-mention-service; unique-id-service; text-service,compose-post-service,7426,1360.4848484848485
+00fb9f7043bdf8ba,21099,33,False,0.0,,/wrk2-api/post/compose,media-service; home-timeline-service; user-timeline-service; url-shorten-service; nginx-web-server; user-service; social-graph-service; compose-post-service; post-storage-service; user-mention-service; unique-id-service; text-service,compose-post-service,7426,1360.4848484848485
+00fb9f7043bdf8ba,21099,33,False,0.0,,/wrk2-api/post/compose,media-service; home-timeline-service; user-timeline-service; url-shorten-service; nginx-web-server; user-service; social-graph-service; compose-post-service; post-storage-service; user-mention-service; unique-id-service; text-service,compose-post-service,7426,1360.4848484848485

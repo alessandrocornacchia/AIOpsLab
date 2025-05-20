@@ -1,0 +1,716 @@
+trace_id,latency,total_spans,contains_errors,error_rate,error_messages,operation,services,longest_span_service,longest_span_duration,mean_span_duration
+455f11814cc7ba9d,3867,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,search,867,253.86666666666667
+56594272dbbdbd32,3050,6,False,0.0,,HTTP GET /recommendations,frontend; recommendation; profile,frontend,1086,510.5
+17e0916845515cb7,6523,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,941,441.93333333333334
+266c534937a3dce6,36731,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,reservation,26953,2450.8
+7137cf6e38fe92d6,10099,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1615,673.2666666666667
+1fc338c49c469773,4272,6,False,0.0,,HTTP GET /recommendations,frontend; recommendation; profile,frontend,1672,714.8333333333334
+3b35b220e0629d0b,4627,6,False,0.0,,HTTP GET /recommendations,frontend; recommendation; profile,frontend,1552,771.1666666666666
+07ade57df411abb7,4041,6,False,0.0,,HTTP GET /recommendations,frontend; recommendation; profile,frontend,1445,673.5
+7e11f80b3f8e7f68,3664,6,False,0.0,,HTTP GET /recommendations,frontend; recommendation; profile,frontend,1332,618.0
+5f596b6a26adf5c2,4560,6,False,0.0,,HTTP GET /recommendations,frontend; recommendation; profile,frontend,1579,760.0
+06d007a53f28183b,4809,6,False,0.0,,HTTP GET /recommendations,frontend; recommendation; profile,frontend,1561,801.5
+787c4f4a8ef82912,10139,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1633,675.9333333333333
+2e6af326dbe616f0,6664,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1520,444.26666666666665
+22f27bbd334a51f6,4368,6,False,0.0,,HTTP GET /recommendations,frontend; recommendation; profile,frontend,1665,728.0
+759855cb5065b311,4211,6,False,0.0,,HTTP GET /recommendations,frontend; recommendation; profile,frontend,1499,701.8333333333334
+766490394c1416eb,6526,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1489,435.46666666666664
+39f379deac5e6ff1,6401,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1481,426.93333333333334
+1da43cdec30953c4,9845,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1517,656.3333333333334
+22f115a9be844c63,4459,6,False,0.0,,HTTP GET /recommendations,frontend; recommendation; profile,frontend,1562,743.1666666666666
+228a8f8e59905c0c,45415,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,reservation,34915,3027.6666666666665
+0f57cc6ac154278f,8021,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1170,537.0666666666667
+31f1edc7ed0cdfca,4508,6,False,0.0,,HTTP GET /recommendations,frontend; recommendation; profile,frontend,1665,751.8333333333334
+60e904b2e7720ce2,4767,6,False,0.0,,HTTP GET /recommendations,frontend; recommendation; profile,frontend,1683,794.5
+6acae8caccd5d7e1,6120,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1524,408.0
+18ff6fa0b40ca57b,6090,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,search,1467,407.73333333333335
+0fd66b67ceaf8f3d,3991,6,False,0.0,,HTTP GET /recommendations,frontend; recommendation; profile,frontend,1563,665.1666666666666
+756b7fecf04ddb49,6121,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1462,402.73333333333335
+71aa22c2df3d1297,81499,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,reservation,71556,5433.266666666666
+7c3ed35f058f7c70,9320,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1566,624.6666666666666
+1a5899cf2f5c3d18,23114,16,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,rate,11654,1444.625
+4465446d40c68b46,5821,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1488,389.0
+26fa8eabf0a6412d,4255,6,False,0.0,,HTTP GET /recommendations,frontend; recommendation; profile,frontend,1686,709.1666666666666
+5178bb936ef99559,5868,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1367,392.0
+5692af6e937243e3,9533,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,rate,1435,638.5333333333333
+61660b6027461023,6959,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,search,1728,468.6
+20463c9f43ed4b85,4937,6,False,0.0,,HTTP GET /recommendations,frontend; recommendation; profile,frontend,1785,822.8333333333334
+7f17d918a1fbe6c4,10454,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1548,696.9333333333333
+13f41f5ead6fe613,3940,6,False,0.0,,HTTP GET /recommendations,frontend; recommendation; profile,frontend,1644,656.6666666666666
+0645aec6d711b6eb,3117,6,False,0.0,,HTTP GET /recommendations,frontend; recommendation; profile,frontend,972,522.5
+3858175e0c962cca,3654,6,False,0.0,,HTTP GET /recommendations,frontend; recommendation; profile,frontend,1417,616.3333333333334
+54addc2d11c15888,10220,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1654,684.1333333333333
+205770c71b47c257,8873,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1216,594.8
+73435f586fce5b3c,3444,6,False,0.0,,HTTP GET /recommendations,frontend; recommendation; profile,frontend,1375,579.5
+78c0a9525c6edbf4,10345,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1659,692.2
+1e96f8b7badffe94,3892,6,False,0.0,,HTTP GET /recommendations,frontend; recommendation; profile,frontend,1340,650.0
+592440931fae2f77,10872,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1595,724.8666666666667
+48414de96ac24948,3893,6,False,0.0,,HTTP GET /recommendations,frontend; recommendation; profile,frontend,1495,648.8333333333334
+7d794ba9d0d100ea,6162,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1464,412.53333333333336
+0858401545afce40,8136,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,search,1173,555.7333333333333
+4f27be90a56febac,3670,6,False,0.0,,HTTP GET /recommendations,frontend; recommendation; profile,frontend,1279,611.6666666666666
+441485eae7b3ea7c,4009,6,False,0.0,,HTTP GET /recommendations,frontend; recommendation; profile,frontend,1441,679.3333333333334
+38ec2d6f6e62b685,3694,6,False,0.0,,HTTP GET /recommendations,frontend; recommendation; profile,frontend,1350,615.6666666666666
+3be90ee407b274c9,3288,6,False,0.0,,HTTP GET /recommendations,frontend; recommendation; profile,frontend,1285,555.3333333333334
+065e515a88cd476f,83185,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,reservation,72849,5545.666666666667
+18800ca104ac21d3,10041,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1738,669.4
+5ff06ec7e1ed9703,5154,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1112,342.4
+7e5bc8604d3485ff,3767,6,False,0.0,,HTTP GET /recommendations,frontend; recommendation; profile,frontend,1554,627.8333333333334
+4d41b10b6bebb334,4284,6,False,0.0,,HTTP GET /recommendations,frontend; recommendation; profile,frontend,1650,714.0
+7076ec7896c0364f,6531,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1549,435.4
+2abf3a950c344038,11391,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1690,759.4
+53ac85da3a93f7dd,10036,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1637,669.0666666666667
+0f8343fd3f9b40a5,4526,6,False,0.0,,HTTP GET /recommendations,frontend; recommendation; profile,frontend,1930,761.3333333333334
+2c16bc1be7d64309,3551,6,False,0.0,,HTTP GET /recommendations,frontend; recommendation; profile,frontend,1446,591.8333333333334
+0ce8d28a8fd74700,7542,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,search,1744,502.8
+465a473277aaa034,6441,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,search,1450,429.4
+4d1ce1e108372b24,18494,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,11193,1233.4
+366440a0e6be0102,3541,6,False,0.0,,HTTP GET /recommendations,frontend; recommendation; profile,frontend,1412,597.6666666666666
+734184f614cfd5ed,5107,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,search,1177,340.8666666666667
+5369dc5293b37a51,7538,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1780,503.93333333333334
+2c4ab754ad932537,86276,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,reservation,76521,5751.733333333334
+3411899b6495f0be,21315,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,reservation,11787,1422.0
+747aa54090c35511,3260,6,False,0.0,,HTTP GET /recommendations,frontend; recommendation; profile,frontend,1294,543.3333333333334
+2dce2045769c7f86,4027,6,False,0.0,,HTTP GET /recommendations,frontend; recommendation; profile,frontend,1203,682.8333333333334
+26d85ab569bddd39,10310,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1517,687.3333333333334
+21dad1273f0c19d6,4460,6,False,0.0,,HTTP GET /recommendations,frontend; recommendation; profile,frontend,1642,743.3333333333334
+790ae9f3a5cde6b0,6480,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1470,432.0
+7728afc2fce50f99,10128,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,search,1551,679.9333333333333
+3cdb82ce0112b873,6218,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1495,414.53333333333336
+3d07ad2720ef409a,4843,6,False,0.0,,HTTP GET /recommendations,frontend; recommendation; profile,frontend,2230,808.5
+003da103aaa66267,4978,6,False,0.0,,HTTP GET /recommendations,frontend; recommendation; profile,frontend,1742,829.6666666666666
+39fb8a935a460b8e,43707,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,reservation,34099,2913.8
+59ac0af40e9b0b6a,23052,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,19038,1536.8
+250586e0d1002876,10276,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1585,685.0666666666667
+04f68e45077d90ba,4291,6,False,0.0,,HTTP GET /recommendations,frontend; recommendation; profile,frontend,1672,715.1666666666666
+34e39ad0c3ebe3e4,10990,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1618,732.6666666666666
+62699d0df95d27a1,4301,6,False,0.0,,HTTP GET /recommendations,frontend; recommendation; profile,frontend,1733,716.8333333333334
+2206fbb281045eb3,6768,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,search,1567,451.2
+6fc3f60a03ee9a9f,9129,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1397,608.6
+4028ffd35f463941,28183,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,reservation,17925,1878.8666666666666
+55bc7930f6b49e38,6050,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1374,403.3333333333333
+6fd67e23a5f6bfd6,4413,6,False,0.0,,HTTP GET /recommendations,frontend; recommendation; profile,frontend,1490,735.5
+6c3c1373b4f53c2e,10162,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1579,681.4
+0d2e123d86d04f7b,4158,6,False,0.0,,HTTP GET /recommendations,frontend; recommendation; profile,frontend,1535,693.3333333333334
+533ebf6340221fdb,10877,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1647,725.1333333333333
+024d335e44419034,3877,6,False,0.0,,HTTP GET /recommendations,frontend; recommendation; profile,frontend,1543,653.1666666666666
+2d1b884405c82196,4067,6,False,0.0,,HTTP GET /recommendations,frontend; recommendation; profile,frontend,1504,677.8333333333334
+4ca199758ed2ab1f,4415,6,False,0.0,,HTTP GET /recommendations,frontend; recommendation; profile,frontend,1572,735.8333333333334
+0c369addf1c7d612,6372,7,False,0.0,,HTTP GET /recommendations,frontend; recommendation; profile,profile,1847,910.2857142857143
+6819e5ec0b244a81,4046,6,False,0.0,,HTTP GET /recommendations,frontend; recommendation; profile,frontend,1652,674.3333333333334
+3f2ef6e0bb1053cb,10263,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1685,684.2
+3709755c22e0af81,8664,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1143,577.6
+65af243c55cb31fe,10308,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1685,687.2
+71e3eb4976f3ab4a,10313,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1696,687.5333333333333
+488a6723b6b4cec4,7148,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1731,476.53333333333336
+7b3d846f86784150,35738,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,reservation,24813,2382.5333333333333
+53115fbf74f7b05d,6387,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1399,426.8
+369c695cb48f07a9,37484,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,32840,2501.133333333333
+5ccbe214b95b998a,23249,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,rate,14423,1549.9333333333334
+5f5131075ed19b7e,6256,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1504,419.73333333333335
+42905f72c47ae9b4,6425,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1454,428.3333333333333
+36f43f0a4f88f08c,5349,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,search,1061,356.93333333333334
+5de73b648a6880d2,50076,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,reservation,42312,3338.4
+53991a7a30484b02,4884,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,search,1226,329.8
+77b3fdfdd4ecffb4,4584,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,991,309.46666666666664
+59e3459a146ebd66,56037,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,reservation,46411,3738.9333333333334
+4a64f3491b4feeeb,10322,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1753,692.2666666666667
+3622de44eebf2b0d,11108,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1641,740.5333333333333
+2c99bda120e38cfb,59060,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,reservation,48929,3937.3333333333335
+62ba6a386a759334,70769,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,reservation,60939,4717.933333333333
+22f92ef4ac2ad281,9798,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1477,653.2
+6f4b803d76e56fef,50644,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,45215,3376.266666666667
+3bbcb5cb02070481,5909,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1397,393.93333333333334
+5cb2a9eab9c4a13d,6848,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1757,456.53333333333336
+38a14b308369cc22,9234,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1827,615.6
+517c29e89de27510,9983,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1489,665.5333333333333
+584e38046d294fd6,6648,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1611,443.2
+3d7e19ddffb0b1f9,6566,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1600,437.73333333333335
+1632739c68cb60cd,7052,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1783,470.1333333333333
+61e6ac67551e13b1,6430,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1452,428.6666666666667
+064cdaae67ce7356,9920,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1482,661.3333333333334
+1a1d3cf834ff1f52,9621,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1502,645.8666666666667
+272b678f2dad5c93,5441,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1314,362.73333333333335
+45f778d5831f9e35,39411,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,reservation,28966,2627.4
+64e4016116ed4228,9106,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1320,607.0666666666667
+65292d4469b83341,10221,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1746,682.9333333333333
+551adef27d9152e1,4768,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1220,317.8666666666667
+3d529c4e56e9837c,10215,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1459,681.0
+4faa9b5c71d07405,6830,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1558,458.73333333333335
+2914baaf3272dfd8,8808,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1443,587.2
+6b42010e750b735b,14185,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,reservation,4521,945.6666666666666
+6d6820d51c0122e4,8728,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1517,582.9333333333333
+17ad5e67f595afe0,8112,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,search,1259,549.6666666666666
+477078aa864f7bdb,77433,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,reservation,68716,5162.8
+70a2857efc54374c,4799,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,search,1114,325.0
+455f11814cc7ba9d,3867,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,search,867,253.86666666666667
+17e0916845515cb7,6523,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,941,441.93333333333334
+266c534937a3dce6,36731,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,reservation,26953,2450.8
+7137cf6e38fe92d6,10099,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1615,673.2666666666667
+787c4f4a8ef82912,10139,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1633,675.9333333333333
+2e6af326dbe616f0,6664,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1520,444.26666666666665
+766490394c1416eb,6526,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1489,435.46666666666664
+39f379deac5e6ff1,6401,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1481,426.93333333333334
+1da43cdec30953c4,9845,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1517,656.3333333333334
+228a8f8e59905c0c,45415,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,reservation,34915,3027.6666666666665
+0f57cc6ac154278f,8021,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1170,537.0666666666667
+6acae8caccd5d7e1,6120,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1524,408.0
+18ff6fa0b40ca57b,6090,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,search,1467,407.73333333333335
+756b7fecf04ddb49,6121,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1462,402.73333333333335
+71aa22c2df3d1297,81499,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,reservation,71556,5433.266666666666
+7c3ed35f058f7c70,9320,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1566,624.6666666666666
+1a5899cf2f5c3d18,23114,16,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,rate,11654,1444.625
+4465446d40c68b46,5821,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1488,389.0
+5178bb936ef99559,5868,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1367,392.0
+5692af6e937243e3,9533,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,rate,1435,638.5333333333333
+61660b6027461023,6959,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,search,1728,468.6
+7f17d918a1fbe6c4,10454,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1548,696.9333333333333
+54addc2d11c15888,10220,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1654,684.1333333333333
+205770c71b47c257,8873,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1216,594.8
+78c0a9525c6edbf4,10345,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1659,692.2
+592440931fae2f77,10872,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1595,724.8666666666667
+7d794ba9d0d100ea,6162,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1464,412.53333333333336
+0858401545afce40,8136,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,search,1173,555.7333333333333
+065e515a88cd476f,83185,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,reservation,72849,5545.666666666667
+18800ca104ac21d3,10041,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1738,669.4
+5ff06ec7e1ed9703,5154,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1112,342.4
+7076ec7896c0364f,6531,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1549,435.4
+2abf3a950c344038,11391,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1690,759.4
+53ac85da3a93f7dd,10036,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1637,669.0666666666667
+0ce8d28a8fd74700,7542,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,search,1744,502.8
+465a473277aaa034,6441,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,search,1450,429.4
+4d1ce1e108372b24,18494,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,11193,1233.4
+734184f614cfd5ed,5107,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,search,1177,340.8666666666667
+5369dc5293b37a51,7538,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1780,503.93333333333334
+2c4ab754ad932537,86276,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,reservation,76521,5751.733333333334
+3411899b6495f0be,21315,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,reservation,11787,1422.0
+26d85ab569bddd39,10310,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1517,687.3333333333334
+790ae9f3a5cde6b0,6480,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1470,432.0
+7728afc2fce50f99,10128,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,search,1551,679.9333333333333
+3cdb82ce0112b873,6218,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1495,414.53333333333336
+39fb8a935a460b8e,43707,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,reservation,34099,2913.8
+59ac0af40e9b0b6a,23052,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,19038,1536.8
+250586e0d1002876,10276,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1585,685.0666666666667
+34e39ad0c3ebe3e4,10990,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1618,732.6666666666666
+2206fbb281045eb3,6768,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,search,1567,451.2
+6fc3f60a03ee9a9f,9129,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1397,608.6
+4028ffd35f463941,28183,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,reservation,17925,1878.8666666666666
+55bc7930f6b49e38,6050,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1374,403.3333333333333
+6c3c1373b4f53c2e,10162,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1579,681.4
+533ebf6340221fdb,10877,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1647,725.1333333333333
+3f2ef6e0bb1053cb,10263,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1685,684.2
+65af243c55cb31fe,10308,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1685,687.2
+71e3eb4976f3ab4a,10313,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1696,687.5333333333333
+488a6723b6b4cec4,7148,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1731,476.53333333333336
+7b3d846f86784150,35738,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,reservation,24813,2382.5333333333333
+53115fbf74f7b05d,6387,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1399,426.8
+369c695cb48f07a9,37484,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,32840,2501.133333333333
+5ccbe214b95b998a,23249,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,rate,14423,1549.9333333333334
+5f5131075ed19b7e,6256,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1504,419.73333333333335
+42905f72c47ae9b4,6425,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1454,428.3333333333333
+36f43f0a4f88f08c,5349,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,search,1061,356.93333333333334
+5de73b648a6880d2,50076,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,reservation,42312,3338.4
+53991a7a30484b02,4884,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,search,1226,329.8
+77b3fdfdd4ecffb4,4584,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,991,309.46666666666664
+59e3459a146ebd66,56037,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,reservation,46411,3738.9333333333334
+4a64f3491b4feeeb,10322,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1753,692.2666666666667
+3622de44eebf2b0d,11108,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1641,740.5333333333333
+2c99bda120e38cfb,59060,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,reservation,48929,3937.3333333333335
+62ba6a386a759334,70769,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,reservation,60939,4717.933333333333
+22f92ef4ac2ad281,9798,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1477,653.2
+6f4b803d76e56fef,50644,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,45215,3376.266666666667
+3bbcb5cb02070481,5909,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1397,393.93333333333334
+5cb2a9eab9c4a13d,6848,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1757,456.53333333333336
+38a14b308369cc22,9234,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1827,615.6
+517c29e89de27510,9983,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1489,665.5333333333333
+584e38046d294fd6,6648,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1611,443.2
+3d7e19ddffb0b1f9,6566,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1600,437.73333333333335
+1632739c68cb60cd,7052,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1783,470.1333333333333
+61e6ac67551e13b1,6430,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1452,428.6666666666667
+064cdaae67ce7356,9920,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1482,661.3333333333334
+1a1d3cf834ff1f52,9621,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1502,645.8666666666667
+272b678f2dad5c93,5441,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1314,362.73333333333335
+45f778d5831f9e35,39411,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,reservation,28966,2627.4
+64e4016116ed4228,9106,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1320,607.0666666666667
+65292d4469b83341,10221,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1746,682.9333333333333
+551adef27d9152e1,4768,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1220,317.8666666666667
+3d529c4e56e9837c,10215,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1459,681.0
+382f88ae1daf1207,18798,5,False,0.0,,HTTP POST /reservation,frontend; reservation; user,reservation,15598,3759.6
+4faa9b5c71d07405,6830,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1558,458.73333333333335
+2914baaf3272dfd8,8808,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1443,587.2
+6b42010e750b735b,14185,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,reservation,4521,945.6666666666666
+6d6820d51c0122e4,8728,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1517,582.9333333333333
+17ad5e67f595afe0,8112,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,search,1259,549.6666666666666
+477078aa864f7bdb,77433,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,reservation,68716,5162.8
+70a2857efc54374c,4799,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,search,1114,325.0
+455f11814cc7ba9d,3867,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,search,867,253.86666666666667
+17e0916845515cb7,6523,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,941,441.93333333333334
+266c534937a3dce6,36731,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,reservation,26953,2450.8
+7137cf6e38fe92d6,10099,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1615,673.2666666666667
+787c4f4a8ef82912,10139,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1633,675.9333333333333
+2e6af326dbe616f0,6664,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1520,444.26666666666665
+766490394c1416eb,6526,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1489,435.46666666666664
+39f379deac5e6ff1,6401,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1481,426.93333333333334
+1da43cdec30953c4,9845,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1517,656.3333333333334
+228a8f8e59905c0c,45415,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,reservation,34915,3027.6666666666665
+0f57cc6ac154278f,8021,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1170,537.0666666666667
+6acae8caccd5d7e1,6120,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1524,408.0
+18ff6fa0b40ca57b,6090,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,search,1467,407.73333333333335
+756b7fecf04ddb49,6121,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1462,402.73333333333335
+71aa22c2df3d1297,81499,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,reservation,71556,5433.266666666666
+7c3ed35f058f7c70,9320,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1566,624.6666666666666
+1a5899cf2f5c3d18,23114,16,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,rate,11654,1444.625
+4465446d40c68b46,5821,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1488,389.0
+5178bb936ef99559,5868,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1367,392.0
+5692af6e937243e3,9533,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,rate,1435,638.5333333333333
+61660b6027461023,6959,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,search,1728,468.6
+7f17d918a1fbe6c4,10454,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1548,696.9333333333333
+54addc2d11c15888,10220,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1654,684.1333333333333
+205770c71b47c257,8873,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1216,594.8
+78c0a9525c6edbf4,10345,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1659,692.2
+592440931fae2f77,10872,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1595,724.8666666666667
+7d794ba9d0d100ea,6162,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1464,412.53333333333336
+0858401545afce40,8136,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,search,1173,555.7333333333333
+065e515a88cd476f,83185,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,reservation,72849,5545.666666666667
+18800ca104ac21d3,10041,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1738,669.4
+5ff06ec7e1ed9703,5154,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1112,342.4
+7076ec7896c0364f,6531,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1549,435.4
+2abf3a950c344038,11391,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1690,759.4
+53ac85da3a93f7dd,10036,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1637,669.0666666666667
+0ce8d28a8fd74700,7542,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,search,1744,502.8
+465a473277aaa034,6441,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,search,1450,429.4
+4d1ce1e108372b24,18494,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,11193,1233.4
+734184f614cfd5ed,5107,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,search,1177,340.8666666666667
+5369dc5293b37a51,7538,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1780,503.93333333333334
+2c4ab754ad932537,86276,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,reservation,76521,5751.733333333334
+3411899b6495f0be,21315,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,reservation,11787,1422.0
+26d85ab569bddd39,10310,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1517,687.3333333333334
+790ae9f3a5cde6b0,6480,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1470,432.0
+7728afc2fce50f99,10128,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,search,1551,679.9333333333333
+3cdb82ce0112b873,6218,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1495,414.53333333333336
+39fb8a935a460b8e,43707,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,reservation,34099,2913.8
+59ac0af40e9b0b6a,23052,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,19038,1536.8
+250586e0d1002876,10276,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1585,685.0666666666667
+34e39ad0c3ebe3e4,10990,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1618,732.6666666666666
+2206fbb281045eb3,6768,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,search,1567,451.2
+6fc3f60a03ee9a9f,9129,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1397,608.6
+4028ffd35f463941,28183,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,reservation,17925,1878.8666666666666
+55bc7930f6b49e38,6050,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1374,403.3333333333333
+6c3c1373b4f53c2e,10162,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1579,681.4
+533ebf6340221fdb,10877,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1647,725.1333333333333
+3f2ef6e0bb1053cb,10263,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1685,684.2
+40a9f619814f191c,1568,3,False,0.0,,HTTP POST /user,frontend; user,frontend,1468,522.6666666666666
+661a118cebbed6e0,1626,3,False,0.0,,HTTP POST /user,frontend; user,frontend,1550,542.0
+084e038753a18630,13351,5,False,0.0,,HTTP POST /reservation,frontend; reservation; user,reservation,10901,2670.2
+4788b8b10436a409,1424,3,False,0.0,,HTTP POST /user,frontend; user,frontend,1363,474.6666666666667
+2134a6821cd86622,24963,5,False,0.0,,HTTP POST /reservation,frontend; reservation; user,reservation,21235,4992.6
+7229e51c135cc434,30444,5,False,0.0,,HTTP POST /reservation,frontend; reservation; user,reservation,27531,6088.8
+49f34ae1f6ace864,18722,5,False,0.0,,HTTP POST /reservation,frontend; reservation; user,reservation,16741,3744.4
+4f995e5ab7ee5e53,1884,3,False,0.0,,HTTP POST /user,frontend; user,frontend,1758,628.0
+745cf3dffe884870,20339,5,False,0.0,,HTTP POST /reservation,frontend; reservation; user,reservation,18136,4067.8
+0af90e61472f75c7,23914,5,False,0.0,,HTTP POST /reservation,frontend; reservation; user,reservation,21118,4782.8
+0c9b23613cb11e87,38348,5,False,0.0,,HTTP POST /reservation,frontend; reservation; user,frontend,32460,7669.6
+71df408b123acf23,2004,3,False,0.0,,HTTP POST /user,frontend; user,frontend,1903,668.0
+770bfae48638de66,15792,5,False,0.0,,HTTP POST /reservation,frontend; reservation; user,reservation,13787,3158.4
+382f88ae1daf1207,18798,5,False,0.0,,HTTP POST /reservation,frontend; reservation; user,reservation,15598,3759.6
+488d5bfad01f97b6,1679,3,False,0.0,,HTTP POST /user,frontend; user,frontend,1564,559.6666666666666
+455f11814cc7ba9d,3867,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,search,867,253.86666666666667
+56594272dbbdbd32,3050,6,False,0.0,,HTTP GET /recommendations,frontend; recommendation; profile,frontend,1086,510.5
+17e0916845515cb7,6523,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,941,441.93333333333334
+266c534937a3dce6,36731,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,reservation,26953,2450.8
+7137cf6e38fe92d6,10099,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1615,673.2666666666667
+1fc338c49c469773,4272,6,False,0.0,,HTTP GET /recommendations,frontend; recommendation; profile,frontend,1672,714.8333333333334
+3b35b220e0629d0b,4627,6,False,0.0,,HTTP GET /recommendations,frontend; recommendation; profile,frontend,1552,771.1666666666666
+07ade57df411abb7,4041,6,False,0.0,,HTTP GET /recommendations,frontend; recommendation; profile,frontend,1445,673.5
+7e11f80b3f8e7f68,3664,6,False,0.0,,HTTP GET /recommendations,frontend; recommendation; profile,frontend,1332,618.0
+5f596b6a26adf5c2,4560,6,False,0.0,,HTTP GET /recommendations,frontend; recommendation; profile,frontend,1579,760.0
+06d007a53f28183b,4809,6,False,0.0,,HTTP GET /recommendations,frontend; recommendation; profile,frontend,1561,801.5
+787c4f4a8ef82912,10139,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1633,675.9333333333333
+2e6af326dbe616f0,6664,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1520,444.26666666666665
+22f27bbd334a51f6,4368,6,False,0.0,,HTTP GET /recommendations,frontend; recommendation; profile,frontend,1665,728.0
+759855cb5065b311,4211,6,False,0.0,,HTTP GET /recommendations,frontend; recommendation; profile,frontend,1499,701.8333333333334
+766490394c1416eb,6526,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1489,435.46666666666664
+39f379deac5e6ff1,6401,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1481,426.93333333333334
+1da43cdec30953c4,9845,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1517,656.3333333333334
+22f115a9be844c63,4459,6,False,0.0,,HTTP GET /recommendations,frontend; recommendation; profile,frontend,1562,743.1666666666666
+228a8f8e59905c0c,45415,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,reservation,34915,3027.6666666666665
+0f57cc6ac154278f,8021,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1170,537.0666666666667
+31f1edc7ed0cdfca,4508,6,False,0.0,,HTTP GET /recommendations,frontend; recommendation; profile,frontend,1665,751.8333333333334
+60e904b2e7720ce2,4767,6,False,0.0,,HTTP GET /recommendations,frontend; recommendation; profile,frontend,1683,794.5
+6acae8caccd5d7e1,6120,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1524,408.0
+18ff6fa0b40ca57b,6090,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,search,1467,407.73333333333335
+0fd66b67ceaf8f3d,3991,6,False,0.0,,HTTP GET /recommendations,frontend; recommendation; profile,frontend,1563,665.1666666666666
+756b7fecf04ddb49,6121,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1462,402.73333333333335
+71aa22c2df3d1297,81499,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,reservation,71556,5433.266666666666
+7c3ed35f058f7c70,9320,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1566,624.6666666666666
+1a5899cf2f5c3d18,23114,16,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,rate,11654,1444.625
+4465446d40c68b46,5821,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1488,389.0
+26fa8eabf0a6412d,4255,6,False,0.0,,HTTP GET /recommendations,frontend; recommendation; profile,frontend,1686,709.1666666666666
+5178bb936ef99559,5868,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1367,392.0
+5692af6e937243e3,9533,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,rate,1435,638.5333333333333
+61660b6027461023,6959,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,search,1728,468.6
+20463c9f43ed4b85,4937,6,False,0.0,,HTTP GET /recommendations,frontend; recommendation; profile,frontend,1785,822.8333333333334
+7f17d918a1fbe6c4,10454,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1548,696.9333333333333
+13f41f5ead6fe613,3940,6,False,0.0,,HTTP GET /recommendations,frontend; recommendation; profile,frontend,1644,656.6666666666666
+0645aec6d711b6eb,3117,6,False,0.0,,HTTP GET /recommendations,frontend; recommendation; profile,frontend,972,522.5
+3858175e0c962cca,3654,6,False,0.0,,HTTP GET /recommendations,frontend; recommendation; profile,frontend,1417,616.3333333333334
+54addc2d11c15888,10220,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1654,684.1333333333333
+205770c71b47c257,8873,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1216,594.8
+73435f586fce5b3c,3444,6,False,0.0,,HTTP GET /recommendations,frontend; recommendation; profile,frontend,1375,579.5
+78c0a9525c6edbf4,10345,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1659,692.2
+1e96f8b7badffe94,3892,6,False,0.0,,HTTP GET /recommendations,frontend; recommendation; profile,frontend,1340,650.0
+592440931fae2f77,10872,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1595,724.8666666666667
+48414de96ac24948,3893,6,False,0.0,,HTTP GET /recommendations,frontend; recommendation; profile,frontend,1495,648.8333333333334
+7d794ba9d0d100ea,6162,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1464,412.53333333333336
+0858401545afce40,8136,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,search,1173,555.7333333333333
+4f27be90a56febac,3670,6,False,0.0,,HTTP GET /recommendations,frontend; recommendation; profile,frontend,1279,611.6666666666666
+441485eae7b3ea7c,4009,6,False,0.0,,HTTP GET /recommendations,frontend; recommendation; profile,frontend,1441,679.3333333333334
+38ec2d6f6e62b685,3694,6,False,0.0,,HTTP GET /recommendations,frontend; recommendation; profile,frontend,1350,615.6666666666666
+3be90ee407b274c9,3288,6,False,0.0,,HTTP GET /recommendations,frontend; recommendation; profile,frontend,1285,555.3333333333334
+065e515a88cd476f,83185,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,reservation,72849,5545.666666666667
+18800ca104ac21d3,10041,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1738,669.4
+5ff06ec7e1ed9703,5154,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1112,342.4
+7e5bc8604d3485ff,3767,6,False,0.0,,HTTP GET /recommendations,frontend; recommendation; profile,frontend,1554,627.8333333333334
+4d41b10b6bebb334,4284,6,False,0.0,,HTTP GET /recommendations,frontend; recommendation; profile,frontend,1650,714.0
+7076ec7896c0364f,6531,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1549,435.4
+2abf3a950c344038,11391,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1690,759.4
+53ac85da3a93f7dd,10036,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1637,669.0666666666667
+0f8343fd3f9b40a5,4526,6,False,0.0,,HTTP GET /recommendations,frontend; recommendation; profile,frontend,1930,761.3333333333334
+2c16bc1be7d64309,3551,6,False,0.0,,HTTP GET /recommendations,frontend; recommendation; profile,frontend,1446,591.8333333333334
+0ce8d28a8fd74700,7542,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,search,1744,502.8
+465a473277aaa034,6441,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,search,1450,429.4
+4d1ce1e108372b24,18494,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,11193,1233.4
+366440a0e6be0102,3541,6,False,0.0,,HTTP GET /recommendations,frontend; recommendation; profile,frontend,1412,597.6666666666666
+734184f614cfd5ed,5107,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,search,1177,340.8666666666667
+5369dc5293b37a51,7538,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1780,503.93333333333334
+2c4ab754ad932537,86276,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,reservation,76521,5751.733333333334
+3411899b6495f0be,21315,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,reservation,11787,1422.0
+747aa54090c35511,3260,6,False,0.0,,HTTP GET /recommendations,frontend; recommendation; profile,frontend,1294,543.3333333333334
+2dce2045769c7f86,4027,6,False,0.0,,HTTP GET /recommendations,frontend; recommendation; profile,frontend,1203,682.8333333333334
+26d85ab569bddd39,10310,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1517,687.3333333333334
+21dad1273f0c19d6,4460,6,False,0.0,,HTTP GET /recommendations,frontend; recommendation; profile,frontend,1642,743.3333333333334
+790ae9f3a5cde6b0,6480,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1470,432.0
+7728afc2fce50f99,10128,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,search,1551,679.9333333333333
+3cdb82ce0112b873,6218,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1495,414.53333333333336
+3d07ad2720ef409a,4843,6,False,0.0,,HTTP GET /recommendations,frontend; recommendation; profile,frontend,2230,808.5
+003da103aaa66267,4978,6,False,0.0,,HTTP GET /recommendations,frontend; recommendation; profile,frontend,1742,829.6666666666666
+39fb8a935a460b8e,43707,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,reservation,34099,2913.8
+59ac0af40e9b0b6a,23052,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,19038,1536.8
+250586e0d1002876,10276,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1585,685.0666666666667
+04f68e45077d90ba,4291,6,False,0.0,,HTTP GET /recommendations,frontend; recommendation; profile,frontend,1672,715.1666666666666
+34e39ad0c3ebe3e4,10990,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1618,732.6666666666666
+62699d0df95d27a1,4301,6,False,0.0,,HTTP GET /recommendations,frontend; recommendation; profile,frontend,1733,716.8333333333334
+2206fbb281045eb3,6768,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,search,1567,451.2
+6fc3f60a03ee9a9f,9129,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1397,608.6
+4028ffd35f463941,28183,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,reservation,17925,1878.8666666666666
+55bc7930f6b49e38,6050,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1374,403.3333333333333
+6fd67e23a5f6bfd6,4413,6,False,0.0,,HTTP GET /recommendations,frontend; recommendation; profile,frontend,1490,735.5
+6c3c1373b4f53c2e,10162,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1579,681.4
+0d2e123d86d04f7b,4158,6,False,0.0,,HTTP GET /recommendations,frontend; recommendation; profile,frontend,1535,693.3333333333334
+533ebf6340221fdb,10877,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1647,725.1333333333333
+024d335e44419034,3877,6,False,0.0,,HTTP GET /recommendations,frontend; recommendation; profile,frontend,1543,653.1666666666666
+2d1b884405c82196,4067,6,False,0.0,,HTTP GET /recommendations,frontend; recommendation; profile,frontend,1504,677.8333333333334
+4ca199758ed2ab1f,4415,6,False,0.0,,HTTP GET /recommendations,frontend; recommendation; profile,frontend,1572,735.8333333333334
+0c369addf1c7d612,6372,7,False,0.0,,HTTP GET /recommendations,frontend; recommendation; profile,profile,1847,910.2857142857143
+6819e5ec0b244a81,4046,6,False,0.0,,HTTP GET /recommendations,frontend; recommendation; profile,frontend,1652,674.3333333333334
+3f2ef6e0bb1053cb,10263,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1685,684.2
+3709755c22e0af81,8664,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1143,577.6
+65af243c55cb31fe,10308,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1685,687.2
+71e3eb4976f3ab4a,10313,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1696,687.5333333333333
+488a6723b6b4cec4,7148,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1731,476.53333333333336
+7b3d846f86784150,35738,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,reservation,24813,2382.5333333333333
+53115fbf74f7b05d,6387,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1399,426.8
+369c695cb48f07a9,37484,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,32840,2501.133333333333
+5ccbe214b95b998a,23249,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,rate,14423,1549.9333333333334
+5f5131075ed19b7e,6256,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1504,419.73333333333335
+42905f72c47ae9b4,6425,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1454,428.3333333333333
+36f43f0a4f88f08c,5349,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,search,1061,356.93333333333334
+5de73b648a6880d2,50076,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,reservation,42312,3338.4
+53991a7a30484b02,4884,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,search,1226,329.8
+77b3fdfdd4ecffb4,4584,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,991,309.46666666666664
+59e3459a146ebd66,56037,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,reservation,46411,3738.9333333333334
+4a64f3491b4feeeb,10322,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1753,692.2666666666667
+3622de44eebf2b0d,11108,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1641,740.5333333333333
+2c99bda120e38cfb,59060,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,reservation,48929,3937.3333333333335
+62ba6a386a759334,70769,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,reservation,60939,4717.933333333333
+22f92ef4ac2ad281,9798,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1477,653.2
+6f4b803d76e56fef,50644,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,45215,3376.266666666667
+3bbcb5cb02070481,5909,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1397,393.93333333333334
+5cb2a9eab9c4a13d,6848,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1757,456.53333333333336
+38a14b308369cc22,9234,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1827,615.6
+517c29e89de27510,9983,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1489,665.5333333333333
+584e38046d294fd6,6648,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1611,443.2
+3d7e19ddffb0b1f9,6566,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1600,437.73333333333335
+1632739c68cb60cd,7052,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1783,470.1333333333333
+61e6ac67551e13b1,6430,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1452,428.6666666666667
+064cdaae67ce7356,9920,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1482,661.3333333333334
+1a1d3cf834ff1f52,9621,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1502,645.8666666666667
+272b678f2dad5c93,5441,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1314,362.73333333333335
+45f778d5831f9e35,39411,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,reservation,28966,2627.4
+64e4016116ed4228,9106,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1320,607.0666666666667
+65292d4469b83341,10221,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1746,682.9333333333333
+551adef27d9152e1,4768,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1220,317.8666666666667
+3d529c4e56e9837c,10215,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1459,681.0
+4faa9b5c71d07405,6830,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1558,458.73333333333335
+2914baaf3272dfd8,8808,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1443,587.2
+6b42010e750b735b,14185,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,reservation,4521,945.6666666666666
+6d6820d51c0122e4,8728,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1517,582.9333333333333
+17ad5e67f595afe0,8112,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,search,1259,549.6666666666666
+477078aa864f7bdb,77433,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,reservation,68716,5162.8
+70a2857efc54374c,4799,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,search,1114,325.0
+455f11814cc7ba9d,3867,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,search,867,253.86666666666667
+17e0916845515cb7,6523,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,941,441.93333333333334
+266c534937a3dce6,36731,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,reservation,26953,2450.8
+7137cf6e38fe92d6,10099,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1615,673.2666666666667
+787c4f4a8ef82912,10139,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1633,675.9333333333333
+2e6af326dbe616f0,6664,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1520,444.26666666666665
+766490394c1416eb,6526,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1489,435.46666666666664
+39f379deac5e6ff1,6401,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1481,426.93333333333334
+1da43cdec30953c4,9845,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1517,656.3333333333334
+228a8f8e59905c0c,45415,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,reservation,34915,3027.6666666666665
+0f57cc6ac154278f,8021,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1170,537.0666666666667
+6acae8caccd5d7e1,6120,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1524,408.0
+18ff6fa0b40ca57b,6090,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,search,1467,407.73333333333335
+756b7fecf04ddb49,6121,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1462,402.73333333333335
+71aa22c2df3d1297,81499,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,reservation,71556,5433.266666666666
+7c3ed35f058f7c70,9320,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1566,624.6666666666666
+1a5899cf2f5c3d18,23114,16,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,rate,11654,1444.625
+4465446d40c68b46,5821,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1488,389.0
+5178bb936ef99559,5868,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1367,392.0
+5692af6e937243e3,9533,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,rate,1435,638.5333333333333
+61660b6027461023,6959,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,search,1728,468.6
+7f17d918a1fbe6c4,10454,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1548,696.9333333333333
+54addc2d11c15888,10220,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1654,684.1333333333333
+205770c71b47c257,8873,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1216,594.8
+78c0a9525c6edbf4,10345,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1659,692.2
+592440931fae2f77,10872,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1595,724.8666666666667
+7d794ba9d0d100ea,6162,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1464,412.53333333333336
+0858401545afce40,8136,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,search,1173,555.7333333333333
+065e515a88cd476f,83185,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,reservation,72849,5545.666666666667
+18800ca104ac21d3,10041,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1738,669.4
+5ff06ec7e1ed9703,5154,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1112,342.4
+7076ec7896c0364f,6531,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1549,435.4
+2abf3a950c344038,11391,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1690,759.4
+53ac85da3a93f7dd,10036,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1637,669.0666666666667
+0ce8d28a8fd74700,7542,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,search,1744,502.8
+465a473277aaa034,6441,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,search,1450,429.4
+4d1ce1e108372b24,18494,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,11193,1233.4
+734184f614cfd5ed,5107,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,search,1177,340.8666666666667
+5369dc5293b37a51,7538,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1780,503.93333333333334
+2c4ab754ad932537,86276,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,reservation,76521,5751.733333333334
+3411899b6495f0be,21315,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,reservation,11787,1422.0
+26d85ab569bddd39,10310,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1517,687.3333333333334
+790ae9f3a5cde6b0,6480,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1470,432.0
+7728afc2fce50f99,10128,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,search,1551,679.9333333333333
+3cdb82ce0112b873,6218,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1495,414.53333333333336
+39fb8a935a460b8e,43707,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,reservation,34099,2913.8
+59ac0af40e9b0b6a,23052,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,19038,1536.8
+250586e0d1002876,10276,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1585,685.0666666666667
+34e39ad0c3ebe3e4,10990,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1618,732.6666666666666
+2206fbb281045eb3,6768,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,search,1567,451.2
+6fc3f60a03ee9a9f,9129,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1397,608.6
+4028ffd35f463941,28183,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,reservation,17925,1878.8666666666666
+55bc7930f6b49e38,6050,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1374,403.3333333333333
+6c3c1373b4f53c2e,10162,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1579,681.4
+533ebf6340221fdb,10877,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1647,725.1333333333333
+3f2ef6e0bb1053cb,10263,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1685,684.2
+720926b4b9d2d21e,4086,6,False,0.0,,HTTP GET /recommendations,frontend; recommendation; profile,frontend,1593,681.0
+089c547f57fbd2d0,4459,6,False,0.0,,HTTP GET /recommendations,frontend; recommendation; profile,frontend,1775,745.8333333333334
+37dc55f8920232ca,4454,6,False,0.0,,HTTP GET /recommendations,frontend; recommendation; profile,frontend,1667,742.3333333333334
+4fe11bfdbe52a199,2623,6,False,0.0,,HTTP GET /recommendations,frontend; recommendation; profile,frontend,1038,446.5
+5a436aec7669764f,3117,6,False,0.0,,HTTP GET /recommendations,frontend; recommendation; profile,frontend,1199,528.5
+4af9f0f2fbd28133,4354,6,False,0.0,,HTTP GET /recommendations,frontend; recommendation; profile,frontend,1499,725.6666666666666
+2dc5f52022d721f6,3457,6,False,0.0,,HTTP GET /recommendations,frontend; recommendation; profile,frontend,1342,583.3333333333334
+4df241ff2bfa64bc,3959,6,False,0.0,,HTTP GET /recommendations,frontend; recommendation; profile,frontend,1472,659.8333333333334
+6262797b7925ec69,4667,6,False,0.0,,HTTP GET /recommendations,frontend; recommendation; profile,profile,1650,777.8333333333334
+6a63ed4e823bb4a6,4299,6,False,0.0,,HTTP GET /recommendations,frontend; recommendation; profile,frontend,1804,716.5
+2d55d7499b66fd56,4436,6,False,0.0,,HTTP GET /recommendations,frontend; recommendation; profile,frontend,1805,739.3333333333334
+1700e76d5a24eea0,4528,6,False,0.0,,HTTP GET /recommendations,frontend; recommendation; profile,frontend,1705,756.5
+6ba2f836f9560eb5,3638,6,False,0.0,,HTTP GET /recommendations,frontend; recommendation; profile,frontend,1344,608.0
+28eae27dd8a32fb2,4544,6,False,0.0,,HTTP GET /recommendations,frontend; recommendation; profile,frontend,1832,757.3333333333334
+1ca3cd1b7725d47b,4262,6,False,0.0,,HTTP GET /recommendations,frontend; recommendation; profile,frontend,1407,710.3333333333334
+6fb1d5d4c845ecbf,4543,6,False,0.0,,HTTP GET /recommendations,frontend; recommendation; profile,frontend,1598,757.1666666666666
+4543334d4f11d6b0,2961,6,False,0.0,,HTTP GET /recommendations,frontend; recommendation; profile,frontend,1297,499.5
+25db6ecdb47341aa,4199,6,False,0.0,,HTTP GET /recommendations,frontend; recommendation; profile,frontend,1539,699.8333333333334
+3b14c7d51ba6c206,4934,6,False,0.0,,HTTP GET /recommendations,frontend; recommendation; profile,frontend,1956,822.3333333333334
+0d535841f721d715,4107,6,False,0.0,,HTTP GET /recommendations,frontend; recommendation; profile,frontend,1449,684.5
+780f2a95cdf2a3b1,4506,6,False,0.0,,HTTP GET /recommendations,frontend; recommendation; profile,frontend,1871,751.0
+26d6b7f884e95ef2,3444,6,False,0.0,,HTTP GET /recommendations,frontend; recommendation; profile,frontend,1244,582.0
+65ee2c85cd63978b,4865,6,False,0.0,,HTTP GET /recommendations,frontend; recommendation; profile,frontend,2038,810.8333333333334
+4584b77586443b7e,4686,6,False,0.0,,HTTP GET /recommendations,frontend; recommendation; profile,frontend,1691,781.0
+031031a3d2af31df,3685,6,False,0.0,,HTTP GET /recommendations,frontend; recommendation; profile,frontend,1481,614.1666666666666
+1b36f40d41dc4678,5026,6,False,0.0,,HTTP GET /recommendations,frontend; recommendation; profile,frontend,1827,837.6666666666666
+4e1d5b623583736e,4342,6,False,0.0,,HTTP GET /recommendations,frontend; recommendation; profile,frontend,1583,729.6666666666666
+32330e6b7db8a414,4732,6,False,0.0,,HTTP GET /recommendations,frontend; recommendation; profile,frontend,1640,788.6666666666666
+2a8369a5fe65187b,4537,6,False,0.0,,HTTP GET /recommendations,frontend; recommendation; profile,frontend,1830,762.0
+3d49cd0acd7e8390,3947,6,False,0.0,,HTTP GET /recommendations,frontend; recommendation; profile,frontend,1398,657.8333333333334
+6d77a8b690e91ada,4583,6,False,0.0,,HTTP GET /recommendations,frontend; recommendation; profile,frontend,1611,763.8333333333334
+4667592767f22a2d,4495,6,False,0.0,,HTTP GET /recommendations,frontend; recommendation; profile,frontend,1669,749.1666666666666
+287e8f1bb9b56317,2817,6,False,0.0,,HTTP GET /recommendations,frontend; recommendation; profile,frontend,1215,480.6666666666667
+777ec567faa810cf,4695,6,False,0.0,,HTTP GET /recommendations,frontend; recommendation; profile,frontend,1747,782.5
+401d9c8e23b00c71,3573,6,False,0.0,,HTTP GET /recommendations,frontend; recommendation; profile,frontend,1386,597.1666666666666
+0924e6f7cbb81e98,3718,6,False,0.0,,HTTP GET /recommendations,frontend; recommendation; profile,frontend,1276,620.8333333333334
+76ef974ed030466d,4458,6,False,0.0,,HTTP GET /recommendations,frontend; recommendation; profile,frontend,1816,743.0
+0f4c9c25d8692763,4213,6,False,0.0,,HTTP GET /recommendations,frontend; recommendation; profile,frontend,1466,705.6666666666666
+7ed5d3aa22840efd,4373,6,False,0.0,,HTTP GET /recommendations,frontend; recommendation; profile,frontend,1609,735.8333333333334
+0e51f1f062dc4a94,4439,6,False,0.0,,HTTP GET /recommendations,frontend; recommendation; profile,frontend,1729,739.8333333333334
+67c217396fa0d26f,4916,6,False,0.0,,HTTP GET /recommendations,frontend; recommendation; profile,frontend,1655,819.3333333333334
+3f58bb15042657dd,3999,6,False,0.0,,HTTP GET /recommendations,frontend; recommendation; profile,frontend,1422,666.5
+44f18ecdc44496df,3780,6,False,0.0,,HTTP GET /recommendations,frontend; recommendation; profile,frontend,1425,630.0
+0d25cea3a25d8427,3400,6,False,0.0,,HTTP GET /recommendations,frontend; recommendation; profile,frontend,1226,574.6666666666666
+62f03b43a2801231,3130,6,False,0.0,,HTTP GET /recommendations,frontend; recommendation; profile,frontend,1294,521.6666666666666
+2f478a46af16057c,4021,6,False,0.0,,HTTP GET /recommendations,frontend; recommendation; profile,frontend,1374,670.1666666666666
+4ff1f64cf99c2434,5024,6,False,0.0,,HTTP GET /recommendations,frontend; recommendation; profile,frontend,2086,837.3333333333334
+42717b292ebfa0d5,4315,6,False,0.0,,HTTP GET /recommendations,frontend; recommendation; profile,frontend,1581,719.1666666666666
+5c1432111c57de49,3807,6,False,0.0,,HTTP GET /recommendations,frontend; recommendation; profile,frontend,1482,634.5
+7889b18b60fd615c,6657,7,False,0.0,,HTTP GET /recommendations,frontend; recommendation; profile,profile,1904,951.0
+5a308006e68f78cf,3278,6,False,0.0,,HTTP GET /recommendations,frontend; recommendation; profile,frontend,1426,552.6666666666666
+1f120b61c7f46919,4451,6,False,0.0,,HTTP GET /recommendations,frontend; recommendation; profile,frontend,1610,741.8333333333334
+39dd3e5e6929b323,3951,6,False,0.0,,HTTP GET /recommendations,frontend; recommendation; profile,frontend,1394,661.3333333333334
+4844365b4b0618d7,5057,6,False,0.0,,HTTP GET /recommendations,frontend; recommendation; profile,frontend,1870,842.8333333333334
+270e348cc349e9de,4730,6,False,0.0,,HTTP GET /recommendations,frontend; recommendation; profile,frontend,1690,788.3333333333334
+4eb4b2b846f169ee,4139,6,False,0.0,,HTTP GET /recommendations,frontend; recommendation; profile,frontend,1406,689.8333333333334
+56594272dbbdbd32,3050,6,False,0.0,,HTTP GET /recommendations,frontend; recommendation; profile,frontend,1086,510.5
+1fc338c49c469773,4272,6,False,0.0,,HTTP GET /recommendations,frontend; recommendation; profile,frontend,1672,714.8333333333334
+3b35b220e0629d0b,4627,6,False,0.0,,HTTP GET /recommendations,frontend; recommendation; profile,frontend,1552,771.1666666666666
+07ade57df411abb7,4041,6,False,0.0,,HTTP GET /recommendations,frontend; recommendation; profile,frontend,1445,673.5
+7e11f80b3f8e7f68,3664,6,False,0.0,,HTTP GET /recommendations,frontend; recommendation; profile,frontend,1332,618.0
+5f596b6a26adf5c2,4560,6,False,0.0,,HTTP GET /recommendations,frontend; recommendation; profile,frontend,1579,760.0
+06d007a53f28183b,4809,6,False,0.0,,HTTP GET /recommendations,frontend; recommendation; profile,frontend,1561,801.5
+22f27bbd334a51f6,4368,6,False,0.0,,HTTP GET /recommendations,frontend; recommendation; profile,frontend,1665,728.0
+759855cb5065b311,4211,6,False,0.0,,HTTP GET /recommendations,frontend; recommendation; profile,frontend,1499,701.8333333333334
+22f115a9be844c63,4459,6,False,0.0,,HTTP GET /recommendations,frontend; recommendation; profile,frontend,1562,743.1666666666666
+31f1edc7ed0cdfca,4508,6,False,0.0,,HTTP GET /recommendations,frontend; recommendation; profile,frontend,1665,751.8333333333334
+60e904b2e7720ce2,4767,6,False,0.0,,HTTP GET /recommendations,frontend; recommendation; profile,frontend,1683,794.5
+0fd66b67ceaf8f3d,3991,6,False,0.0,,HTTP GET /recommendations,frontend; recommendation; profile,frontend,1563,665.1666666666666
+26fa8eabf0a6412d,4255,6,False,0.0,,HTTP GET /recommendations,frontend; recommendation; profile,frontend,1686,709.1666666666666
+20463c9f43ed4b85,4937,6,False,0.0,,HTTP GET /recommendations,frontend; recommendation; profile,frontend,1785,822.8333333333334
+13f41f5ead6fe613,3940,6,False,0.0,,HTTP GET /recommendations,frontend; recommendation; profile,frontend,1644,656.6666666666666
+0645aec6d711b6eb,3117,6,False,0.0,,HTTP GET /recommendations,frontend; recommendation; profile,frontend,972,522.5
+3858175e0c962cca,3654,6,False,0.0,,HTTP GET /recommendations,frontend; recommendation; profile,frontend,1417,616.3333333333334
+73435f586fce5b3c,3444,6,False,0.0,,HTTP GET /recommendations,frontend; recommendation; profile,frontend,1375,579.5
+1e96f8b7badffe94,3892,6,False,0.0,,HTTP GET /recommendations,frontend; recommendation; profile,frontend,1340,650.0
+48414de96ac24948,3893,6,False,0.0,,HTTP GET /recommendations,frontend; recommendation; profile,frontend,1495,648.8333333333334
+4f27be90a56febac,3670,6,False,0.0,,HTTP GET /recommendations,frontend; recommendation; profile,frontend,1279,611.6666666666666
+441485eae7b3ea7c,4009,6,False,0.0,,HTTP GET /recommendations,frontend; recommendation; profile,frontend,1441,679.3333333333334
+38ec2d6f6e62b685,3694,6,False,0.0,,HTTP GET /recommendations,frontend; recommendation; profile,frontend,1350,615.6666666666666
+3be90ee407b274c9,3288,6,False,0.0,,HTTP GET /recommendations,frontend; recommendation; profile,frontend,1285,555.3333333333334
+7e5bc8604d3485ff,3767,6,False,0.0,,HTTP GET /recommendations,frontend; recommendation; profile,frontend,1554,627.8333333333334
+4d41b10b6bebb334,4284,6,False,0.0,,HTTP GET /recommendations,frontend; recommendation; profile,frontend,1650,714.0
+0f8343fd3f9b40a5,4526,6,False,0.0,,HTTP GET /recommendations,frontend; recommendation; profile,frontend,1930,761.3333333333334
+2c16bc1be7d64309,3551,6,False,0.0,,HTTP GET /recommendations,frontend; recommendation; profile,frontend,1446,591.8333333333334
+366440a0e6be0102,3541,6,False,0.0,,HTTP GET /recommendations,frontend; recommendation; profile,frontend,1412,597.6666666666666
+747aa54090c35511,3260,6,False,0.0,,HTTP GET /recommendations,frontend; recommendation; profile,frontend,1294,543.3333333333334
+2dce2045769c7f86,4027,6,False,0.0,,HTTP GET /recommendations,frontend; recommendation; profile,frontend,1203,682.8333333333334
+21dad1273f0c19d6,4460,6,False,0.0,,HTTP GET /recommendations,frontend; recommendation; profile,frontend,1642,743.3333333333334
+3d07ad2720ef409a,4843,6,False,0.0,,HTTP GET /recommendations,frontend; recommendation; profile,frontend,2230,808.5
+003da103aaa66267,4978,6,False,0.0,,HTTP GET /recommendations,frontend; recommendation; profile,frontend,1742,829.6666666666666
+04f68e45077d90ba,4291,6,False,0.0,,HTTP GET /recommendations,frontend; recommendation; profile,frontend,1672,715.1666666666666
+62699d0df95d27a1,4301,6,False,0.0,,HTTP GET /recommendations,frontend; recommendation; profile,frontend,1733,716.8333333333334
+6fd67e23a5f6bfd6,4413,6,False,0.0,,HTTP GET /recommendations,frontend; recommendation; profile,frontend,1490,735.5
+0d2e123d86d04f7b,4158,6,False,0.0,,HTTP GET /recommendations,frontend; recommendation; profile,frontend,1535,693.3333333333334
+024d335e44419034,3877,6,False,0.0,,HTTP GET /recommendations,frontend; recommendation; profile,frontend,1543,653.1666666666666
+2d1b884405c82196,4067,6,False,0.0,,HTTP GET /recommendations,frontend; recommendation; profile,frontend,1504,677.8333333333334
+4ca199758ed2ab1f,4415,6,False,0.0,,HTTP GET /recommendations,frontend; recommendation; profile,frontend,1572,735.8333333333334
+0c369addf1c7d612,6372,7,False,0.0,,HTTP GET /recommendations,frontend; recommendation; profile,profile,1847,910.2857142857143
+6819e5ec0b244a81,4046,6,False,0.0,,HTTP GET /recommendations,frontend; recommendation; profile,frontend,1652,674.3333333333334
+3709755c22e0af81,8664,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1143,577.6
+65af243c55cb31fe,10308,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1685,687.2
+71e3eb4976f3ab4a,10313,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1696,687.5333333333333
+488a6723b6b4cec4,7148,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1731,476.53333333333336
+7b3d846f86784150,35738,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,reservation,24813,2382.5333333333333
+53115fbf74f7b05d,6387,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1399,426.8
+369c695cb48f07a9,37484,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,32840,2501.133333333333
+5ccbe214b95b998a,23249,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,rate,14423,1549.9333333333334
+5f5131075ed19b7e,6256,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1504,419.73333333333335
+42905f72c47ae9b4,6425,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1454,428.3333333333333
+36f43f0a4f88f08c,5349,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,search,1061,356.93333333333334
+5de73b648a6880d2,50076,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,reservation,42312,3338.4
+53991a7a30484b02,4884,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,search,1226,329.8
+77b3fdfdd4ecffb4,4584,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,991,309.46666666666664
+59e3459a146ebd66,56037,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,reservation,46411,3738.9333333333334
+4a64f3491b4feeeb,10322,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1753,692.2666666666667
+3622de44eebf2b0d,11108,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1641,740.5333333333333
+2c99bda120e38cfb,59060,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,reservation,48929,3937.3333333333335
+62ba6a386a759334,70769,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,reservation,60939,4717.933333333333
+22f92ef4ac2ad281,9798,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1477,653.2
+6f4b803d76e56fef,50644,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,45215,3376.266666666667
+3bbcb5cb02070481,5909,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1397,393.93333333333334
+5cb2a9eab9c4a13d,6848,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1757,456.53333333333336
+38a14b308369cc22,9234,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1827,615.6
+517c29e89de27510,9983,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1489,665.5333333333333
+584e38046d294fd6,6648,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1611,443.2
+3d7e19ddffb0b1f9,6566,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1600,437.73333333333335
+1632739c68cb60cd,7052,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1783,470.1333333333333
+61e6ac67551e13b1,6430,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1452,428.6666666666667
+064cdaae67ce7356,9920,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1482,661.3333333333334
+1a1d3cf834ff1f52,9621,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1502,645.8666666666667
+272b678f2dad5c93,5441,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1314,362.73333333333335
+45f778d5831f9e35,39411,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,reservation,28966,2627.4
+64e4016116ed4228,9106,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1320,607.0666666666667
+65292d4469b83341,10221,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1746,682.9333333333333
+551adef27d9152e1,4768,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1220,317.8666666666667
+3d529c4e56e9837c,10215,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1459,681.0
+4faa9b5c71d07405,6830,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1558,458.73333333333335
+2914baaf3272dfd8,8808,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1443,587.2
+6b42010e750b735b,14185,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,reservation,4521,945.6666666666666
+6d6820d51c0122e4,8728,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1517,582.9333333333333
+17ad5e67f595afe0,8112,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,search,1259,549.6666666666666
+477078aa864f7bdb,77433,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,reservation,68716,5162.8
+70a2857efc54374c,4799,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,search,1114,325.0
+455f11814cc7ba9d,3867,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,search,867,253.86666666666667
+17e0916845515cb7,6523,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,941,441.93333333333334
+266c534937a3dce6,36731,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,reservation,26953,2450.8
+7137cf6e38fe92d6,10099,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1615,673.2666666666667
+787c4f4a8ef82912,10139,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1633,675.9333333333333
+2e6af326dbe616f0,6664,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1520,444.26666666666665
+766490394c1416eb,6526,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1489,435.46666666666664
+39f379deac5e6ff1,6401,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1481,426.93333333333334
+1da43cdec30953c4,9845,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1517,656.3333333333334
+228a8f8e59905c0c,45415,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,reservation,34915,3027.6666666666665
+0f57cc6ac154278f,8021,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1170,537.0666666666667
+6acae8caccd5d7e1,6120,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1524,408.0
+18ff6fa0b40ca57b,6090,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,search,1467,407.73333333333335
+756b7fecf04ddb49,6121,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1462,402.73333333333335
+71aa22c2df3d1297,81499,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,reservation,71556,5433.266666666666
+7c3ed35f058f7c70,9320,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1566,624.6666666666666
+1a5899cf2f5c3d18,23114,16,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,rate,11654,1444.625
+4465446d40c68b46,5821,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1488,389.0
+5178bb936ef99559,5868,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1367,392.0
+5692af6e937243e3,9533,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,rate,1435,638.5333333333333
+61660b6027461023,6959,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,search,1728,468.6
+7f17d918a1fbe6c4,10454,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1548,696.9333333333333
+54addc2d11c15888,10220,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1654,684.1333333333333
+205770c71b47c257,8873,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1216,594.8
+78c0a9525c6edbf4,10345,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1659,692.2
+592440931fae2f77,10872,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1595,724.8666666666667
+7d794ba9d0d100ea,6162,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1464,412.53333333333336
+0858401545afce40,8136,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,search,1173,555.7333333333333
+065e515a88cd476f,83185,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,reservation,72849,5545.666666666667
+18800ca104ac21d3,10041,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1738,669.4
+5ff06ec7e1ed9703,5154,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1112,342.4
+7076ec7896c0364f,6531,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1549,435.4
+2abf3a950c344038,11391,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1690,759.4
+53ac85da3a93f7dd,10036,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1637,669.0666666666667
+0ce8d28a8fd74700,7542,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,search,1744,502.8
+465a473277aaa034,6441,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,search,1450,429.4
+4d1ce1e108372b24,18494,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,11193,1233.4
+734184f614cfd5ed,5107,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,search,1177,340.8666666666667
+5369dc5293b37a51,7538,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1780,503.93333333333334
+2c4ab754ad932537,86276,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,reservation,76521,5751.733333333334
+3411899b6495f0be,21315,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,reservation,11787,1422.0
+26d85ab569bddd39,10310,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1517,687.3333333333334
+790ae9f3a5cde6b0,6480,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1470,432.0
+7728afc2fce50f99,10128,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,search,1551,679.9333333333333
+3cdb82ce0112b873,6218,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1495,414.53333333333336
+39fb8a935a460b8e,43707,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,reservation,34099,2913.8
+59ac0af40e9b0b6a,23052,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,19038,1536.8
+250586e0d1002876,10276,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1585,685.0666666666667
+34e39ad0c3ebe3e4,10990,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1618,732.6666666666666
+2206fbb281045eb3,6768,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,search,1567,451.2
+6fc3f60a03ee9a9f,9129,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1397,608.6
+4028ffd35f463941,28183,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,reservation,17925,1878.8666666666666
+55bc7930f6b49e38,6050,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1374,403.3333333333333
+6c3c1373b4f53c2e,10162,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1579,681.4
+533ebf6340221fdb,10877,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1647,725.1333333333333
+3f2ef6e0bb1053cb,10263,15,False,0.0,,HTTP GET /hotels,frontend; geo; reservation; rate; profile; search,frontend,1685,684.2
