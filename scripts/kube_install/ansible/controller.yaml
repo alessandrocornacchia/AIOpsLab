@@ -1,5 +1,4 @@
 ---
-# TODO: use separate playbooks or use roles
 - name: Install pre-requisites
   hosts: all
   become: true  # needs sudo priviledges
@@ -12,8 +11,23 @@
           {{ ansible_user }} ALL=(ALL) NOPASSWD: ALL
         owner: root
         group: root
-        mode: 0440
+        mode: 0440  
 
+- name: Configure aliases for kubectl
+  hosts: all
+  tags: alias
+  tasks:
+    - name: Create alias k for kubectl
+      lineinfile:
+        path: "{{ ansible_user_dir }}/.bashrc"
+        line: "alias k=kubectl"
+        create: yes
+
+# install helm on all kubernetes nodes
+- name: Kube packages
+  hosts: control_plane:workers
+  tags: kubeconfig
+  tasks:
     - name: Download Helm installation script
       get_url:
         url: https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3
@@ -27,17 +41,6 @@
       file:
         path: /tmp/get_helm.sh
         state: absent
-
-# install aliases on ubuntu user
-- name: Configure aliases
-  hosts: all
-  tags: alias
-  tasks:
-    - name: Create alias k for kubectl
-      lineinfile:
-        path: "{{ ansible_user_dir }}/.bashrc"
-        line: "alias k=kubectl"
-        create: yes
 
 # run on plane
 - name: Create Control Plane
