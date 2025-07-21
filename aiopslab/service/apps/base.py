@@ -2,6 +2,7 @@
 # Licensed under the MIT License.
 
 import json
+import os
 from aiopslab.paths import TARGET_MICROSERVICES
 
 
@@ -30,7 +31,11 @@ class Application:
             self.helm_configs = metadata["Helm Config"]
             if "chart_path" in self.helm_configs:
                 chart_path = self.helm_configs["chart_path"]
-                self.helm_configs["chart_path"] = str(TARGET_MICROSERVICES / chart_path)
+                
+                if not os.path.exists(str(TARGET_MICROSERVICES / chart_path)):
+                    self.helm_configs["chart_path"] = chart_path
+                else:
+                    self.helm_configs["chart_path"] = str(TARGET_MICROSERVICES / chart_path)
 
         if "K8S Deploy Path" in metadata:
             self.k8s_deploy_path = TARGET_MICROSERVICES / metadata["K8S Deploy Path"]

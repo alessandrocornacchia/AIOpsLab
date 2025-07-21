@@ -1,16 +1,7 @@
-"""Naive ReAct client for AIOpsLab.
-
-Yao, S., Zhao, J., Yu, D., Du, N., Shafran, I., Narasimhan, K., & Cao, Y. (2022). 
-React: Synergizing reasoning and acting in language models. arXiv preprint arXiv:2210.03629.
-
-Code: https://github.com/ysymyth/ReAct
-Paper: https://arxiv.org/abs/2210.03629
-"""
-
 import asyncio
 
 from aiopslab.orchestrator import Orchestrator
-from clients.utils.llm import o1
+from clients.utils.llm import Ollama
 from clients.utils.templates import DOCS
 
 RESP_INSTR = """DO NOT REPEAT ACTIONS! Respond with:
@@ -18,11 +9,10 @@ Thought: <your thought on the previous output>
 Action: <your action towards mitigating>
 """
 
-
 class Agent:
     def __init__(self):
         self.history = []
-        self.llm = o1() # here we instantiate the LLM client (see utils/llm.py)
+        self.llm = Ollama()
 
     def init_context(self, problem_desc: str, instructions: str, apis: str):
         """Initialize the context for the agent."""
@@ -68,20 +58,17 @@ class Agent:
 
     def _add_instr(self, input):
         return input + "\n\n" + RESP_INSTR
-
-
+x
 if __name__ == "__main__":
-    for i in range(1):
-        print(f"Running ReAct o1 - with new tools: {i}")
-        agent = Agent() # creates an AIOpsLab-compliant Agent from class above
+    agent = Agent()
 
-        orchestrator = Orchestrator()
-        orchestrator.register_agent(agent, name="ReAct o1 - with new tools")
+    orchestrator = Orchestrator()
+    orchestrator.register_agent(agent, name="minstral-react")
 
-        pid = "assign_to_non_existent_node_social_net-localization-1"
-        fault_free_interval = '60s'
-        fault_interval = '60s'
-        num_failures = 1
-        problem_desc, instructs, apis = orchestrator.init_problem(pid, fault_free_interval, fault_interval, num_failures)
-        agent.init_context(problem_desc, instructs, apis)
-        asyncio.run(orchestrator.start_problem(max_steps=30))
+    # this is the problem ID you want to solve. You can find the problem
+    # list in the orchestrator's `problems` directory.
+    pid = "astronomy_shop_payment_service_unreachable-detection-1"
+    problem_desc, instructs, apis = orchestrator.init_problem(pid)
+    print(problem_desc, instructs, apis)
+    agent.init_context(problem_desc, instructs, apis)
+    asyncio.run(orchestrator.start_problem(max_steps=30))

@@ -83,5 +83,7 @@ if __name__ == "__main__":
         fault_interval = '60s'
         num_failures = 1
         problem_desc, instructs, apis = orchestrator.init_problem(pid, fault_free_interval, fault_interval, num_failures)
+        # problem_desc in orchestrator.tasks.localization.py + subclasses
+        problem_desc, instructs, apis = orchestrator.init_problem(pid)
         agent.init_context(problem_desc, instructs, apis)
         asyncio.run(orchestrator.start_problem(max_steps=30))

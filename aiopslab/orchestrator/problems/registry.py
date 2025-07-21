@@ -22,6 +22,7 @@ from aiopslab.orchestrator.problems.kafka_queue_problems import *
 from aiopslab.orchestrator.problems.loadgenerator_flood_homepage import *
 from aiopslab.orchestrator.problems.payment_service_failure import *
 from aiopslab.orchestrator.problems.payment_service_unreachable import *
+from aiopslab.orchestrator.problems.payment_service_pod_kill.payment_service_pod_kill import *
 from aiopslab.orchestrator.problems.product_catalog_failure import *
 from aiopslab.orchestrator.problems.recommendation_service_cache_failure import *
 from aiopslab.orchestrator.problems.redeploy_without_pv import *
@@ -193,6 +194,8 @@ class ProblemRegistry:
             "astronomy_shop_payment_service_failure-localization-1": PaymentServiceFailureLocalization,
             "astronomy_shop_payment_service_unreachable-detection-1": PaymentServiceUnreachableDetection,
             "astronomy_shop_payment_service_unreachable-localization-1": PaymentServiceUnreachableLocalization,
+            "astronomy_shop_payment_service_podkill-detection-1": PaymentServicePodKillDetection,
+            "astronomy_shop_payment_service_podkill-localization-1": PaymentServicePodKillLocalization,
             "astronomy_shop_product_catalog_service_failure-detection-1": ProductCatalogServiceFailureDetection,
             "astronomy_shop_product_catalog_service_failure-localization-1": ProductCatalogServiceFailureLocalization,
             "astronomy_shop_recommendation_service_cache_failure-detection-1": RecommendationServiceCacheFailureDetection,

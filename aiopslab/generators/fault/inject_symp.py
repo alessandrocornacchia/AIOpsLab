@@ -59,7 +59,10 @@ class SymptomFaultInjector(FaultInjector):
                 "mode": "one",
                 "duration": duration,
                 "selector": {
-                    "labelSelectors": {"io.kompose.service": ", ".join(microservices)}
+                    "labelSelectors": {
+                        "io.kompose.service": ", ".join(microservices),
+                        "app.kubernetes.io/name": ", ".join(microservices)
+                    }
                 },
             },
         }
@@ -223,7 +226,10 @@ class SymptomFaultInjector(FaultInjector):
                 "mode": "one",
                 "duration": duration,
                 "selector": {
-                    "labelSelectors": {"io.kompose.service": ", ".join(microservices)}
+                    "labelSelectors": {
+                        "io.kompose.service": ", ".join(microservices),
+                        "app.kubernetes.io/name": ", ".join(microservices)
+                    }
                 },
             },
         }

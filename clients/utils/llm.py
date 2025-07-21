@@ -8,6 +8,8 @@ from openai import OpenAI
 import together
 from pathlib import Path
 import json
+from ollama import Client
+from ollama import ChatResponse
 
 CACHE_DIR = Path("./cache_dir")
 CACHE_PATH = CACHE_DIR / "cache.json"
@@ -155,6 +157,46 @@ class TogetherLLM:
     def run(self, payload: list[dict[str, str]]) -> list[str]:
         response = self.inference(payload)
         if self.cache:
+            self.cache.add_to_cache(payload, response)
+            self.cache.save_cache()
+        return response
+
+
+class Ollama:
+    """Abstraction for Ollama clients."""
+
+    def __init__(self):
+        self.cache = Cache()
+
+    def inference(self, payload: list[dict[str, str]]) -> list[str]:
+        if self.cache is not None:
+            cache_result = self.cache.get_from_cache(payload)
+            if cache_result is not None:
+                return cache_result
+
+        
+        client = Client(
+            host=os.getenv("OLLAMA_HOST", "http://10.68.186.140:11434"),
+            # headers={'x-some-header': 'some-value'}
+        )
+
+        try:
+            response = client.chat(
+                model='mistral:instruct', 
+                messages=payload,
+                # tools=[add_two_numbers]  # pass the actual function object as a tool
+            )
+            
+        except Exception as e:
+            print(f"Exception: {repr(e)}")
+            raise e
+
+        # return [c.message.content for c in response.choices]  # type: ignore
+        return response['message']['content']
+
+    def run(self, payload: list[dict[str, str]]) -> list[str]:
+        response = self.inference(payload)
+        if self.cache is not None:
             self.cache.add_to_cache(payload, response)
             self.cache.save_cache()
         return response

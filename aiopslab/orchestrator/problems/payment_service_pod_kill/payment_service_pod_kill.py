@@ -2,6 +2,7 @@
 
 from typing import Any
 
+from aiopslab.generators.fault.inject_symp import SymptomFaultInjector
 from aiopslab.orchestrator.tasks import *
 from aiopslab.orchestrator.evaluators.quantitative import *
 from aiopslab.service.kubectl import KubeCtl
@@ -10,13 +11,13 @@ from aiopslab.generators.fault.inject_otel import OtelFaultInjector
 from aiopslab.session import SessionItem
 
 
-class PaymentServiceUnreachableBaseTask:
+class PaymentServicePodKillBaseTask:
     def __init__(self):
         self.app = AstronomyShop()
         self.kubectl = KubeCtl()
         self.namespace = self.app.namespace
-        self.injector = OtelFaultInjector(namespace=self.namespace)
-        self.faulty_service = "paymentservice"
+        self.injector = SymptomFaultInjector(namespace=self.namespace)
+        self.faulty_service = "payment"
 
     def start_workload(self):
         print("== Start Workload ==")
@@ -24,20 +25,24 @@ class PaymentServiceUnreachableBaseTask:
 
     def inject_fault(self):
         print("== Fault Injection ==")
-        self.injector.inject_fault("paymentUnreachable")
-        print(f"Fault: paymentUnreachable | Namespace: {self.namespace}\n")
+        self.injector._inject(
+            fault_type="pod_kill", microservices=[self.faulty_service], duration="100s", delay=60
+        )
+        print(f"Service: {self.faulty_service} | Namespace: {self.namespace}\n")
 
     def recover_fault(self):
         print("== Fault Recovery ==")
-        self.injector.recover_fault("paymentUnreachable")
+        self.injector._recover(
+            fault_type="pod_kill",
+        )
 
 
 ################## Detection Problem ##################
-class PaymentServiceUnreachableDetection(
-    PaymentServiceUnreachableBaseTask, DetectionTask
+class PaymentServicePodKillDetection(
+    PaymentServicePodKillBaseTask, DetectionTask
 ):
     def __init__(self):
-        PaymentServiceUnreachableBaseTask.__init__(self)
+        PaymentServicePodKillBaseTask.__init__(self)
         DetectionTask.__init__(self, self.app)
 
     def eval(self, soln: Any, trace: list[SessionItem], duration: float):
@@ -59,11 +64,11 @@ class PaymentServiceUnreachableDetection(
 
 
 ################## Localization Problem ##################
-class PaymentServiceUnreachableLocalization(
-    PaymentServiceUnreachableBaseTask, LocalizationTask
+class PaymentServicePodKillLocalization(
+    PaymentServicePodKillBaseTask, LocalizationTask
 ):
     def __init__(self):
-        PaymentServiceUnreachableBaseTask.__init__(self)
+        PaymentServicePodKillBaseTask.__init__(self)
         LocalizationTask.__init__(self, self.app)
         self.task_desc += "Start by investigating the payment service."
 

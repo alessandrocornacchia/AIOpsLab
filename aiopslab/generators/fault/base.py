@@ -40,8 +40,9 @@ class FaultInjector:
         self._inject(microservices, fault_type)
 
     def _inject(
-        self, fault_type: str, microservices: list[str] = None, duration: str = None
+        self, fault_type: str, microservices: list[str] = None, duration: str = None, delay: float = 0
     ):
+        time.sleep(delay)  # Allow time for any setup before injection
         if duration:
             self._invoke_method("inject", fault_type, microservices, duration)
         elif microservices:
