@@ -8,8 +8,7 @@ from openai import OpenAI
 import together
 from pathlib import Path
 import json
-from ollama import Client
-from ollama import ChatResponse
+from ollama import Client as OllamaClient
 
 CACHE_DIR = Path("./cache_dir")
 CACHE_PATH = CACHE_DIR / "cache.json"
@@ -128,14 +127,14 @@ class TogetherLLM:
             cache_result = self.cache.get_from_cache(payload)
             if cache_result is not None:
                 return cache_result
-            
+
         api_key = os.getenv("TOGETHER_API_KEY")
-        
+
         if not api_key:
             raise ValueError("API key must be provided or set in TOGETHER_API_KEY environment variable")
-        
+
         client = together.Together()
-    
+
         if self.cache:
             cache_result = self.cache.get_from_cache(payload)
         if cache_result is not None:
@@ -168,25 +167,23 @@ class Ollama:
     def __init__(self):
         self.cache = Cache()
 
-    def inference(self, payload: list[dict[str, str]]) -> list[str]:
-        if self.cache is not None:
-            cache_result = self.cache.get_from_cache(payload)
-            if cache_result is not None:
-                return cache_result
+    def inference(self, payload: list[dict[str, str]], model_name: str) -> list[str]:
+        host_addr = os.getenv("OLLAMA_HOST")
+        if host_addr is None:
+            raise EnvironmentError("The Ollama LLM requires the OLLAMA_HOST environment variable to be set.")
 
-        
-        client = Client(
-            host=os.getenv("OLLAMA_HOST", "http://10.68.186.140:11434"),
+        client = OllamaClient(
+            host=host_addr,
             # headers={'x-some-header': 'some-value'}
         )
 
         try:
             response = client.chat(
-                model='mistral:instruct', 
+                model='mistral:instruct',
                 messages=payload,
                 # tools=[add_two_numbers]  # pass the actual function object as a tool
             )
-            
+
         except Exception as e:
             print(f"Exception: {repr(e)}")
             raise e
