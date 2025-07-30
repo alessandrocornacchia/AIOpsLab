@@ -49,9 +49,11 @@ class Agent:
             str: The response from the agent.
         """
         self.history.append({"role": "user", "content": self._add_instr(input)})
+        print(f"Agent response: {self.history}") # debug information
         response = self.llm.run(self.history)
-        self.history.append({"role": "assistant", "content": response[0]})
-        return response[0]
+        print(f"Agent response: {response}") # debug information
+        self.history.append({"role": "assistant", "content": response})
+        return response
 
     def _filter_dict(self, dictionary, filter_func):
         return {k: v for k, v in dictionary.items() if filter_func(k, v)}
@@ -63,11 +65,11 @@ if __name__ == "__main__":
     agent = Agent()
 
     orchestrator = Orchestrator()
-    orchestrator.register_agent(agent, name="minstral-react")
+    orchestrator.register_agent(agent, name="qwen3:32b-ollama-local")
 
     # this is the problem ID you want to solve. You can find the problem
     # list in the orchestrator's `problems` directory.
-    pid = "astronomy_shop_payment_service_unreachable-detection-1"
+    pid = "astronomy_shop_payment_service_unreachable-localization-1"
     problem_desc, instructs, apis = orchestrator.init_problem(pid)
     print(problem_desc, instructs, apis)
     agent.init_context(problem_desc, instructs, apis)
