@@ -7,8 +7,9 @@ import time
 import uuid
 import json
 from pydantic import BaseModel
+from pathlib import Path
 
-from aiopslab.paths import RESULTS_DIR
+from aiopslab.paths import SRSI_RESULTS_DIR #RESULTS_DIR
 
 
 class SessionItem(BaseModel):
@@ -27,6 +28,7 @@ class Session:
         self.start_time = None
         self.end_time = None
         self.agent_name = None
+        self.fault = None
 
     def set_problem(self, problem, pid=None):
         """Set the problem instance for the session.
@@ -37,6 +39,7 @@ class Session:
         """
         self.problem = problem
         self.pid = pid
+        self.fault = problem.faulty_service
 
     def set_solution(self, solution):
         """Set the solution shared by the agent.
@@ -104,25 +107,37 @@ class Session:
             "agent": self.agent_name,
             "session_id": str(self.session_id),
             "problem_id": self.pid,
+            "faulty_service": self.fault,
             "start_time": self.start_time,
             "end_time": self.end_time,
-            "trace": [item.model_dump() for item in self.history],
             "results": self.results,
+            "trace": [item.model_dump() for item in self.history],
         }
 
         return summary
 
-    def to_json(self):
-        """Save the session to a JSON file."""
-        RESULTS_DIR.mkdir(parents=True, exist_ok=True)
+    def to_json(self, result_path: str = None, result_file: str = None):
+        """Save the session to a JSON file.
 
-        with open(RESULTS_DIR / f"{self.session_id}_{self.start_time}.json", "w") as f:
+        If result_file is provided, use it directly. Otherwise, use session_id and start_time in the result_file.
+        """
+
+        if result_path is None:
+            result_path = SRSI_RESULTS_DIR
+        result_path = Path(result_path)
+
+        if result_file is None:
+            result_file = f"{self.session_id}_{self.start_time}.json"
+
+        file_path = result_path / result_file
+
+        with open(file_path, "w") as f:
             json.dump(self.to_dict(), f, indent=4)
 
     def from_json(self, filename: str):
         """Load a session from a JSON file."""
 
-        with open(RESULTS_DIR / filename, "r") as f:
+        with open(SRSI_RESULTS_DIR / filename, "r") as f:
             data = json.load(f)
 
         self.session_id = data.get("session_id")

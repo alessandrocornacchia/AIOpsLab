@@ -14,6 +14,7 @@ import time
 import inspect
 import asyncio
 import re
+from aiopslab.paths import SRSI_RESULTS_DIR
 
 class Orchestrator:
     def __init__(self):
@@ -26,7 +27,8 @@ class Orchestrator:
         self.execution_end_time = None
         self.kubectl = KubeCtl()
 
-    def init_problem(self, problem_id: str, fault_free_interval: str = "60s", fault_interval: str = "60s", num_failures: int = 1):
+
+    def init_problem(self, problem_id: str, delete_app: bool, fault_free_interval: str = "60s", fault_interval: str = "60s", num_failures: int = 1):
         """Initialize a problem instance for the agent to solve.
 
         Args:
@@ -64,8 +66,10 @@ class Orchestrator:
         self.prometheus = Prometheus()
         self.prometheus.deploy()
 
-        # deploy service
-        prob.app.delete()
+        # deploy service, if needed:
+        if delete_app:
+            prob.app.delete()
+
         prob.app.deploy()
 
         if 'cpu_stress' in problem_id or 'memory_stress' in problem_id or 'network_delay' in problem_id:
@@ -78,7 +82,7 @@ class Orchestrator:
                 asyncio.create_task(prob.start_workload(total_duration))
             else:
                 prob.start_workload(total_duration)
-            
+
             for i in range(num_failures):
                 print(f"Fault injection {i+1} of {num_failures}, sleeping for {int_fault_free_interval} seconds for no faults...")
                 time.sleep(int_fault_free_interval)
@@ -86,7 +90,7 @@ class Orchestrator:
                 prob.inject_fault(fault_interval)
                 time.sleep(int_fault_interval)
                 prob.recover_fault()
-                
+
         else:
             # inject fault
             prob.inject_fault()
@@ -148,11 +152,13 @@ class Orchestrator:
 
         return env_response
 
-    async def start_problem(self, max_steps: int):
+    async def start_problem(self, max_steps: int, result_path: str = None, result_file: str = None):
         """Start the task and run for a specified number of steps.
 
         Args:
             max_steps (int): The maximum number of steps to run the task.
+            result_path (str): Directory path to save the session JSON.
+            result_file (str, optional): Filename for the session JSON. If not provided, a default is used.
 
         Returns:
             dict: The final state of the session.
@@ -186,7 +192,7 @@ class Orchestrator:
             self.sprint.result(results)
 
         self.session.set_results(results)
-        self.session.to_json()
+        self.session.to_json(result_path, result_file)
         self.session.problem.recover_fault()
 
         # Beyond recovering from fault,
@@ -227,5 +233,5 @@ class Orchestrator:
         value, unit = int(match.group(1)), match.group(2)
 
         conversion = {"s": 1, "m": 60, "h": 3600}
-        
+
         return value * conversion[unit]

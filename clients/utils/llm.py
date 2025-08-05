@@ -164,10 +164,11 @@ class TogetherLLM:
 class Ollama:
     """Abstraction for Ollama clients."""
 
-    def __init__(self):
+    def __init__(self, model_name):
         self.cache = Cache()
+        self.model_name = model_name
 
-    def inference(self, payload: list[dict[str, str]], model_name: str) -> list[str]:
+    def inference(self, payload: list[dict[str, str]]) -> list[str]:
         host_addr = os.getenv("OLLAMA_HOST")
         if host_addr is None:
             raise EnvironmentError("The Ollama LLM requires the OLLAMA_HOST environment variable to be set.")
@@ -179,11 +180,11 @@ class Ollama:
 
         try:
             response = client.chat(
-                model='mistral:instruct',
+                model=self.model_name,
                 messages=payload,
                 # tools=[add_two_numbers]  # pass the actual function object as a tool
             )
-
+            
         except Exception as e:
             print(f"Exception: {repr(e)}")
             raise e

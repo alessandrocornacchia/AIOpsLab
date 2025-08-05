@@ -17,6 +17,7 @@ TARGET_MICROSERVICES = BASE_PARENT_DIR / "aiopslab-applications"
 # Data directories
 DATA_DIR = BASE_DIR / config.get("data_dir")
 RESULTS_DIR = DATA_DIR / "results"
+SRSI_RESULTS_DIR = DATA_DIR / "srsi"
 PLOTS_DIR = DATA_DIR / "plots"
 
 # Cache directories
