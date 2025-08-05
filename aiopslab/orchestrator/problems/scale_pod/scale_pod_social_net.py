@@ -92,7 +92,7 @@ class ScalePodSocialNetLocalization(ScalePodSocialNetBaseTask, LocalizationTask)
     def __init__(self):
         ScalePodSocialNetBaseTask.__init__(self)
         LocalizationTask.__init__(self, self.app)
-        self.task_desc += "Start by investigating the `compost-post-service` pod"
+        self.task_desc += "Start by investigating the `compose-post-service` pod"
 
     def eval(self, soln: Any, trace: list[SessionItem], duration: float):
         print("== Evaluation ==")
@@ -134,7 +134,7 @@ class ScalePodSocialNetAnalysis(ScalePodSocialNetBaseTask, AnalysisTask):
     def __init__(self):
         ScalePodSocialNetBaseTask.__init__(self)
         AnalysisTask.__init__(self, self.app)
-        self.task_desc += "Start by investigating the `compost-post-service` pod"
+        self.task_desc += "Start by investigating the `compose-post-service` pod"
 
     def eval(self, soln: Any, trace: list[SessionItem], duration: float):
         print("== Evaluation ==")
@@ -174,7 +174,7 @@ class ScalePodSocialNetMitigation(ScalePodSocialNetBaseTask, MitigationTask):
     def __init__(self):
         ScalePodSocialNetBaseTask.__init__(self)
         MitigationTask.__init__(self, self.app)
-        self.task_desc += "Start by investigating the `compost-post-service` pod"
+        self.task_desc += "Start by investigating the `compose-post-service` pod"
 
     def eval(self, soln: Any, trace: list[SessionItem], duration: float) -> dict:
         print("== Evaluation ==")
