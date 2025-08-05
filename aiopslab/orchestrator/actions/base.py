@@ -117,7 +117,8 @@ class TaskActions:
             str: The requested metrics with the time-series column or an error message.
         """
         if not os.path.exists(file_path):
-            return {"error": f"Metrics file '{file_path}' not found."}
+            #return {"error": f"Metrics file '{file_path}' not found."}
+            return f"Error: Metrics file '{file_path}' not found."
 
         try:
             df_metrics = pd.read_csv(file_path)
@@ -146,7 +147,7 @@ class TaskActions:
             str: A formatted string containing the summary statistics.
         """
         if not os.path.exists(file_path):
-            return {"error": f"Metrics file '{file_path}' not found."}
+            return f"Error: Metrics file '{file_path}' not found."
 
         try:
             df = pd.read_csv(file_path)
@@ -412,7 +413,8 @@ class TaskActions:
             str: The requested traces or an error message.
         """
         if not os.path.exists(file_path):
-            return {"error": f"Traces file '{file_path}' not found."}
+            #return {"error": f"Traces file '{file_path}' not found."}
+            return f"Error: Traces file '{file_path}' not found."
 
         try:
             df_traces = pd.read_csv(file_path)
