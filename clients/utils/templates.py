@@ -29,6 +29,25 @@ Thought: <your thought>
 Action: <your action>
 """
 
+DOCS_ACTIONS = """
+You are provided with the following APIs to interact with the service:
+
+
+{telemetry_apis}
+
+
+You are also provided an API to a secure terminal to the service where you can run commands:
+
+
+{shell_api}
+
+
+Finally, you will submit your solution for this task using the following API:
+
+
+{submit_api}
+"""
+
 
 ### custom templates
 

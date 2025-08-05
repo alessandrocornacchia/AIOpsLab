@@ -27,6 +27,10 @@ class Orchestrator:
         self.execution_end_time = None
         self.kubectl = KubeCtl()
 
+        # Read from env variable
+        # Improvement levels
+        # 1. Improve action not parsed + remind agent of actions
+        self.improvement_level = "1"
 
     def init_problem(self, problem_id: str, delete_app: bool, fault_free_interval: str = "60s", fault_interval: str = "60s", num_failures: int = 1):
         """Initialize a problem instance for the agent to solve.
@@ -135,6 +139,8 @@ class Orchestrator:
             resp = self.parser.parse(input)
         except ResponseParsingError as e:
             self.session.add({"role": "env", "content": str(e)})
+            # Imp.1 Most likely did not format response in markdown.
+            self.session.add({"role": "env", "content": self.agent.task_message})
             return str(e)
 
         api, args, kwargs = resp["api_name"], resp["args"], resp["kwargs"]
@@ -145,12 +151,13 @@ class Orchestrator:
 
         try:
             env_response = self.session.problem.perform_action(api, *args, **kwargs)
+            self.session.add({"role": "env", "content": env_response})
+            return env_response
         except InvalidActionError as e:
-            env_response = str(e)
-
-        self.session.add({"role": "env", "content": env_response})
-
-        return env_response
+            self.session.add({"role": "env", "content": str(e)})
+            # Imp.1 Remind agent of the available actions
+            self.session.add({"role": "env", "content": self.agent.available_actions})
+            return str(e)
 
     async def start_problem(self, max_steps: int, result_path: str = None, result_file: str = None):
         """Start the task and run for a specified number of steps.
