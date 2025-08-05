@@ -73,9 +73,9 @@ class Shell:
 
         try:
             ssh_client.connect(
-                hostname=host, 
+                hostname=host,
                 username=user,
-                #key_filename=ssh_key_path
+                key_filename=ssh_key_path,
                 allow_agent=True,  # This enables SSH agent authentication
                 look_for_keys=False  # TODO ideal behavior is to look when agent fails
             )
