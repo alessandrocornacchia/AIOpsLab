@@ -10,8 +10,17 @@ from datetime import datetime
 # Set style for better looking tables
 plt.style.use('default')
 
-def create_table_image(df, title, filename, figsize=(12, 8)):
+def create_table_image(df, title, filename, figsize=(12, 8), dedup_cols=None):
     """Create a styled table image from a DataFrame"""
+
+    # Hide duplicate entries for first col
+    if dedup_cols:
+        # Don't change the original
+        df = df.copy()
+        for col_i in dedup_cols:
+            col_name = df.columns[col_i]
+            df.loc[df[col_name].duplicated(), col_name] = ''
+
     fig, ax = plt.subplots(figsize=figsize)
     ax.axis('tight')
     ax.axis('off')
@@ -124,11 +133,7 @@ def extract_from_file(filepath):
 def build_insights_table(results_dir):
     all_records = []
     pid_dir = os.path.join(results_dir, 'pid')
-    # pid_dir = os.path.join(results_dir, 'pid', 'cpu_stress_hotel_res-detection-1')
     for root, dirs, files in os.walk(pid_dir):
-        if "localization" not in root:
-            continue
-
         for filename in files:
             if not filename.endswith('.json'):
                 continue
@@ -178,30 +183,38 @@ def main():
     # --- Trial type comparison tables ---
 
     # Group by problem_id and exp_name, then pivot to show trial types as columns
-    summary_grouped = (
-        df.groupby(['agent_llm_name', 'problem_id', 'exp_name', 'round_index'])
-            # [""]
-          .agg(
-              accuracy=('accuracy', 'sum'),
-              tokens_in=('tokens_in', 'sum'),
-              tokens_out=('tokens_out', 'sum'),
-              steps=('steps', 'sum'),
-              num_tool_calls=('num_tool_calls', 'sum'),
-              num_parse_fail=('num_parse_fail', 'sum')
-          )
-          .reset_index()
-    )
+    # summary_grouped = (
+    #     df.groupby(['problem_id', 'exp_name', 'agent_llm_name', 'round_index'])
+    #       .agg(
+    #           accuracy=('accuracy', 'sum'),
+    #           tokens_in=('tokens_in', 'sum'),
+    #           tokens_out=('tokens_out', 'sum'),
+    #           steps=('steps', 'sum'),
+    #           num_tool_calls=('num_tool_calls', 'sum'),
+    #           num_parse_fail=('num_parse_fail', 'sum')
+    #       )
+    #       .reset_index()
+    # )
 
-    # Replace repeated `problem_id`s with ''
-    summary_grouped.loc[summary_grouped['agent_llm_name'].duplicated(), 'agent_llm_name'] = ''
+    table_columns = ['problem_id', 'agent_llm_name', 'exp_name', 'round_index', 'accuracy', 'tokens_in', 'tokens_out', 'steps', 'num_tool_calls', 'num_parse_fail']
+    exp_df = df.sort_values(['problem_id', 'agent_llm_name', 'exp_name', 'round_index'])[table_columns]
 
     # Round numeric columns for better display
-    summary_grouped['accuracy'] = summary_grouped['accuracy'].round(3)
+    exp_df['accuracy'] = exp_df['accuracy'].round(3)
 
-    long_path = os.path.join(results_dir, 'exp_name_comparison_long.png')
-    create_table_image(summary_grouped, 'Experiment Comparison (Long Format)', long_path)
-    print(f"Created long-format exp_name comparison table image: {long_path}")
+    filename = os.path.join(results_dir, 'exp_comparison.png')
+    create_table_image(exp_df, 'Comparing all experiments', filename, dedup_cols=[0, 1, 2])
+    print(f"Created comparison table image in: {filename}")
 
+    # Create one table per pid so it's easier to read
+    pid_dir = os.path.join(results_dir, 'per_pid')
+    os.makedirs(pid_dir, exist_ok=True)
+    pids = exp_df['problem_id'].unique().tolist()
+    for pid in pids:
+        filtered_df = exp_df[exp_df['problem_id'] == pid]
+        filename = os.path.join(pid_dir, f'{pid}.png')
+        create_table_image(filtered_df, f'Comparing PID solutions for {pid}', filename, dedup_cols=[0, 1, 2])
+        print(f"Created comparison table image for PID in: {filename}")
 
 if __name__ == "__main__":
     main()
