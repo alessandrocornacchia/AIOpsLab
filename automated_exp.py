@@ -153,7 +153,7 @@ class ExperimentRunner:
     def configure_experiments(self, pids: List[str] = None, pid_type: str = None, models: List[str] = None,
                             agents: List[str] = None, free_intv: str = None,
                             fault_intv: str = None, runs_per_experiment: int = None,
-                            max_experiments: int = None, max_steps: int = None):
+                            max_experiments: int = None, max_steps: int = None, no_exp_override: bool = False):
         """
         Configure experiment parameters.
 
@@ -188,6 +188,8 @@ class ExperimentRunner:
             self.runs_per_experiment = runs_per_experiment
         if max_steps is not None:
             self.max_steps = max_steps
+        if no_exp_override is not None:
+            self.no_exp_override = no_exp_override
 
         self.logger.info(f"Experiment configuration:")
         self.logger.info(f"  PIDs: {self.pids}")
@@ -249,11 +251,27 @@ class ExperimentRunner:
         Returns:
             Dictionary containing experiment results
         """
+
         experiment_id = f"{agent_name}_{model}_{pid}_run_{run_number}"
         aiops_result_file = result_file.with_suffix(".json")
         start_time = datetime.now()
 
         self.logger.info(f"Starting experiment: {experiment_id}")
+        if result_file.exists():
+            if self.no_exp_override:
+                self.logger.info(f"Experiment already exists. Not rerunning.")
+                fixed_time = start_time
+                experiment_result = self._create_experiment_result(
+                    experiment_id, pid, agent_name, model, run_number,
+                    fixed_time, fixed_time, "NO_REPEAT",
+                    stdout="(see log file)", stderr="(see log file)", log_file=result_file
+                )
+                return experiment_result
+            else:
+                self.logger.warning(f"Experiment already exists. Overriding!")
+                result_file.unlink()
+                if aiops_result_file.exists():
+                    aiops_result_file.unlink()
 
         try:
             # Run the agent command
@@ -428,6 +446,8 @@ def main():
                        help="Number of runs per experiment combination")
     parser.add_argument("--max-steps", default=None,
                        help="Maximum number of steps for each agent run (overrides default)")
+    parser.add_argument("--no-exp-override", action="store_true", default=False,
+                       help="If set, do not rerun experiments with the same run_index - useful to add more runs")
 
     args = parser.parse_args()
 
@@ -444,7 +464,8 @@ def main():
         runs_per_experiment=args.runs,
         pid_type=args.pid_type,
         max_experiments=args.max_experiments,
-        max_steps=args.max_steps
+        max_steps=args.max_steps,
+        no_exp_override=args.no_exp_override,
     )
 
     # Run all experiments
