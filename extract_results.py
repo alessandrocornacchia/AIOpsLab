@@ -64,11 +64,11 @@ def extract_from_file(filepath):
     # Look for tool invocations
     for t in trace:
         if t.get("role") == "assistant":
-            actions = re.findall(r"```(?:\w*\n)?(.*?)```", t["content"], re.DOTALL)
-            for action in actions:
-                stripped = action.strip()
+            action = re.search(r"```(?:\w*\n)?(.*?)```\Z", t["content"], re.DOTALL)
+            if action:
+                action = action.group(1).strip()
                 # Try to match function and arguments: function_name("arg1", 123)
-                match = re.match(r"(\w+)\((.*)\)", stripped, re.DOTALL)
+                match = re.match(r"(\w+)\((.*)\)", action, re.DOTALL)
                 if match:
                     tool_name = match.group(1)
                     args = match.group(2).strip()
@@ -77,13 +77,14 @@ def extract_from_file(filepath):
                         "args": args
                     })
 
-    failed_tool_calls_detailed = []
+
+    invalid_action = []
     # Look for cases where agent fails to ouput a valid action:
     for t in trace:
         if t.get("role") == "env":
             m = t["content"].strip()
-            if m.startswith("Error parsing response:"):
-                failed_tool_calls_detailed.append(m)
+            if m.startswith("Invalid action:"):
+                invalid_action.append(m)
 
     # Extract trial type as the parent of the parent directory
     exp_name = os.path.basename(os.path.dirname(os.path.dirname(filepath)))
@@ -127,7 +128,8 @@ def extract_from_file(filepath):
         "accuracy": get_accuracy_field(session["results"]),
         "tool_calls_ordered": "".join(f"\n{str(item)}" for item in tool_calls_detailed), #tool_calls_detailed,
         "num_tool_calls": len(tool_calls_detailed),
-        "num_parse_fail": len(failed_tool_calls_detailed)
+        "num_no_action": session["results"].get("steps") - len(tool_calls_detailed),
+        "num_invalid_action": len(invalid_action)
     }
 
 def build_insights_table(results_dir):
@@ -191,12 +193,13 @@ def main():
     #           tokens_out=('tokens_out', 'sum'),
     #           steps=('steps', 'sum'),
     #           num_tool_calls=('num_tool_calls', 'sum'),
-    #           num_parse_fail=('num_parse_fail', 'sum')
+    #           num_no_action=('num_no_action', 'sum')
     #       )
     #       .reset_index()
     # )
 
-    table_columns = ['problem_id', 'agent_llm_name', 'exp_name', 'round_index', 'accuracy', 'tokens_in', 'tokens_out', 'steps', 'num_tool_calls', 'num_parse_fail']
+    table_columns = ['problem_id', 'agent_llm_name', 'exp_name', 'round_index', 'accuracy',
+                     'tokens_in', 'tokens_out', 'steps', 'num_tool_calls', 'num_no_action', 'num_invalid_action']
     exp_df = df.sort_values(['problem_id', 'agent_llm_name', 'exp_name', 'round_index'])[table_columns]
 
     # Round numeric columns for better display
