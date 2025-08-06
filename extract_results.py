@@ -19,7 +19,15 @@ def create_table_image(df, title, filename, figsize=(12, 8), dedup_cols=None):
         df = df.copy()
         for col_i in dedup_cols:
             col_name = df.columns[col_i]
-            df.loc[df[col_name].duplicated(), col_name] = ''
+            empty_condition = df[col_name].shift() == df[col_name]
+
+            if col_i > 0:
+                prev_col_i = col_i - 1
+                prev_col_name = df.columns[prev_col_i]
+                prev_empty = (df[prev_col_name] == '')
+                empty_condition &= prev_empty
+
+            df.loc[empty_condition, col_name] = ''
 
     fig, ax = plt.subplots(figsize=figsize)
     ax.axis('tight')
