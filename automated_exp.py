@@ -110,8 +110,9 @@ class ExperimentRunner:
         """
         self.run_name = run_name
         self.base_output_dir = Path(output_dir)
-        self.output_dir = self.base_output_dir / "run_name" /self.run_name
+        self.output_dir = self.base_output_dir / "experiment_summary" /self.run_name
         self.output_dir.mkdir(parents=True, exist_ok=True)
+        self.run_agent_timeout = 25*60 # 25min
 
         # Setup logging
         self.setup_logging(log_level)
@@ -286,7 +287,7 @@ class ExperimentRunner:
                     stderr=f,
                     text=True
                 )
-                process.wait(timeout=25*60) # 25 min
+                process.wait(timeout=self.run_agent_timeout)
 
                 end_time = datetime.now()
 
@@ -306,7 +307,7 @@ class ExperimentRunner:
 
         except subprocess.TimeoutExpired:
             process.kill()
-            self.logger.error(f"Experiment timed out after 1 hour")
+            self.logger.error(f"Experiment timed out after {self.run_agent_timeout/60} minutes.")
             return self._create_experiment_result(
                 experiment_id, pid, agent_name, model, run_number,
                 start_time, datetime.now(), -1, "", "Timeout after 1 hour", result_file, "Timeout"
