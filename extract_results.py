@@ -6,11 +6,13 @@ import argparse
 import matplotlib.pyplot as plt
 import numpy as np
 from datetime import datetime
+import seaborn as sns
 
 # Set style for better looking tables
 plt.style.use('default')
+plt.rcParams['savefig.dpi'] = 300
 
-def create_table_image(df, title, filename, figsize=(12, 8), dedup_cols=None):
+def create_table_image(df, title, filename, figsize=None, dedup_cols=None):
     """Create a styled table image from a DataFrame"""
 
     # Hide duplicate entries for first col
@@ -54,9 +56,40 @@ def create_table_image(df, title, filename, figsize=(12, 8), dedup_cols=None):
                 table[(i, j)].set_facecolor('#f3f3f3')
 
     # plt.title(title, fontsize=14, fontweight='bold', pad=20)
-    plt.tight_layout()
+    # plt.tight_layout()
     plt.savefig(filename, dpi=300, bbox_inches='tight')
     plt.close()
+
+def create_per_type_tables(df, results_dir, table_type, folder_name = None):
+    """Create a table per {table_type} from the given DataFrame."""
+
+    folder_name = folder_name if folder_name else f'per_{table_type}'
+    table_dir = os.path.join(results_dir, folder_name)
+
+    os.makedirs(table_dir, exist_ok=True)
+    types = df[table_type].unique().tolist()
+    for t in types:
+        filename = os.path.join(table_dir, f'{t}.png')
+        filtered_df = df[df[table_type] == t]
+        filtered_df = filtered_df.drop(columns=[table_type])
+        create_table_image(filtered_df, f'{t}', filename, dedup_cols=[0, 1])
+        print(f"Created comparison table image for {table_type} in: {filename}")
+
+def plot_remind_actions_per_type(df, type, x_axis, folder):
+    folder = os.path.join(folder, f'remind_actions_missing_per_{type}')
+    os.makedirs(folder, exist_ok=True)
+    for i, (name, df) in enumerate(df.groupby(type)):
+        fig, ax = plt.subplots(figsize=(10, 5))
+        sns.barplot(data=df, x=x_axis, y='percent_missing_actions', hue='exp_name', ax=ax)
+        ax.set_title(f"{name} - missing_actions calls per experiment")
+        ax.set_xlabel(x_axis)
+        ax.set_ylabel('Percentage of missing actions relative to step count')
+        plt.tight_layout()
+        plt.setp(plt.gca().get_xticklabels(), rotation=45, ha='right')
+        filename = os.path.join(folder, f"{name}_missing_calls_per_{x_axis}.png")
+        plt.savefig(filename, bbox_inches='tight')
+        print(f"Created missing actions plot image in: {filename}")
+        plt.close()
 
 def extract_from_file(filepath):
     with open(filepath, "r") as f:
@@ -86,18 +119,18 @@ def extract_from_file(filepath):
                     })
 
 
-    invalid_action = []
+    invalid_actions = []
     # Look for cases where agent fails to ouput a valid action:
     for t in trace:
         if t.get("role") == "env":
             m = t["content"].strip()
             if m.startswith("Invalid action:"):
-                invalid_action.append(m)
+                invalid_actions.append(m)
 
     # Extract trial type as the parent of the parent directory
     exp_name = os.path.basename(os.path.dirname(os.path.dirname(filepath)))
     # Extract agent_name_model_name as the parent directory
-    agent_llm_name = os.path.basename(os.path.dirname(filepath))
+    agent = os.path.basename(os.path.dirname(filepath))
 
     # Extract round index from filename (e.g., run_0.json -> 0)
     filename = os.path.basename(filepath)
@@ -107,13 +140,13 @@ def extract_from_file(filepath):
         round_index = int(match.group(1))
 
     def get_accuracy_field(d):
-        for key in ["Localization Accuracy", "Detection Accuracy"]:
+        for key in ["Detection Accuracy", "Localization Accuracy"]:
             if key in d:
                 return d[key]
 
         result_success = d.get("success", None)
         if result_success is not None:
-            return "100" if result_success else "0"
+            return "Correct" if result_success else "Incorrect"
 
         return "Can't get it"
         # raise ValueError("No accuracy found. We only support Localization and Detection problems for now")
@@ -121,9 +154,9 @@ def extract_from_file(filepath):
     return {
         "session_id": session.get("session_id"),
         "agent": session.get("agent"),
-        "problem_id": session.get("problem_id"),
+        "pid": session.get("problem_id"),
         "faulty_service": session.get("faulty_service"),
-        "agent_llm_name": agent_llm_name,
+        "agent": agent,
         "exp_name": exp_name,
         "round_index": round_index,
         "start_time": datetime.fromtimestamp(session["start_time"]).isoformat(),
@@ -135,9 +168,9 @@ def extract_from_file(filepath):
         # TODO: FIX for other accuracy types
         "accuracy": get_accuracy_field(session["results"]),
         "tool_calls_ordered": "".join(f"\n{str(item)}" for item in tool_calls_detailed), #tool_calls_detailed,
-        "num_tool_calls": len(tool_calls_detailed),
-        "num_no_action": session["results"].get("steps") - len(tool_calls_detailed),
-        "num_invalid_action": len(invalid_action)
+        "tool_calls": len(tool_calls_detailed),
+        "missing_actions": session["results"].get("steps") - len(tool_calls_detailed),
+        "invalid_actions": len(invalid_actions)
     }
 
 def build_insights_table(results_dir):
@@ -174,8 +207,8 @@ def main():
 
     print(f"Results will be extracted from '{args.folder}' and saved to '{args.output}'")
     # Build insights table
-    df = build_insights_table(args.folder)
-    if df.empty:
+    exp_df = build_insights_table(args.folder)
+    if exp_df.empty:
         print(f"No valid JSON files found in '{args.folder}'")
         return
 
@@ -184,48 +217,50 @@ def main():
     os.makedirs(results_dir, exist_ok=True)
 
     # Sort and save results
-    df = df.sort_values(by=["agent", "start_time"])
+    exp_df = exp_df.sort_values(by=["agent", "start_time"])
     main_csv_path = os.path.join(results_dir, os.path.basename(args.output))
-    df.to_csv(main_csv_path, index=False)
-    print(f"Total records processed: {len(df)}")
+    exp_df.to_csv(main_csv_path, index=False)
+    print(f"Total records processed: {len(exp_df)}")
     print(f"Main results saved to {main_csv_path}")
 
-    # --- Trial type comparison tables ---
 
-    # Group by problem_id and exp_name, then pivot to show trial types as columns
-    # summary_grouped = (
-    #     df.groupby(['problem_id', 'exp_name', 'agent_llm_name', 'round_index'])
-    #       .agg(
-    #           accuracy=('accuracy', 'sum'),
-    #           tokens_in=('tokens_in', 'sum'),
-    #           tokens_out=('tokens_out', 'sum'),
-    #           steps=('steps', 'sum'),
-    #           num_tool_calls=('num_tool_calls', 'sum'),
-    #           num_no_action=('num_no_action', 'sum')
-    #       )
-    #       .reset_index()
-    # )
+    # Plot results
+    table_columns = ['pid', 'agent', 'exp_name', 'round_index', 'accuracy',
+                     'tokens_in', 'tokens_out', 'steps', 'tool_calls', 'missing_actions', 'invalid_actions']
+    exp_df = exp_df.sort_values(['pid', 'agent', 'exp_name', 'round_index'])[table_columns]
 
-    table_columns = ['problem_id', 'agent_llm_name', 'exp_name', 'round_index', 'accuracy',
-                     'tokens_in', 'tokens_out', 'steps', 'num_tool_calls', 'num_no_action', 'num_invalid_action']
-    exp_df = df.sort_values(['problem_id', 'agent_llm_name', 'exp_name', 'round_index'])[table_columns]
+    # Replace accuracies with ✗ or ✓
+    exp_df['accuracy'] = exp_df['accuracy'].replace({
+        100.0: '✓',
+        0.0: '✗',
+        'Correct': '✓',
+        'Incorrect': '✗'
+    })
 
-    # Round numeric columns for better display
-    exp_df['accuracy'] = exp_df['accuracy'].round(3)
+    exp_df = exp_df[~exp_df['pid'].str.contains('memory_stress', na=False)]
 
     filename = os.path.join(results_dir, 'exp_comparison.png')
     create_table_image(exp_df, 'Comparing all experiments', filename, dedup_cols=[0, 1, 2])
     print(f"Created comparison table image in: {filename}")
 
-    # Create one table per pid so it's easier to read
-    pid_dir = os.path.join(results_dir, 'per_pid')
-    os.makedirs(pid_dir, exist_ok=True)
-    pids = exp_df['problem_id'].unique().tolist()
-    for pid in pids:
-        filtered_df = exp_df[exp_df['problem_id'] == pid]
-        filename = os.path.join(pid_dir, f'{pid}.png')
-        create_table_image(filtered_df, f'Comparing PID solutions for {pid}', filename, dedup_cols=[0, 1, 2])
-        print(f"Created comparison table image for PID in: {filename}")
+    create_per_type_tables(exp_df, results_dir, 'pid')
+    create_per_type_tables(exp_df, results_dir, 'agent')
+
+    # # Plot remind actions
+    table_columns = ['pid', 'agent', 'exp_name', 'round_index', 'steps', 'missing_actions', 'invalid_actions']
+    valid_agent_exp = exp_df.groupby(['pid', 'agent'])['exp_name'].apply(lambda s: {'remind_actions', 'baseline'}.issubset(s.unique()))
+    valid_agent_exp = valid_agent_exp[valid_agent_exp].index
+    valid_exp_df = exp_df.set_index(['pid', 'agent']).loc[valid_agent_exp].reset_index()
+    valid_exp_df = valid_exp_df.sort_values(['pid', 'agent', 'exp_name', 'round_index'])[table_columns]
+
+    create_per_type_tables(valid_exp_df, results_dir, 'pid', folder_name = "remind_actions_per_pid")
+    create_per_type_tables(valid_exp_df, results_dir, 'agent', folder_name = "remind_actions_per_agent")
+
+    # Plot tool calls
+    valid_exp_df['percent_missing_actions'] = (valid_exp_df['missing_actions'] / valid_exp_df['steps']) * 100
+    plot_remind_actions_per_type(valid_exp_df, 'agent', 'pid', results_dir)
+    plot_remind_actions_per_type(valid_exp_df, 'pid', 'agent', results_dir)
+
 
 if __name__ == "__main__":
     main()
