@@ -256,7 +256,7 @@ class ExperimentRunner:
         aiops_result_file = result_file.with_suffix(".json")
         start_time = datetime.now()
 
-        self.logger.info(f"Starting experiment: {experiment_id}")
+        self.logger.info(f"Starting experiment: {result_file}")
         if result_file.exists():
             if self.no_exp_override:
                 self.logger.info(f"Experiment already exists. Not rerunning.")
