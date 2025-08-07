@@ -15,6 +15,7 @@ import inspect
 import asyncio
 import re
 from aiopslab.paths import SRSI_RESULTS_DIR
+from aiopslab.utils.improvement_flags import escape_ansi, ACTIVE_IMP_FLAGS
 
 class Orchestrator:
     def __init__(self):
@@ -151,6 +152,9 @@ class Orchestrator:
 
         try:
             env_response = self.session.problem.perform_action(api, *args, **kwargs)
+            if 'remove_ansi' in ACTIVE_IMP_FLAGS:
+                env_response = escape_ansi(env_response)
+
             self.session.add({"role": "env", "content": env_response})
             return env_response
         except InvalidActionError as e:
