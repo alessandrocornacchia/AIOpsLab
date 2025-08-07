@@ -1,5 +1,6 @@
 import asyncio
 import argparse
+import os
 
 from aiopslab.orchestrator import Orchestrator
 from clients.utils.llm import Ollama
@@ -13,6 +14,7 @@ class Agent():
     def __init__(self, model_name):
         self.history = []
         self.llm = Ollama(model_name)
+        self.improvement_level = os.getenv("IMPROVEMENT_LEVEL")
 
     def init_context(self, problem_desc: str, instructions: str, apis: str):
         """Initialize the context for the agent."""
@@ -42,6 +44,10 @@ class Agent():
 
         self.task_message = instructions
 
+        if self.improvement_level == "remind_actions":
+            self.task_message += "Respond only with the action you will take."
+        
+
         self.history.append({"role": "system", "content": self.system_message})
         self.history.append({"role": "user", "content": self.task_message})
 
@@ -55,9 +61,9 @@ class Agent():
             str: The response from the agent.
         """
         self.history.append({"role": "user", "content": self._add_instr(input)})
-        print(f"Agent response: {self.history}") # debug information
+#        print(f"Agent response: {self.history}") # debug information
         response = self.llm.run(self.history)
-        print(f"Agent response: {response}") # debug information
+#        print(f"Agent response: {response}") # debug information
         self.history.append({"role": "assistant", "content": response})
         return response
 

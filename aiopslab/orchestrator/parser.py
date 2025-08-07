@@ -149,7 +149,7 @@ class ResponseParser:
 
                 return args, kwargs
             except Exception as e:
-                raise ResponseParsingError(f"Error parsing response: {str(e)}")
+                raise ResponseParsingError(str(e))
 
         raise ResponseParsingError("No API call found!")
 

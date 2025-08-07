@@ -36,15 +36,20 @@ class TaskActions:
 
         Returns:
             str | dict | list[dicts]: Log data as a structured object or a string.
+
+        Example:
+            ```
+            get_logs("astronomy-shop", "payment")
+            ```
         """
         kubectl = KubeCtl()
         try:
             if namespace == "test-social-network":
                 user_service_pod = kubectl.get_pod_name(namespace, f"app={service}")
             elif namespace == "test-hotel-reservation":
-                user_service_pod = kubectl.get_pod_name(
-                    namespace, f"io.kompose.service={service}"
-                )
+                user_service_pod = kubectl.get_pod_name(namespace, f"io.kompose.service={service}")
+            elif namespace == "astronomy-shop":
+                user_service_pod = kubectl.get_pod_name(namespace, f"opentelemetry.io/name={service}")
             else:
                 raise Exception
             logs = kubectl.get_pod_logs(user_service_pod, namespace)
@@ -103,7 +108,7 @@ class TaskActions:
         )
 
         return save_dir_str
-    
+
     @staticmethod
     @read
     def read_metrics(file_path: str) -> str:
@@ -234,14 +239,14 @@ class TaskActions:
             return result
         else:
             return "No high CPU usage instances found."
-    
+
     @staticmethod
     # @read
     def analyze_metric(file_path: str) -> str:
         """
         Please call get_metrics() before calling this function to generate the CSV files.
         Analyzes the given metric and returns a summary.
-        
+
         Args:
             file_path (str): Path to the metrics CSV file.
 
@@ -262,14 +267,14 @@ class TaskActions:
 
             # Downsample for GPT input if too large
             sample_df = df.sample(n=min(len(df), 1000), random_state=42)
-            
+
             # Select relevant columns
             context_df = sample_df[['timestamp', 'cmdb_id', 'value', 'kpi_name']] if 'kpi_name' in df.columns else sample_df[['timestamp', 'cmdb_id', 'value']]
             context_csv = context_df.to_csv(index=False)
 
             # Compose prompt
             prompt = f"""
-                        You are a metrics analyst assistant. Analyze the following metrics data and provide any key patterns and outliers. 
+                        You are a metrics analyst assistant. Analyze the following metrics data and provide any key patterns and outliers.
                         Suggest exactly what service(s) need attention or further investigation, that's it.
 
                         Metric file: {file_path}
@@ -310,7 +315,7 @@ class TaskActions:
         Returns:
             str: Cluster mapping as a string or an error message.
         """
-        
+
         if not os.path.exists(file_path):
             return "Error: Metrics file not found."
 
@@ -329,10 +334,10 @@ class TaskActions:
             # Ensure 'value' column is numeric
             df['value'] = pd.to_numeric(df['value'], errors='coerce')  # Convert non-numeric to NaN
             df.dropna(subset=['value'], inplace=True)  # Remove rows where value is NaN
-            
+
             if df.empty:
                 return "Error: No valid numerical time-series data available."
-            
+
             # Pivot the data so each `cmdb_id` becomes a column (one time series per entity)
             df_pivot = df.pivot(index='timestamp', columns='cmdb_id', values='value')
 
@@ -346,13 +351,13 @@ class TaskActions:
             # Extract time series values
             metric_names = df_pivot.columns.tolist()  # Unique cmdb_id values
             time_series = [df_pivot[col].values for col in metric_names]  # Extract values
-            
+
             if not time_series:
                 return "Error: No valid time series found after cleaning."
 
             # Convert list of series to uniform shape
             X = to_time_series_dataset(time_series)  # Auto-pads/truncates to a uniform shape
-            
+
             # Scale the time series using RobustScaler (prevents outliers from being ignored)
             scaler = TimeSeriesScalerMeanVariance()
             X_scaled = np.array([scaler.fit_transform(x.reshape(-1, 1)).flatten() for x in X])
@@ -427,9 +432,9 @@ class TaskActions:
     @staticmethod
     # @read
     def analyze_specific_trace(
-        namespace: str, 
+        namespace: str,
         trace_id: str,
-        duration: int = 5, 
+        duration: int = 5,
     ) -> str:
         """
         Please call get_traces() before calling this function to generate the CSV file.
@@ -441,7 +446,7 @@ class TaskActions:
             namespace (str): The Kubernetes namespace of Jaeger and your services.
             trace_id (str): The specific trace to analyze.
             duration (int): Time window in minutes from now going backward to collect traces.
-            
+
         Returns:
             str: The analysis for the chosen trace.
         """
@@ -482,7 +487,7 @@ class TaskActions:
                 return str(analysis_result)
         except KeyError as ke:
             return str(ke)
-    
+
     @staticmethod
     # @read
     def get_traces_summary(file_path: str) -> str:
@@ -490,20 +495,20 @@ class TaskActions:
         Please call get_traces() before calling this function to generate the CSV file.
         Reads a traces file (CSV) and returns a detailed statistical summary including
         average latency, total requests, error rate, and longest spans, along with trace IDs.
-        
+
         Args:
             file_path (str): Path to the traces file.
-        
+
         Returns:
             str: A formatted string containing trace summary statistics.
         """
         if not os.path.exists(file_path):
             return f"Error: Traces file '{file_path}' not found."
-        
+
         try:
             # Load the traces CSV file
             df = pd.read_csv(file_path)
-            
+
             # Compute statistical summary
             total_traces = len(df)
             avg_latency = df["latency"].mean()
@@ -513,17 +518,17 @@ class TaskActions:
             total_errors = df[df["contains_errors"] == True].shape[0]
             most_common_operation = df["operation"].mode()[0]
             most_common_service = df["services"].mode()[0]
-            
+
             # Identify trace IDs for max values
             max_latency_trace = df.loc[df["latency"].idxmax(), "trace_id"]
             min_latency_trace = df.loc[df["latency"].idxmin(), "trace_id"]
             max_span_trace = df.loc[df["longest_span_duration"].idxmax(), "trace_id"]
-            
+
             # Identify the longest span service
             longest_span_service = df.loc[df["longest_span_duration"].idxmax(), "longest_span_service"]
             max_span_duration = df["longest_span_duration"].max()
             mean_span_duration = df["mean_span_duration"].mean()
-            
+
             # Format summary as a string
             summary_str = (
                 f"Trace Summary Report\n"
@@ -540,7 +545,7 @@ class TaskActions:
                 f"Max Span Duration: {max_span_duration:.2f} ms (Trace ID: {max_span_trace})\n"
                 f"Mean Span Duration: {mean_span_duration:.2f} ms\n"
             )
-            
+
             return summary_str
         except Exception as e:
             return f"Error processing traces file: {str(e)}"
@@ -665,4 +670,3 @@ class TaskActions:
 
 if __name__ == "__main__":
     print(TaskActions.analyze_metric('/home/ubuntu/iliyas/AIOpsLab/metrics_output/metric_20250416_205524/container/kpi_container_memory_usage_bytes.csv'))
-    

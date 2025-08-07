@@ -14,6 +14,7 @@ import time
 import inspect
 import asyncio
 import re
+import os
 from aiopslab.paths import SRSI_RESULTS_DIR
 from aiopslab.utils.improvement_flags import escape_ansi, ACTIVE_IMP_FLAGS
 
@@ -31,7 +32,8 @@ class Orchestrator:
         # Read from env variable
         # Improvement levels
         # 1. Improve action not parsed + remind agent of actions
-        self.improvement_level = "1"
+        self.improvement_level = os.getenv("IMPROVEMENT_LEVEL")
+        print(f"AAa orchestrator initiated: {self.improvement_level}")
 
     def init_problem(self, problem_id: str, delete_app: bool, fault_free_interval: str = "60s", fault_interval: str = "60s", num_failures: int = 1):
         """Initialize a problem instance for the agent to solve.
@@ -138,11 +140,28 @@ class Orchestrator:
 
         try:
             resp = self.parser.parse(input)
+            print("try responseparsingerror", self.improvement_level, flush=True)
         except ResponseParsingError as e:
-            self.session.add({"role": "env", "content": str(e)})
-            # Imp.1 Most likely did not format response in markdown.
-            self.session.add({"role": "env", "content": self.agent.task_message})
-            return str(e)
+            # Imp.1 Remind agent to format response in markdown.
+            if self.improvement_level == "remind_actions":
+                print("except responseparsingerror", self.improvement_level, self.agent.task_message, flush=True)
+                reply = f"""
+{str(e)}\n Please respond in the following format: 
+```
+<API_NAME>(<API_PARAM1>, <API_PARAM2> ...)
+```
+
+Example:
+
+```
+get_logs("test-hotel-reservation", "geo")
+```
+                """  
+            else:
+                reply = str(e)
+            
+            self.session.add({"role": "env", "content": reply})
+            return reply
 
         api, args, kwargs = resp["api_name"], resp["args"], resp["kwargs"]
 
@@ -158,10 +177,15 @@ class Orchestrator:
             self.session.add({"role": "env", "content": env_response})
             return env_response
         except InvalidActionError as e:
-            self.session.add({"role": "env", "content": str(e)})
             # Imp.1 Remind agent of the available actions
-            self.session.add({"role": "env", "content": self.agent.available_actions})
-            return str(e)
+            if self.improvement_level == "remind_actions":
+                print("except invalidactionerror", self.improvement_level, self.agent.task_message, flush=True)
+                reply = f"{str(e)}\n{self.agent.available_actions}"            
+            else:
+                reply = str(e)
+
+            self.session.add({"role": "env", "content": reply})    
+            return reply
 
     async def start_problem(self, max_steps: int, result_path: str = None, result_file: str = None):
         """Start the task and run for a specified number of steps.

@@ -54,6 +54,7 @@ class TraceAPI:
             print(f"Error getting NodePort: {e.output}")
             return None
 
+
     def print_output(self, stream):
         """Thread function to print output from a subprocess stream non-blockingly."""
         while not self.stop_event.is_set():
@@ -265,7 +266,7 @@ class TraceAPI:
 
         This replaces the old `process_traces()` method from the original code.
         It calculates timing information, error states, and service relationships.
-        
+
         Returns a DataFrame with columns:
             - 'trace_id'
             - 'latency'

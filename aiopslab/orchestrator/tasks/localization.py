@@ -31,14 +31,16 @@ class LocalizationTask(Task):
             The service you are working with today is described below:
             {app_summary}
 
-            You will begin by analyzing the service's state and telemetry, and then submit one of two possible solutions:
+            You will begin by analyzing the service's state and telemetry, and then **submit** one of two possible solutions:
             1. list[str]: list of faulty components (i.e., service names)
             2. str: `None` if no faults were detected
+
             """
 
         self.instructions = """\
+        
             You will respond with one of the above APIs as your next action.
-            Please respond in the following format in a markdown code block:
+            Please respond in the following format in a **markdown** code block:
             ```
             <API_NAME>(<API_PARAM1>, <API_PARAM2> ...)
             ```
@@ -48,7 +50,8 @@ class LocalizationTask(Task):
             exec_shell("ls -l")      # will list files in current directory
             ```
 
-            Please respond with only a single action per turn.
+            Please respond with only a single action per turn. Please do not repeat your actions. 
+            Before you submit your response, verify that there is a single action being called and that it exists.
             """
 
     def get_task_description(self):
